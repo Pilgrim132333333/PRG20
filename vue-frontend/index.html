@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Programming Question Bank -  Homepage</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        warning: '#FF9F43',
+                        dark: '#374151',
+                        light: '#F3F4F6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Navigator -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="text-primary text-2xl">
+                    <i class="fa fa-code"></i>
+                </div>
+                <h1 class="text-xl font-bold text-gray-800">AI Programming Question Bank</h1>
+            </div>
+            <div>
+                <a href="login.html" class="bg-primary hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all-300">
+                    log in
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="bg-gradient-primary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-shadow">Intelligent Programming Learning Platform</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-90">
+                An AI-powered programming question bank that provides intelligent teaching support for educators and delivers personalised learning experiences for students.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="login.html" class="bg-white text-primary hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-all-300 text-lg">
+                    start now
+                </a>
+                <a href="#features" class="bg-transparent border-2 border-white text-white hover:bg-white hover:bg-opacity-10 font-medium py-3 px-8 rounded-lg transition-all-300 text-lg">
+                    learn more
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特点区 -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Platform Features</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-lightbulb-o"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">AI-assisted teaching</h3>
+                    <p class="text-gray-600">
+                        Intelligent AI assistants assist teachers in generating teaching ideas, designing programming tasks, and providing personalised teaching recommendations.
+                    </p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Extensive question bank</h3>
+                    <p class="text-gray-600">
+                        A question bank covering multiple programming languages and courses, supporting multi-dimensional filtering by language, course, year, and more.
+                    </p>
+                </div>
+                
+                <div class="card text-center">
+                    <div class="text-4xl text-primary mb-4">
+                        <i class="fa fa-user-circle"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Personalised learning</h3>
+                    <p class="text-gray-600">
+                        Students can practise with mock questions, view solutions, and save questions to create a personalised learning experience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 功能区 -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Core functionality</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Teacher Portal Features</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Idea Function：</span>
+                                Accessing pre-set AI enables teachers to converse with AI to gain teaching ideas.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Question Function：</span>
+                                Filter questions by language, course, and year to view detailed explanations and knowledge point presentations.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Coursework Function：</span>
+                                Manage coursework assignments, view student submissions and grades
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Question Bank：</span>
+                                Collect and manage frequently used questions for convenient teaching purposes.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-card">
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7665995581a84e6eaff885de6ca0de97.png~tplv-a9rns2rl98-24:720:720.png?rcl=20251101145222A8476E570002ACAE9F87&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1762584743&x-signature=v4S0%2FEbYioXhn3exeP9LiM1sTRA%3D" alt="教师端界面" class="rounded-lg w-full">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 bg-white p-4 rounded-xl shadow-card">
+                    <img src="https://p3-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/7665995581a84e6eaff885de6ca0de97.png~tplv-a9rns2rl98-24:720:720.png?rcl=20251101145222A8476E570002ACAE9F87&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1762584743&x-signature=v4S0%2FEbYioXhn3exeP9LiM1sTRA%3D" alt="学生端界面" class="rounded-lg w-full">
+                </div>
+                <div class="order-1 md:order-2">
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Student-side functionality</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Question Function：</span>
+                                Browse and search for questions, practise with mock tests, review solutions and key concepts.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Coursework Function：</span>
+                                View and submit coursework, view marks and feedback
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Question Bank：</span>
+                                Bookmark topics of personal interest for convenient revision and practice.
+                            </p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0 mt-1">
+                                <i class="fa fa-check text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-gray-700">
+                                <span class="font-medium">Learning Progress：</span>
+                                View your personal learning progress and performance statistics to understand your learning situation.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动召唤区 -->
+    <section class="bg-gradient-primary text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-shadow">Ready to embark on your journey into intelligent programming?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+                Register now and experience the intelligent teaching and learning experience delivered by our AI programming question bank
+            </p>
+            <a href="login.html" class="bg-white text-primary hover:bg-gray-100 font-medium py-3 px-8 rounded-lg transition-all-300 text-lg">
+                Log in now
+            </a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">AI Programming Question Bank</h3>
+                    <p class="text-gray-400">
+                        An AI-powered programming question bank that provides intelligent teaching support for educators and delivers personalised learning experiences for students.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all-300">Homepage</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-all-300">Platform Features</a></li>
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-all-300">Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">contact us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope-o mr-2 text-gray-400"></i>
+                            <a href="mailto:contact@aiprogramming.com" class="text-gray-400 hover:text-white transition-all-300">contact@aiprogramming.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">XXX-XXX-XXXX</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 AI Programming Question Bank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

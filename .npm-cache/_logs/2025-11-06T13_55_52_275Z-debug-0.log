@@ -1,0 +1,395 @@
+0 verbose cli /opt/homebrew/Cellar/node/23.9.0/bin/node /opt/homebrew/bin/npm
+1 info using npm@10.9.2
+2 info using node@v23.9.0
+3 silly config load:file:/opt/homebrew/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/.npmrc
+5 silly config load:file:/Users/guozigeng/.npmrc
+6 silly config load:file:/opt/homebrew/etc/npmrc
+7 verbose title npm install vue-router@4
+8 verbose argv "--cache" "/Users/guozigeng/Documents/Learning/Group Subject/Workspace/.npm-cache" "install" "vue-router@4"
+9 verbose logfile logs-max:10 dir:/Users/guozigeng/Documents/Learning/Group Subject/Workspace/.npm-cache/_logs/2025-11-06T13_55_52_275Z-
+10 verbose logfile /Users/guozigeng/Documents/Learning/Group Subject/Workspace/.npm-cache/_logs/2025-11-06T13_55_52_275Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest vue-router@4
+15 silly packumentCache full:https://registry.npmmirror.com/vue-router cache-miss
+16 http fetch GET 200 https://registry.npmmirror.com/vue-router 478ms (cache miss)
+17 silly packumentCache full:https://registry.npmmirror.com/vue-router set size:120094 disposed:false
+18 silly fetch manifest vue@^3.5.22
+19 silly packumentCache full:https://registry.npmmirror.com/vue cache-miss
+20 http cache https://registry.npmmirror.com/vue 7ms (cache hit)
+21 silly packumentCache full:https://registry.npmmirror.com/vue set size:2016856 disposed:false
+22 silly fetch manifest typescript@*
+23 silly packumentCache full:https://registry.npmmirror.com/typescript cache-miss
+24 http cache https://registry.npmmirror.com/typescript 17ms (cache hit)
+25 silly packumentCache full:https://registry.npmmirror.com/typescript set size:14096420 disposed:false
+26 silly placeDep ROOT vue-router@4.6.3 OK for: vue-frontend@0.0.0 want: 4
+27 silly fetch manifest @vue/devtools-api@^6.6.4
+28 silly packumentCache full:https://registry.npmmirror.com/@vue%2fdevtools-api cache-miss
+29 http fetch GET 200 https://registry.npmmirror.com/@vue%2fdevtools-api 63ms (cache miss)
+30 silly packumentCache full:https://registry.npmmirror.com/@vue%2fdevtools-api set size:66366 disposed:false
+31 silly placeDep ROOT @vue/devtools-api@6.6.4 OK for: vue-router@4.6.3 want: ^6.6.4
+32 silly reify moves {}
+33 silly audit bulk request {
+33 silly audit   '@babel/helper-string-parser': [ '7.27.1' ],
+33 silly audit   '@babel/helper-validator-identifier': [ '7.28.5' ],
+33 silly audit   '@babel/parser': [ '7.28.5' ],
+33 silly audit   '@babel/types': [ '7.28.5' ],
+33 silly audit   '@esbuild/aix-ppc64': [ '0.25.12' ],
+33 silly audit   '@esbuild/android-arm': [ '0.25.12' ],
+33 silly audit   '@esbuild/android-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/android-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/darwin-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/darwin-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/freebsd-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/freebsd-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-arm': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-ia32': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-loong64': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-mips64el': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-ppc64': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-riscv64': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-s390x': [ '0.25.12' ],
+33 silly audit   '@esbuild/linux-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/netbsd-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/netbsd-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/openbsd-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/openbsd-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/openharmony-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/sunos-x64': [ '0.25.12' ],
+33 silly audit   '@esbuild/win32-arm64': [ '0.25.12' ],
+33 silly audit   '@esbuild/win32-ia32': [ '0.25.12' ],
+33 silly audit   '@esbuild/win32-x64': [ '0.25.12' ],
+33 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+33 silly audit   '@rolldown/pluginutils': [ '1.0.0-beta.29' ],
+33 silly audit   '@rollup/rollup-android-arm-eabi': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-android-arm64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-darwin-arm64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-darwin-x64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-freebsd-arm64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-freebsd-x64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-arm-gnueabihf': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-arm-musleabihf': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-arm64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-arm64-musl': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-loong64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-ppc64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-riscv64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-riscv64-musl': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-s390x-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-x64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-linux-x64-musl': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-openharmony-arm64': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-win32-arm64-msvc': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-win32-ia32-msvc': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-win32-x64-gnu': [ '4.52.5' ],
+33 silly audit   '@rollup/rollup-win32-x64-msvc': [ '4.52.5' ],
+33 silly audit   '@types/estree': [ '1.0.8' ],
+33 silly audit   '@vitejs/plugin-vue': [ '6.0.1' ],
+33 silly audit   '@vue/compiler-core': [ '3.5.23' ],
+33 silly audit   '@vue/compiler-dom': [ '3.5.23' ],
+33 silly audit   '@vue/compiler-sfc': [ '3.5.23' ],
+33 silly audit   '@vue/compiler-ssr': [ '3.5.23' ],
+33 silly audit   '@vue/reactivity': [ '3.5.23' ],
+33 silly audit   '@vue/runtime-core': [ '3.5.23' ],
+33 silly audit   '@vue/runtime-dom': [ '3.5.23' ],
+33 silly audit   '@vue/server-renderer': [ '3.5.23' ],
+33 silly audit   '@vue/shared': [ '3.5.23' ],
+33 silly audit   csstype: [ '3.1.3' ],
+33 silly audit   entities: [ '4.5.0' ],
+33 silly audit   esbuild: [ '0.25.12' ],
+33 silly audit   'estree-walker': [ '2.0.2' ],
+33 silly audit   fdir: [ '6.5.0' ],
+33 silly audit   fsevents: [ '2.3.3' ],
+33 silly audit   'magic-string': [ '0.30.21' ],
+33 silly audit   nanoid: [ '3.3.11' ],
+33 silly audit   picocolors: [ '1.1.1' ],
+33 silly audit   picomatch: [ '4.0.3' ],
+33 silly audit   postcss: [ '8.5.6' ],
+33 silly audit   rollup: [ '4.52.5' ],
+33 silly audit   'source-map-js': [ '1.2.1' ],
+33 silly audit   tinyglobby: [ '0.2.15' ],
+33 silly audit   vite: [ '7.2.1' ],
+33 silly audit   vue: [ '3.5.23' ],
+33 silly audit   'vue-router': [ '4.6.3' ],
+33 silly audit   '@vue/devtools-api': [ '6.6.4' ]
+33 silly audit }
+34 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-x64-msvc
+35 silly reify mark deleted [
+35 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-x64-msvc'
+35 silly reify ]
+36 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-x64-gnu
+37 silly reify mark deleted [
+37 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-x64-gnu'
+37 silly reify ]
+38 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-ia32-msvc
+39 silly reify mark deleted [
+39 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-ia32-msvc'
+39 silly reify ]
+40 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-arm64-msvc
+41 silly reify mark deleted [
+41 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-win32-arm64-msvc'
+41 silly reify ]
+42 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-openharmony-arm64
+43 silly reify mark deleted [
+43 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-openharmony-arm64'
+43 silly reify ]
+44 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-x64-musl
+45 silly reify mark deleted [
+45 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-x64-musl'
+45 silly reify ]
+46 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-x64-gnu
+47 silly reify mark deleted [
+47 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-x64-gnu'
+47 silly reify ]
+48 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-s390x-gnu
+49 silly reify mark deleted [
+49 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-s390x-gnu'
+49 silly reify ]
+50 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-riscv64-musl
+51 silly reify mark deleted [
+51 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-riscv64-musl'
+51 silly reify ]
+52 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-riscv64-gnu
+53 silly reify mark deleted [
+53 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-riscv64-gnu'
+53 silly reify ]
+54 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-ppc64-gnu
+55 silly reify mark deleted [
+55 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-ppc64-gnu'
+55 silly reify ]
+56 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-loong64-gnu
+57 silly reify mark deleted [
+57 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-loong64-gnu'
+57 silly reify ]
+58 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm64-musl
+59 silly reify mark deleted [
+59 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm64-musl'
+59 silly reify ]
+60 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm64-gnu
+61 silly reify mark deleted [
+61 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm64-gnu'
+61 silly reify ]
+62 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm-musleabihf
+63 silly reify mark deleted [
+63 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm-musleabihf'
+63 silly reify ]
+64 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm-gnueabihf
+65 silly reify mark deleted [
+65 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-linux-arm-gnueabihf'
+65 silly reify ]
+66 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-freebsd-x64
+67 silly reify mark deleted [
+67 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-freebsd-x64'
+67 silly reify ]
+68 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-freebsd-arm64
+69 silly reify mark deleted [
+69 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-freebsd-arm64'
+69 silly reify ]
+70 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-darwin-x64
+71 silly reify mark deleted [
+71 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-darwin-x64'
+71 silly reify ]
+72 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-android-arm64
+73 silly reify mark deleted [
+73 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-android-arm64'
+73 silly reify ]
+74 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-android-arm-eabi
+75 silly reify mark deleted [
+75 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@rollup/rollup-android-arm-eabi'
+75 silly reify ]
+76 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-x64
+77 silly reify mark deleted [
+77 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-x64'
+77 silly reify ]
+78 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-ia32
+79 silly reify mark deleted [
+79 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-ia32'
+79 silly reify ]
+80 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-arm64
+81 silly reify mark deleted [
+81 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/win32-arm64'
+81 silly reify ]
+82 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/sunos-x64
+83 silly reify mark deleted [
+83 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/sunos-x64'
+83 silly reify ]
+84 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openharmony-arm64
+85 silly reify mark deleted [
+85 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openharmony-arm64'
+85 silly reify ]
+86 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openbsd-x64
+87 silly reify mark deleted [
+87 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openbsd-x64'
+87 silly reify ]
+88 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openbsd-arm64
+89 silly reify mark deleted [
+89 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/openbsd-arm64'
+89 silly reify ]
+90 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/netbsd-x64
+91 silly reify mark deleted [
+91 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/netbsd-x64'
+91 silly reify ]
+92 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/netbsd-arm64
+93 silly reify mark deleted [
+93 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/netbsd-arm64'
+93 silly reify ]
+94 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-x64
+95 silly reify mark deleted [
+95 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-x64'
+95 silly reify ]
+96 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-s390x
+97 silly reify mark deleted [
+97 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-s390x'
+97 silly reify ]
+98 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-riscv64
+99 silly reify mark deleted [
+99 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-riscv64'
+99 silly reify ]
+100 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-ppc64
+101 silly reify mark deleted [
+101 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-ppc64'
+101 silly reify ]
+102 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-mips64el
+103 silly reify mark deleted [
+103 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-mips64el'
+103 silly reify ]
+104 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-loong64
+105 silly reify mark deleted [
+105 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-loong64'
+105 silly reify ]
+106 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-ia32
+107 silly reify mark deleted [
+107 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-ia32'
+107 silly reify ]
+108 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-arm64
+109 silly reify mark deleted [
+109 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-arm64'
+109 silly reify ]
+110 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-arm
+111 silly reify mark deleted [
+111 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/linux-arm'
+111 silly reify ]
+112 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/freebsd-x64
+113 silly reify mark deleted [
+113 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/freebsd-x64'
+113 silly reify ]
+114 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/freebsd-arm64
+115 silly reify mark deleted [
+115 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/freebsd-arm64'
+115 silly reify ]
+116 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/darwin-x64
+117 silly reify mark deleted [
+117 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/darwin-x64'
+117 silly reify ]
+118 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-x64
+119 silly reify mark deleted [
+119 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-x64'
+119 silly reify ]
+120 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-arm64
+121 silly reify mark deleted [
+121 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-arm64'
+121 silly reify ]
+122 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-arm
+123 silly reify mark deleted [
+123 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/android-arm'
+123 silly reify ]
+124 verbose reify failed optional dependency /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/aix-ppc64
+125 silly reify mark deleted [
+125 silly reify   '/Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend/node_modules/@esbuild/aix-ppc64'
+125 silly reify ]
+126 http cache @vue/devtools-api@https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.6.4.tgz 0ms (cache hit)
+127 http cache fsevents@https://registry.npmmirror.com/fsevents/-/fsevents-2.3.3.tgz 0ms (cache hit)
+128 http cache vue-router@https://registry.npmmirror.com/vue-router/-/vue-router-4.6.3.tgz 0ms (cache hit)
+129 silly tarball no local data for @vue/devtools-api@https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.6.4.tgz. Extracting by manifest.
+130 silly tarball no local data for vue-router@https://registry.npmmirror.com/vue-router/-/vue-router-4.6.3.tgz. Extracting by manifest.
+131 http fetch POST 404 https://registry.npmmirror.com/-/npm/v1/security/advisories/bulk 45ms
+132 silly audit bulk request failed [object Object]
+133 http fetch POST 404 https://registry.npmmirror.com/-/npm/v1/security/audits/quick 42ms
+134 verbose audit error HttpErrorGeneral: 404 Not Found - POST https://registry.npmmirror.com/-/npm/v1/security/audits/quick - [NOT_IMPLEMENTED] /-/npm/v1/security/* not implemented yet
+134 verbose audit error     at /opt/homebrew/lib/node_modules/npm/node_modules/npm-registry-fetch/lib/check-response.js:103:15
+134 verbose audit error     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+134 verbose audit error     at async [getReport] (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/audit-report.js:336:21)
+134 verbose audit error     at async AuditReport.run (/opt/homebrew/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/audit-report.js:106:19) {
+134 verbose audit error   headers: [Object: null prototype] {
+134 verbose audit error     server: [ 'Tengine' ],
+134 verbose audit error     date: [ 'Thu, 06 Nov 2025 13:54:42 GMT' ],
+134 verbose audit error     'content-type': [ 'application/json' ],
+134 verbose audit error     'transfer-encoding': [ 'chunked' ],
+134 verbose audit error     connection: [ 'keep-alive' ],
+134 verbose audit error     'strict-transport-security': [ 'max-age=5184000' ],
+134 verbose audit error     via: [ 'kunlun1.cn7971[,404666]' ],
+134 verbose audit error     'timing-allow-origin': [ '*' ],
+134 verbose audit error     eagleid: [ '7ae4d61517624372821434021e' ],
+134 verbose audit error     'x-fetch-attempts': [ '1' ]
+134 verbose audit error   },
+134 verbose audit error   statusCode: 404,
+134 verbose audit error   code: 'E404',
+134 verbose audit error   method: 'POST',
+134 verbose audit error   uri: 'https://registry.npmmirror.com/-/npm/v1/security/audits/quick',
+134 verbose audit error   body: {
+134 verbose audit error     error: '[NOT_IMPLEMENTED] /-/npm/v1/security/* not implemented yet'
+134 verbose audit error   },
+134 verbose audit error   pkgid: undefined
+134 verbose audit error }
+135 silly audit error [object Object]
+136 silly audit report null
+137 http fetch GET 200 https://cdn.npmmirror.com/packages/%40vue/devtools-api/6.6.4/devtools-api-6.6.4.tgz 394ms (cache miss)
+138 http fetch GET 200 https://cdn.npmmirror.com/packages/vue-router/4.6.3/vue-router-4.6.3.tgz 500ms (cache miss)
+139 silly ADD node_modules/@vue/devtools-api
+140 silly ADD node_modules/vue-router
+141 silly ADD node_modules/fsevents
+142 silly ADD
+143 silly ADD
+144 silly ADD
+145 silly ADD
+146 silly ADD
+147 silly ADD
+148 silly ADD
+149 silly ADD
+150 silly ADD
+151 silly ADD
+152 silly ADD
+153 silly ADD
+154 silly ADD
+155 silly ADD
+156 silly ADD
+157 silly ADD
+158 silly ADD
+159 silly ADD
+160 silly ADD
+161 silly ADD
+162 silly ADD
+163 silly ADD
+164 silly ADD
+165 silly ADD
+166 silly ADD
+167 silly ADD
+168 silly ADD
+169 silly ADD
+170 silly ADD
+171 silly ADD
+172 silly ADD
+173 silly ADD
+174 silly ADD
+175 silly ADD
+176 silly ADD
+177 silly ADD
+178 silly ADD
+179 silly ADD
+180 silly ADD
+181 silly ADD
+182 silly ADD
+183 silly ADD
+184 silly ADD
+185 silly ADD
+186 silly ADD
+187 silly ADD
+188 verbose cwd /Users/guozigeng/Documents/Learning/Group Subject/Workspace/vue-frontend
+189 verbose os Darwin 24.3.0
+190 verbose node v23.9.0
+191 verbose npm  v10.9.2
+192 verbose exit 0
+193 info ok
