@@ -1,0 +1,44 @@
+﻿question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path
+PGA-WEB-Q01,N/A,Website,Fundamental,"Write a C program to print your name, date of birth, and mobile number.
+Expected Output:
+
+Name   : Alexandra Abramov  
+DOB    : July 14, 1975  
+Mobile : 99-9999999999","#include <stdio.h>
+
+int main()  
+{
+    // Print Name
+    printf(""Name   : Alexandra Abramov\n""); 
+    
+    // Print Date of Birth
+    printf(""DOB    : July 14, 1975\n""); 
+    
+    // Print Mobile Number
+    printf(""Mobile : 99-9999999999\n""); 
+    
+    // Indicate successful execution
+    return(0); 
+}",
+PGA-LAB02-Q01,2024,Lab Worksheet,Data Type Conversion; User Input; Arithmetic Operations; Output / String Formatting,"Pythagoras Solver
+Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double a, b, c;
+
+    printf(""请输入第一条直角边的长度: "");
+    scanf(""%lf"", &a);
+    printf(""请输入第二条直角边的长度: "");
+    scanf(""%lf"", &b);
+
+    c = sqrt(a * a + b * b);
+
+    printf(""最长边（斜边）的长度为: %.2f\n"", c);
+
+    return 0;
+}",
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,

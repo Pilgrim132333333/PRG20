@@ -1,0 +1,33 @@
+﻿material_code,material_type,week_number,title,file_path
+PGA-PPT-W01-01,PPT,1,Intro,pga_lec_w01_intro.pdf
+PGA-PPT-W01-02,PPT,1,Overview,pga_lec_w01_overview.pdf
+PGA-PPT-W02-01,PPT,2,Fundamental,pga_lec_w02_fundamental.pdf
+PGA-PPT-W02-02,PPT,2,Type,pga_lec_w02_type.pdf
+PGA-PPT-W02-03,PPT,2,Iteration,pga_lec_w02_iteration.pdf
+PGA-PPT-W03-01,PPT,3,Arrays,pga_lec_w03_arrays.pdf
+PGA-PPT-W03-02,PPT,3,Operators,pga_lec_w03_operators.pdf
+PGA-PPT-W03-03,PPT,3,Simple Algorithms,pga_lec_w03_simple_algorithms.pdf
+PGA-PPT-W04-01,PPT,4,Pointer 1,pga_lec_w04_pointer1.pdf
+PGA-PPT-W04-02,PPT,4,Pointer 2,pga_lec_w04_pointer2.pdf
+PGA-PPT-W05-01,PPT,5,Functions 1,pga_lec_w05_functions1.pdf
+PGA-PPT-W05-02,PPT,5,Functions 2,pga_lec_w05_functions2.pdf
+PGA-PPT-W06-01,PPT,6,Characters and Strings,pga_lec_w06_characters_and_strings.pdf
+PGA-PPT-W06-02,PPT,6,Dynamic Memory Allocation,pga_lec_w06_dynamic_memory_allocation.pdf
+PGA-PPT-W07-01,PPT,7,Structures,pga_lec_w07_structures.pdf
+PGA-PPT-W08-01,PPT,8,Singly Linked List,pga_lec_w08_singly_linked_list.pdf
+PGA-PPT-W08-02,PPT,8,Doubly Linked List,pga_lec_w08_doubly_linked_list.pdf
+PGA-PPT-W09-01,PPT,9,Files and IO,pga_lec_w09_files_and_IO.pdf
+PGA-PPT-W10-01,PPT,10,Stack and Queue,pga_lec_w10_stack_and_queue.pdf
+PGA-PPT-W10-02,PPT,10,Trees and Graphs,pga_lec_w10_trees_and_graphs.pdf
+PGA-PPT-W11-01,PPT,11,Variable Length Argument,pga_lec_w11_variable_length_argument.pdf
+PGA-PPT-W11-02,PPT,11,Few Advanced Concepts,pga_lec_w11_few_advanced_concepts.pdf
+PGA-PPT-W11-03,PPT,11,Revision,pga_lec_w11_revision.pdf
+PGA-TUT-W02-01,Tutorial,2,Data Types and Conversions,pga_tut_w02_data_types_and_conversions.pdf
+PGA-TUT-W03-01,Tutorial,3,Control and Iteration,pga_tut_w03_control_and_iteration.pdf
+PGA-TUT-W04-01,Tutorial,4,Pointers and Arrays,pga_tut_w04_pointers_and_arrays.pdf
+PGA-TUT-W05-01,Tutorial,5,Functions,pga_tut_w05_functions.pdf
+PGA-TUT-W06-01,Tutorial,6,Strings and Debugging,pga_tut_w06_strings_and_debugging.pdf
+PGA-TUT-W07-01,Tutorial,7,Dynamic Memory Allocation,pga_tut_w07_dynamic_memory_allocation.pdf
+PGA-TUT-W08-01,Tutorial,8,Linked Lists,pga_tut_w08_linked_lists.pdf
+PGA-TUT-W09-01,Tutorial,9,Pointers to Pointers,pga_tut_w09_pointers_to_pointers.pdf
+PGA-TUT-W10-01,Tutorial,10,Miscellaneous,pga_tut_w10_miscellaneous.pdf
