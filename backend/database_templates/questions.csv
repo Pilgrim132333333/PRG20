@@ -1,4 +1,4 @@
-﻿question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path
+﻿question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path,language,favourite
 PGA-WEB-Q01,N/A,Website,Fundamental,"Write a C program to print your name, date of birth, and mobile number.
 Expected Output:
 
@@ -19,7 +19,7 @@ int main()
     
     // Indicate successful execution
     return(0); 
-}",
+}",,C,0
 PGA-LAB02-Q01,2024,Lab Worksheet,Data Type Conversion; User Input; Arithmetic Operations; Output / String Formatting,"Pythagoras Solver
 Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
 #include <math.h>
@@ -37,8 +37,1562 @@ int main() {
     printf(""最长边（斜边）的长度为: %.2f\n"", c);
 
     return 0;
-}",
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
+}",,C,0
+PGA-TUT01-Q01,2024,Tutorial,Type; Fundamental,"#include <stdio.h> 
+#include <stdbool.h> 
+int main() 
+{ 
+bool a = true; // true == 1
+char x = ‘A’;  // ‘A’ == 65 
+int b = 2;
+float c = 3;
+double d = 3.1415926;
+b = b/3*c;
+printf(“%d\n”, b);  // question 1
+c = a/2.0*c;
+printf(“%f\n”, c);  // question 2
+d = d*2/a;
+printf(“%f\n”, d);  // question 3
+a = a+1;
+printf(“%d\n”, a);  // question 4
+x = x+1;
+printf(“%c\n”, x);  // question 5
+return 0; 
+} ","1. 0
+2. 1.500000
+3. 6.283185
+4. 1
+5. B",,C,0
+PGA-TUT01-Q02,2024,Tutorial,Type; Fundamental,Exercise 2 Write a program to compute the body mass index (BMI). Input variables are the weight (in kg) and height (in metre). Compute BMI by formula BMI= weight/(height*height);  Output in which category the user belongs to.,"#include <stdio.h>
+
+int main() {
+    float weight, height, bmi;
+
+    // Prompt user for weight in kg
+    printf(""Enter weight (in kg): "");
+    scanf(""%f"", &weight);
+
+    // Prompt user for height in metre
+    printf(""Enter height (in metre): "");
+    scanf(""%f"", &height);
+
+    // Compute BMI using the formula: weight / (height * height)
+    bmi = weight / (height * height);
+
+    // Print the calculated BMI, rounded to two decimal places
+    printf(""Your BMI is: %.2f\n"", bmi);
+
+    // Determine and output the category based on the BMI value
+    if (bmi <= 18.4) {
+        printf(""Category: Underweight\n"");
+    } else if (bmi <= 24.9) {
+        // This condition implicitly means bmi > 18.4 and <= 24.9
+        printf(""Category: Normal\n"");
+    } else if (bmi <= 30.0) {
+        // This condition implicitly means bmi > 24.9 and <= 30.0
+        printf(""Category: Overweight\n"");
+    } else {
+        // Handles cases where bmi > 30.0
+        printf(""Category: Obese\n"");
+    }
+
+    return 0;
+}",pga_tut01_q02_img.png,C,0
+PGA-TUT01-Q03,2024,Tutorial,"Type, Fundamental","Test these math functions in a program, understand the data types of parameters and return values.","#include <stdio.h>
+#include <math.h> // Required for math functions
+
+int main() {
+    // Declaring variables of type 'double' as math functions expect floating-point numbers
+    double positive_num = 4.7;
+    double negative_num = -5.3;
+    double base = 2.0;
+    double exponent = 3.0;
+    double perfect_square = 25.0;
+
+    printf(""--- Testing Math Functions ---\n\n"");
+
+    // 1. ceil() - Rounds up to the nearest integer
+    printf(""1) ceil(%f)  = %f\n"", positive_num, ceil(positive_num));
+    
+    // 2. floor() - Rounds down to the nearest integer
+    printf(""2) floor(%f) = %f\n"", positive_num, floor(positive_num));
+    
+    // 3. sqrt() - Calculates the square root
+    printf(""3) sqrt(%f)  = %f\n"", perfect_square, sqrt(perfect_square));
+    
+    // 4. pow() - Calculates base raised to the power of exponent
+    printf(""4) pow(%f, %f) = %f\n"", base, exponent, pow(base, exponent));
+    
+    // 5. fabs() - Returns the absolute (positive) value
+    printf(""5) fabs(%f) = %f\n"", negative_num, fabs(negative_num));
+
+    return 0;
+}","pga_tut01_q03_img.,png",C,0
+PGA-TUT02-Q01,2024,Tutorial,"Operators, Control and Iteration","Assume i=5, j=7, k=4 and m=-2.
+What does each of the following print? 
+a) printf(“%d”, i==5);
+b) printf(“%d”, j!=3);
+c) printf(“%d”, i>=5 && j<4);
+d) printf(“%d”, !m && k>m);
+e) printf(“%d”, !k || m);
+f) printf(“%d”, k-m<j || 5-j>=k);
+g) printf(“%d”, j+m<=i && !0);
+h) printf(“%d”, !(j-m));
+i)
+printf(“%d”, !(k>m));
+j)
+printf(“%d”, !(j>k));","In C, a true condition evaluates to 1, and a false condition evaluates to 0. Additionally, any non-zero integer (such as -2 or 4) is inherently evaluated as ""true"", while 0 is evaluated as ""false"".
+
+a) 1 (Explanation: 5 == 5 is true)
+
+b) 1 (Explanation: 7 != 3 is true)
+
+c) 0 (Explanation: 5 >= 5 is true, but 7 < 4 is false. 1 && 0 results in 0)
+
+d) 0 (Explanation: m is -2 which is true/non-zero, so !m becomes 0. Since the left side of && is 0, the whole expression evaluates to 0)
+
+e) 1 (Explanation: k is 4 so !k is 0. However, m is -2 (true). 0 || 1 evaluates to 1)
+
+f) 1 (Explanation: k - m is 4 - (-2) = 6. 6 < 7 is true (1). Due to short-circuit evaluation of ||, the condition stops here and evaluates to 1)
+
+g) 1 (Explanation: j + m is 7 - 2 = 5. 5 <= 5 is true (1). !0 is also true (1). 1 && 1 evaluates to 1)
+
+h) 0 (Explanation: j - m is 7 - (-2) = 9, which is non-zero/true. !9 evaluates to 0)
+
+i) 0 (Explanation: k > m is 4 > -2, which is true. !(1) evaluates to 0)
+
+j) 0 (Explanation: j > k is 7 > 4, which is true. !(1) evaluates to 0)",,C,0
+PGA-TUT02-Q02,2024,Tutorial,Control and Iteration,"What's the output of the program?
+#include <stdio.h>
+int main()
+{ 
+   int a = 10;
+   if(!a)
+       printf(""True\n"");
+   else
+       printf(""False\n"");
+ while(a)
+ {
+     printf(“%d\n”, a);
+      a--;
+ }
+}","1.	int a = 10; initializes the variable a to 10. In C, any non-zero integer is evaluated as ""true"".
+2.	The if(!a) condition evaluates the logical NOT of a. Since a is 10 (true), !a becomes false (0). Therefore, the else block executes, printing False.
+3.	The while(a) loop continues to execute as long as the condition a is non-zero (true).
+4.	Inside the loop, it prints the current value of a and then decrements it by 1 (a--).
+5.	The loop will print the values 10, 9, 8, 7, 6, 5, 4, 3, 2, 1.
+6.	When a becomes 0, the condition while(0) evaluates to false, and the loop terminates.",,C,0
+PGA-TUT02-Q03,2024,Tutorial,"Iteration, Simple Algorithms","
+What does the following program do?
+#include <stdio.h>
+int main(void)
+{
+int x, i, j;
+// prompt user for input
+printf%s"", ""Enter an integer in the range 1-20:""); 
+scanf (%d, &x); // read values for x
+for (i = 1; i <= x; i++) {// count from 1 to x
+for (j = 1; j <= x; j++) { // count from 1 to x
+if (j==i)
+printf(%c"",'@'); / output @
+else
+printf("" "");
+} / end inner for
+printf(""\n"");
+} / end outer for
+}// end of main","1.	It prompts the user to enter an integer x (intended to be between 1 and 20).
+2.	It uses a nested for loop structure to iterate through rows (i) and columns (j), essentially creating an x by x grid.
+3.	Inside the inner loop, the condition if (j == i) checks if the current row number is equal to the current column number. This mathematical condition represents the main diagonal of a square grid.
+4.	If the condition is true, it prints the @ character. If false, it prints a blank space "" "".
+5.	After completing one full row (the inner loop finishes), it prints a newline character \n to move to the next row. (Note: The provided code contains typographical syntax errors, such as missing quotes in scanf and printf, and single slashes for comments, which would prevent it from compiling successfully as-is.)",,C,0
+PGA-TUT02-Q04,2024,Tutorial,"Fundamental, Control and Iteration",Design a program to create a menu like this:,"#include <stdio.h>
+
+int main() {
+    int choice;
+
+    // A do-while loop ensures the menu is displayed at least once
+    do {
+        // Print the menu exactly as specified
+        printf(""********************************\n"");
+        printf(""* 1. Add a new record      *\n"");
+        printf(""* 2. Delete a record       *\n"");
+        printf(""* 3. Search a record       *\n"");
+        printf(""* 4. Quit                  *\n"");
+        printf(""********************************\n"");
+
+        // Prompt the user for their choice
+        printf(""Please enter your choice (1-4): "");
+        scanf(""%d"", &choice);
+
+        // Handle the user's input using a switch statement
+        switch (choice) {
+            case 1:
+                printf(""[System] You selected: Add a new record.\n\n"");
+                // Code to add a record would go here
+                break;
+            case 2:
+                printf(""[System] You selected: Delete a record.\n\n"");
+                // Code to delete a record would go here
+                break;
+            case 3:
+                printf(""[System] You selected: Search a record.\n\n"");
+                // Code to search a record would go here
+                break;
+            case 4:
+                printf(""[System] Quitting the program. Goodbye!\n"");
+                break;
+            default:
+                printf(""[System] Invalid input. Please enter a number between 1 and 4.\n\n"");
+        }
+
+    } while (choice != 4); // Loop continues until the user inputs 4
+
+    return 0;
+}",pga_tut02_q04_img.png,C,0
+PGA-TUT03-Q01,2024,Tutorial,"Pointers and Arrays, Pointer 1","What's the output?
+#include<stdio.h>
+int main(int argc, char* argv[ ])
+{
+int a = 1;
+int b = 2;
+int *p1 = &a;
+int *p2 = &b;
+printf(“%d, %d”, *p1, *p2);
+p1 = p2; 
+*p1 = 3;
+printf(“%d, %d”, a, b);
+printf(“%d, %d”, *p1, *p2);
+return 0;
+8
+}","The exact console output of this program (assuming standard ASCII quotes and ignoring the typo 8 at the end) will be:
+1, 21, 33, 3
+
+(Note: Because there are no newline characters \n in the printf statements, the outputs will be printed continuously on the same line. If newlines were present, it would print 1, 2, then 1, 3, then 3, 3).
+
+Here is the step-by-step memory and execution breakdown:
+
+1.	int a = 1; and int b = 2; initialize the integer variables.
+2.	int *p1 = &a; assigns the memory address of a to pointer p1.
+3.	int *p2 = &b; assigns the memory address of b to pointer p2.
+4.	printf(""%d, %d"", *p1, *p2); dereferences the pointers to print the values they point to. It prints 1, 2.
+5.	p1 = p2; changes the pointer p1 so that it now points to the same memory address as p2. Now, both p1 and p2 point to b.
+6.	*p1 = 3; modifies the value at the memory address p1 is currently pointing to. Since p1 points to b, the value of b is updated from 2 to 3. The variable a remains 1.
+7.	printf(""%d, %d"", a, b); prints the variables directly. a is 1 and b is 3. It prints 1, 3.
+8.	printf(""%d, %d"", *p1, *p2); dereferences both pointers. Since they both point to b (which is now 3), it prints 3, 3.",,C,0
+PGA-TUT03-Q02,2024,Tutorial,"Arrays, Pointer 1, Pointers and Arrays","What's the output?
+#include<stdio.h>
+int main(int argc, char* argv[ ])
+{
+ int a[] = {1, 2, 3};
+ printf(“%d, %d, %d\n”, a[0], a[1], a[2]);
+ printf(“%p, %p, %p\n”, &a[0], &a[1], &a[2]);
+ int b[] = {1, 2, 3};
+ printf(“%p, %p\n”, a, b);
+ char* s1 = “Paul”;
+ char* s2 = “Paul”; 
+ printf(“%p, %p\n”, s1, s2);
+ 
+}","The exact output for the %p (pointer address) format specifiers will vary every time the program runs due to memory allocation and Address Space Layout Randomization (ASLR). However, the relationship between the printed values is strictly defined.
+
+Here is an example of what the output might look like, followed by a detailed breakdown:
+
+1, 2, 3
+0x7ffeeb5a9a10, 0x7ffeeb5a9a14, 0x7ffeeb5a9a18
+0x7ffeeb5a9a10, 0x7ffeeb5a9a20
+0x1043bbf10, 0x1043bbf10
+
+1.	printf(""%d, %d, %d\n"", a[0], a[1], a[2]); prints the integer values stored in array a, which are 1, 2, 3.
+2.	printf(""%p, %p, %p\n"", &a[0], &a[1], &a[2]); prints the memory addresses of the array elements. Since an int typically occupies 4 bytes, these addresses will be contiguous in memory, increasing by exactly 4 bytes each time (e.g., ...10, ...14, ...18).
+3.	printf(""%p, %p\n"", a, b); prints the base memory addresses of array a and array b. Even though they contain the same values {1, 2, 3}, they are two distinctly allocated local arrays on the stack, so they will print two different addresses. Note that printing a is equivalent to printing &a[0].
+4.	printf(""%p, %p\n"", s1, s2); prints the memory addresses that pointers s1 and s2 are pointing to. Because ""Paul"" is a string literal, the compiler optimizes memory by storing it once in the read-only data segment (string pooling). Both s1 and s2 point to this exact same memory location, so they will print the exact same address.
+",,C,0
+PGA-TUT04-Q01,2024,Tutorial,"Functions 1, Pointers to Pointers","What's the output of the program?
+void swap(int* arg1, int* arg2)
+{
+ int* value = NULL;
+ value = arg1; 
+ arg1 = arg2;
+ arg2 = value;
+}
+int main()
+{
+ int a = 1, b = 2;
+ printf(“%p, %p\n”, &a, &b); 
+ swap(&a, &b); 
+ printf(“%p, %p\n”, &a, &b);   
+}","The output will print the exact same two memory addresses twice. For example:
+0x7ffeeb5a9a10, 0x7ffeeb5a9a14
+0x7ffeeb5a9a10, 0x7ffeeb5a9a14
+
+The swap function receives the addresses of a and b. However, inside the function, it only swaps the local pointer variables (arg1 and arg2). It never dereferences the pointers (e.g., *arg1 = *arg2) to modify the actual integer values stored in memory. Furthermore, the physical memory addresses of the local variables a and b in main are fixed and cannot be changed. Because of this, the function call has absolutely no effect on the variables in main.",,C,0
+PGA-TUT04-Q02,2024,Tutorial,"Simple Algorithms, Arrays, Functions 1","1.	Write two functions. 
+2.	The first function sorts an integer array in ascending order. Example: input array 3, 5, 2, 8, 7 result array 2, 3, 5, 7, 8
+3.	The second function prints all unique elements in an array.","#include <stdio.h>
+
+// Function 1: Sorts an integer array in ascending order
+void sortArray(int arr[], int size) {
+    int temp;
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] > arr[j+1]) {
+                // Swap the elements
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+// Function 2: Prints all unique (distinct) elements in an array
+void printUnique(int arr[], int size) {
+    printf(""Unique elements: "");
+    for (int i = 0; i < size; i++) {
+        int isDuplicate = 0;
+        // Check if the current element has already appeared
+        for (int j = 0; j < i; j++) {
+            if (arr[i] == arr[j]) {
+                isDuplicate = 1;
+                break;
+            }
+        }
+        // If it is not a duplicate, print it
+        if (!isDuplicate) {
+            printf(""%d "", arr[i]);
+        }
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int arr[] = {3, 5, 2, 8, 7, 5, 2};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    // Test Function 1
+    sortArray(arr, size);
+    
+    printf(""Sorted array: "");
+    for(int i = 0; i < size; i++) {
+        printf(""%d "", arr[i]);
+    }
+    printf(""\n"");
+
+    // Test Function 2
+    printUnique(arr, size);
+
+    return 0;
+}",,C,0
+PGA-TUT05-Q01,2024,Tutorial,"Strings and Debugging, Simple Algorithms, Iteration","A program with the name ‘incorrect.c’ is available on the 
+Moodle page. Try to find out bugs in the program. The 
+program first reads an array from user input, then sort the 
+array to ascending and descending orders by calling two 
+functions.
+#include <stdio.h>
+ 
+void sort_array_ascending(float arr[], int length);
+void sort_array_descending(float* arr, int length);
+ 
+int main()
+{
+    int num, i;
+ 
+    printf(""Enter number of elements: "");
+    scanf(""%d"", &num);
+    float heap[num]; 
+    printf(""Enter the elements: "");
+    for (i = 0; i < num; i++)
+       scanf(""%d"", &heap[i]);
+
+    printf(""\nThe sorted array are:\n"");
+    printf(""Ascending order: "");
+    sort_array_ascending(heap, num);
+    for (i = 0; i < num; i++)
+       printf(""%f "", heap[i]);
+
+    printf(""\nDescending order: "");
+    sort_array_descending(heap, num);
+    for (i = 0; i < num; i++)
+       printf(""%f "", heap[i]);
+    printf(""\n"");
+            
+    return 0;
+}
+
+void sort_array_ascending(float arr[], int length)
+{
+	int i=0, j=0, min_idx;
+ 
+    // One by one move boundary of unsorted subarray
+    do
+    {
+         // Find the minimum element in unsorted array
+        min_idx = i;
+        j = i+1;
+        do
+        {
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+            j++;
+            
+ 		}while(j<length);
+        // Swap the found minimum element
+        // with the first element
+        float temp = arr[min_idx];
+    	arr[min_idx] = arr[i];
+    	arr[i] = temp;
+       	i++;
+    }while(i < length); 
+}
+
+void sort_array_descending(float* arr, int length)
+{
+	int i=0, j=0, min_idx;
+ 
+    // One by one move boundary of unsorted subarray
+    do
+    {
+         // Find the minimum element in unsorted array
+        min_idx = i;
+        j = i+1;
+        do
+        {
+            if (arr[j] > arr[min_idx])
+                min_idx = j;
+            j++;
+            
+ 		}while(j<length);
+        // Swap the found maximum element with the first element
+        float temp = arr[min_idx];
+    	arr[min_idx] = arr[i];
+    	arr[i] = temp;
+       	i++;
+    }while(i < length); 
+}","#include <stdio.h>
+ 
+void sort_array_ascending(float arr[], int length);
+void sort_array_descending(float* arr, int length);
+ 
+int main()
+{
+    int num, i;
+ 
+    printf(""Enter number of elements: "");
+    scanf(""%d"", &num);
+    float heap[num]; 
+    printf(""Enter the elements: "");
+    for (i = 0; i < num; i++)
+       scanf(""%f"", &heap[i]);
+
+    printf(""\nThe sorted array are:\n"");
+    printf(""Ascending order: "");
+    sort_array_ascending(heap, num);
+    for (i = 0; i < num; i++)
+       printf(""%f "", heap[i]);
+
+    printf(""\nDescending order: "");
+    sort_array_descending(heap, num);
+    for (i = 0; i < num; i++)
+       printf(""%f "", heap[i]);
+    printf(""\n"");
+            
+    return 0;
+}
+
+void sort_array_ascending(float arr[], int length)
+{
+	int i=0, j=0, min_idx;
+ 
+    // One by one move boundary of unsorted subarray
+    do
+    {
+         // Find the minimum element in unsorted array
+        min_idx = i;
+        j = i+1;
+        do
+        {
+            if (arr[j] < arr[min_idx])
+                min_idx = j;
+            j++;
+            
+ 		}while(j<length);
+        // Swap the found minimum element
+        // with the first element
+        float temp = arr[min_idx];
+    	arr[min_idx] = arr[i];
+    	arr[i] = temp;
+       	i++;
+    }while(i < length-1); 
+}
+
+void sort_array_descending(float* arr, int length)
+{
+	int i=0, j=0, min_idx;
+ 
+    // One by one move boundary of unsorted subarray
+    do
+    {
+         // Find the minimum element in unsorted array
+        min_idx = i;
+        j = i+1;
+        do
+        {
+            if (arr[j] > arr[min_idx])
+                min_idx = j;
+            j++;
+            
+ 		}while(j<length);
+        // Swap the found maximum element with the first element
+        float temp = arr[min_idx];
+    	arr[min_idx] = arr[i];
+    	arr[i] = temp;
+       	i++;
+    }while(i < length-1); 
+}
+
+ ",,C,0
+PGA-TUT06-Q01,2024,Tutorial,"Dynamic Memory Allocation, Pointers and Arrays, Simple Algorithms","Figure out what this program does:
+int main()
+{
+int i,n;
+float *element;
+scanf(“%d”, &n);
+element = malloc( n*sizeof(float) );  
+if(element==NULL) { 
+exit(0); 
+} 
+for(i=0;i<n;++i) 
+{ 
+scanf(""%f"",element+i); 
+} 
+for(i=1;i<n;++i) 
+{ 
+if(*element<*(element+i)) 
+*element=*(element+i); 
+} 
+printf("" The wanted element is : %.2f \n\n"",*element);
+free(element);
+return 0;
+}","The program dynamically allocates memory for an array of floating-point numbers, reads the values from the user input, finds the largest (maximum) number in that array, prints it, and safely frees the memory.",,C,0
+PGA-TUT07-Q01,2024,Tutorial,"Linked Lists, Dynamic Memory Allocation","1.	A program with the name of list.c is available on the Moodle. It allows the user to create a simple char list.
+2.	Your task is to write a function reverseList() which creates a new list that contains all the nodes of the original list in reverse order.
+3.	For example, if the original list contains “a  f   f  g  k”, the new list should be “k  g   f  f  a”.
+4.	Declaration of the function is:
+5.	void reverseList(ListNode **newList, ListNode *currentList);
+
+
+list.c:
+#include<stdio.h>
+#include <stdlib.h>
+//self-referential structure
+
+struct listnode{
+	char data;//each list will contain a character
+	struct listnode *nextPtr;//pointer to next node
+};
+
+typedef struct listnode ListNode;//synonym for struct listnode
+
+
+//prototypes
+void insert(ListNode **sPtr, char value);
+char delete(ListNode **sPtr, char value);
+int isEmpty(ListNode *sPtr);
+void printList(ListNode *currentPtr);
+void instructions(void);
+
+int main(void)
+{
+	ListNode *startPtr = NULL;	//initially there are no nodes
+	char item;//char input by user
+	instructions();//print menu
+	printf(""%s"",""?"");
+	unsigned int choice;
+	scanf(""%u"",&choice);
+
+	//loop while user does not choose 3
+	while (choice!=3)
+	{
+		switch (choice){
+			case 1:
+				printf(""%s"",""Enter a character: "");
+				scanf(""\n%c"",&item);
+				insert(&startPtr,item);//insert item in list
+				printList(startPtr);//print it
+				break;
+			case 2://delete an element
+			//if the list is not empty
+				if (!isEmpty(startPtr)){
+					printf(""%s"",""Enter character to be deleted: "");
+					scanf(""\n%c"",&item);
+					//if character is found, remove it
+					if(delete(&startPtr, item)){//remove item
+						printf(""%c deleted.\n"",item);
+						printList(startPtr);
+					}
+					else{
+						printf(""%c not found\n\n"",item);
+					}
+				}
+				else{
+					puts(""List is empty.\n"");
+				}
+				break;
+
+			default:
+				puts(""Invalid choice.\n"");
+				instructions();
+				break;
+		}
+
+		printf(""%s"",""? "");
+		scanf(""%u"",&choice);
+
+	}
+
+	puts(""End of run."");
+}
+
+//display program instruction to user
+
+void instructions(void)
+{
+	puts(""Enter your choice:\n1 to add \n 2 to delete\n 3 to end"");
+}
+
+void insert(ListNode **sPtr, char value)
+{
+	 ListNode *newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = NULL;//nodes does not link to another one
+
+	 	ListNode *previousPtr = NULL;
+	 	ListNode *currentPtr = *sPtr;
+	 	//loop to find current location in the list
+
+	 	while (currentPtr!=NULL&&value>currentPtr->data){
+	 		previousPtr = currentPtr;
+	 		currentPtr = currentPtr->nextPtr;//interesting
+		}
+        if (previousPtr == NULL)
+        {
+            newPtr->nextPtr = *sPtr;
+            *sPtr = newPtr;
+        }
+        else
+        {
+            previousPtr->nextPtr =newPtr;
+            newPtr->nextPtr = currentPtr;
+        }
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}
+
+//return 1 if the list is emppty
+int isEmpty(ListNode *sPtr)
+{
+	return sPtr == NULL;
+}
+
+
+//print the list
+void printList(ListNode *currentPtr) {
+  //if List is empty
+  if (isEmpty(currentPtr)) {
+	puts(""List is empty.\n"");
+  }
+  else {
+	while (currentPtr!=NULL) {
+		printf(""%c---> "", currentPtr->data);
+		currentPtr = currentPtr->nextPtr;
+	}
+	puts(""NULL\n"");
+  }
+}
+char delete(ListNode **sPtr, char value)
+{
+    //delete first node if a match is found
+    if (value == (*sPtr)->data)
+    {
+        ListNode *tempPtr = *sPtr;    //hold onto node being removed
+        *sPtr = (*sPtr)->nextPtr;
+        free(tempPtr);
+        return value;
+    }
+    else
+    {
+        ListNode *previousPtr = *sPtr;
+        ListNode *currentPtr = (*sPtr)->nextPtr;
+        //loop to find the correct location in the list
+        while(currentPtr != NULL && currentPtr->data!=value)
+        {
+            previousPtr = currentPtr;
+            currentPtr = currentPtr->nextPtr;
+        }
+        //delete node
+        if (currentPtr != NULL)
+        {
+            ListNode *tempPtr = currentPtr;
+            previousPtr->nextPtr = currentPtr->nextPtr;
+            free(tempPtr);
+            return value;
+        }
+    }
+    return '\0';
+}
+
+/*void insert(ListNodePtr* sPtr, char value)
+{
+	  ListNodePtr newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = (*sPtr)->nextPtr;//nodes does not link to another one
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}*/
+
+void yinsert(ListNode **sPtr, char value)
+{
+	 ListNode *newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = (*sPtr)->nextPtr;//nodes does not link to another one
+       // (*sPtr)->nextPtr = newPtr;
+ 		(*sPtr)->nextPtr = newPtr;
+ 
+ /*
+  	previousPtr->nextPtr =newPtr;
+	newPtr->nextPtr = currentPtr;*/
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}","#include<stdio.h>
+#include <stdlib.h>
+//self-referential structure
+
+struct listnode{
+	char data;//each list will contain a character
+	struct listnode *nextPtr;//pointer to next node
+};
+
+typedef struct listnode ListNode;//synonym for struct listnode
+
+
+//prototypes
+void insert(ListNode **sPtr, char value);
+char delete(ListNode **sPtr, char value);
+int isEmpty(ListNode *sPtr);
+void printList(ListNode *currentPtr);
+void instructions(void);
+void reverseList(ListNode **newList, ListNode *currentList);
+void list_remove_last_node(ListNode **start);
+void list_append(ListNode **start, int value);
+
+int main(void)
+{
+	ListNode *startPtr = NULL;	//initially there are no nodes
+	char item;//char input by user
+	instructions();//print menu
+	printf(""%s"",""?"");
+	unsigned int choice;
+	scanf(""%u"",&choice);
+
+	//loop while user does not choose 3
+	while (choice!=3)
+	{
+		switch (choice){
+			case 1:
+				printf(""%s"",""Enter a character: "");
+				scanf(""\n%c"",&item);
+				insert(&startPtr,item);//insert item in list
+				printList(startPtr);//print it
+				break;
+			case 2://delete an element
+			//if the list is not empty
+				if (!isEmpty(startPtr)){
+					printf(""%s"",""Enter character to be deleted: "");
+					scanf(""\n%c"",&item);
+					//if character is found, remove it
+					if(delete(&startPtr, item)){//remove item
+						printf(""%c deleted.\n"",item);
+						printList(startPtr);
+					}
+					else{
+						printf(""%c not found\n\n"",item);
+					}
+				}
+				else{
+					puts(""List is empty.\n"");
+				}
+				break;
+
+			default:
+				puts(""Invalid choice.\n"");
+				instructions();
+				break;
+		}
+
+		printf(""%s"",""? "");
+		scanf(""%u"",&choice);
+
+	}
+
+	ListNode *new = NULL;
+	reverseList(&new, startPtr);
+	printList(new);
+	printList(startPtr);
+	
+	puts(""End of run."");
+}
+
+//display program instruction to user
+
+void instructions(void)
+{
+	puts(""Enter your choice:\n1 to add \n 2 to delete\n 3 to end"");
+}
+
+void insert(ListNode **sPtr, char value)
+{
+	 ListNode *newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = NULL;//nodes does not link to another one
+
+	 	ListNode *previousPtr = NULL;
+	 	ListNode *currentPtr = *sPtr;
+	 	//loop to find current location in the list
+
+	 	while (currentPtr!=NULL&&value>currentPtr->data){
+	 		previousPtr = currentPtr;
+	 		currentPtr = currentPtr->nextPtr;//interesting
+		}
+        if (previousPtr == NULL)
+        {
+            newPtr->nextPtr = *sPtr;
+            *sPtr = newPtr;
+        }
+        else
+        {
+            previousPtr->nextPtr =newPtr;
+            newPtr->nextPtr = currentPtr;
+        }
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}
+
+
+//return 1 if the list is emppty
+int isEmpty(ListNode *sPtr)
+{
+	return sPtr == NULL;
+}
+
+
+//print the list
+void printList(ListNode *currentPtr) {
+  //if List is empty
+  if (isEmpty(currentPtr)) {
+	puts(""List is empty.\n"");
+  }
+  else {
+	while (currentPtr!=NULL) {
+		printf(""%c---> "", currentPtr->data);
+		currentPtr = currentPtr->nextPtr;
+	}
+	puts(""NULL\n"");
+  }
+}
+char delete(ListNode **sPtr, char value)
+{
+    //delete first node if a match is found
+    if (value == (*sPtr)->data)
+    {
+        ListNode *tempPtr = *sPtr;    //hold onto node being removed
+        *sPtr = (*sPtr)->nextPtr;
+        free(tempPtr);
+        return value;
+    }
+    else
+    {
+        ListNode *previousPtr = *sPtr;
+        ListNode *currentPtr = (*sPtr)->nextPtr;
+        //loop to find the correct location in the list
+        while(currentPtr != NULL && currentPtr->data!=value)
+        {
+            previousPtr = currentPtr;
+            currentPtr = currentPtr->nextPtr;
+        }
+        //delete node
+        if (currentPtr != NULL)
+        {
+            ListNode *tempPtr = currentPtr;
+            previousPtr->nextPtr = currentPtr->nextPtr;
+            free(tempPtr);
+            return value;
+        }
+    }
+    return '\0';
+}
+
+/*void insert(ListNodePtr* sPtr, char value)
+{
+	  ListNodePtr newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = (*sPtr)->nextPtr;//nodes does not link to another one
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}*/
+
+void yinsert(ListNode **sPtr, char value)
+{
+	 ListNode *newPtr = malloc(sizeof(ListNode)); //create node
+	 if (newPtr!=NULL)
+    {//is space available?
+	 	newPtr->data = value;//place value in node
+	 	newPtr->nextPtr = (*sPtr)->nextPtr;//nodes does not link to another one
+       // (*sPtr)->nextPtr = newPtr;
+ 		(*sPtr)->nextPtr = newPtr;
+ 
+ /*
+  	previousPtr->nextPtr =newPtr;
+	newPtr->nextPtr = currentPtr;*/
+	 }
+	 else
+     {
+         printf(""%c not inserted. No memory available,\n"", value);
+     }
+}
+
+void reverseList(ListNode **newList, ListNode *currentList)
+{
+	ListNode *newNode = currentList;
+	int i,length = 0;	
+	while(newNode!=NULL)
+	{
+		length++;
+		newNode = newNode->nextPtr;  		
+	}
+	
+	int array[length];
+	newNode = currentList;
+	i = 0;
+	while(newNode!=NULL)
+	{
+		array[i] = newNode->data;
+		i++;
+		newNode = newNode->nextPtr;  		
+	}
+
+	for(i=length-1;i>=0;i--)
+		list_append(newList, array[i]);
+
+}
+
+void list_append(ListNode **start, int value)
+{
+  if(*start == NULL)
+   {
+      ListNode *n = malloc(sizeof(ListNode));
+      if(n == NULL)
+      {
+	 // error, cannot allocate memory for new list node.
+	 return;
+      }
+      n->data = value;
+      n->nextPtr = NULL;
+      *start = n;
+   }
+   else
+   {
+      ListNode *cur = *start;
+      while(cur->nextPtr != NULL)
+      {
+	 cur = cur->nextPtr;
+      }
+      ListNode *n = malloc(sizeof(ListNode));
+      if(n == NULL)
+      {
+	 // error, cannot allocate memory for new list node.
+	 return;
+      }
+      n->data = value;
+      n->nextPtr = NULL;
+      cur->nextPtr = n;
+   }
+}
+		
+void list_remove_last_node(ListNode **start)
+{
+	ListNode *newNode = *start;
+	ListNode *prev = *start;
+	
+	while (newNode->nextPtr!=NULL)
+	{
+		prev = newNode;
+		newNode = newNode->nextPtr;
+	}
+	
+	free(newNode); 
+	prev->nextPtr = NULL;
+}
+  ",,C,0
+PGA-TUT08-Q01,2024,Tutorial,Files and IO,"A dictionary file containing many words is here:
+ /usr/share/dict/words Each word is saved as a string in the file. Different words are separated by ‘\n’. Your task is to check how many words the dictionary contains. Hint: FILE *fp; fp = fopen (“/usr/share/dict/words ”, ”r”);","#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include <assert.h>
+#include <ctype.h>
+#include <time.h>
+
+//int wordguess(char *word, char guess);
+
+int main()
+{
+      	FILE *fp;
+//	fp = (fopen(""/usr/share/dict/linux.words"", ""r""));
+ 	fp = (fopen(""/usr/share/dict/words"", ""r""));
+  	if(fp == NULL)
+   	{
+       		printf(""Error!"");
+       		exit(1);
+   	}
+   
+    char word[50];
+    int isWord;
+    int length = 0;
+ 
+    while(!feof(fp))
+    {
+    	isWord = 1;
+            if(fscanf(fp,""%s"",word) == EOF)
+            	break;
+            for(int i=0; i<strlen(word); i++)
+            {
+            	
+            	if((word[i]<'A' || word[i]>'z') && word[i]!='-')
+ //		if(word[i]<'9' && word[i]>'0')
+            		isWord = 0;
+            }
+            if(isWord == 1)	
+            	length++;
+            else
+            	isWord = 1;                     
+   }
+   
+   printf(""%d\n"",length);
+   fclose(fp);
+}",,C,0
+PGA-TUT09-Q01,2024,Tutorial,Miscellaneous,"What's the output?
+#include<stdio.h>
+void func()
+{
+    static int value = 0;
+    value++;
+    printf(""value: %d\n"",value);
+}
+int main()
+{
+    for(int i=0;i<5;i++)
+ func();
+ 
+}","The output of the program will be exactly:
+value: 1
+value: 2
+value: 3
+value: 4
+value: 5
+
+The key to this program is the static keyword used in the declaration of int value = 0;. Unlike normal local variables that are created on the stack and destroyed when a function exits, a static local variable is allocated in the data segment of memory. This means it is initialized to 0 only once when the program begins executing. It then retains its value between successive calls to func().
+
+Since the for loop in main() calls func() 5 times, value continuously increments from its previous state (1, then 2, then 3, and so on) instead of resetting to 0 each time.",,C,0
+PGA-TUT09-Q02,2024,Tutorial,Miscellaneous,"What's the output?
+#include<stdio.h> 
+int initializer(void) 
+{ 
+return 50; 
+} 
+int main() 
+{ 
+static int i = initializer(); 
+printf("" value of i = %d"", i); 
+getchar(); 
+return 0; 
+} ","The program will not produce an output because it will result in a compile-time error.
+
+In C, static variables are stored in the data segment of memory and are initialized before the program even begins executing. Because of this, they must be initialized using constant literals (compile-time constants). The function call initializer() is evaluated at runtime, making it invalid for initializing a static variable. To fix this, you would either need to initialize i with a constant (like static int i = 50;) or remove the static keyword if you want to initialize it with a function return value.",,C,0
+PGA-TUT09-Q03,2024,Tutorial,"Trees and Graphs, Miscellaneous","1.	You are given a partially-completed program which implements a Trie. (trie_incomplete.c in the Tutorial section) 
+2.	Your task is to complete the function trie_contains() so that the program print ""Test passed"" when run. 
+3.	The trie_contains function should check if a given string is present in the trie or not. 
+4.	assert(expression) is a macro in C. If expression is true, it does nothing. If expression is false, it terminates the program.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+////////////////////////////////////////////////////////////////////////////////
+// Internal definition and functions.  Only to be used by the trie
+// functions themselves.
+
+#define TRIE_WIDTH 26
+
+// Internal structure of each level.
+struct trie_node {
+   int valid[TRIE_WIDTH];	           // Is this the end of a valid word?
+   struct trie_node *children[TRIE_WIDTH];  // The rest of any words with this prefix.
+};
+
+// Overall data-type.
+struct trie {
+   struct trie_node *root;
+};
+
+struct trie_node *create_trie_node();
+void trie_destroy_rec(struct trie_node *n);
+
+////////////////////////////////////////////////////////////////////////////////
+// External definitions and functions.  The ""public interface"" to the Trie.
+typedef struct trie Trie;
+
+Trie *trie_create();
+void trie_destroy(Trie * t);
+int trie_add(Trie *t, const char *str);
+int trie_contains(Trie *t, const char *str);
+
+////////////////////////////////////////////////////////////////////////////////
+// Implementation of the functions.
+
+/* Internal function to allocate and initialise a new level of the trie.
+** Returns NULL on failure. */
+struct trie_node *create_trie_node()
+{
+   struct trie_node *n = malloc(sizeof(struct trie_node));
+   if(n == NULL)
+   {
+      return NULL;
+   }
+
+   for(int i = 0; i < TRIE_WIDTH; i++)
+   {
+      n->valid[i] = 0;
+      n->children[i] = NULL;
+   }
+
+   return n;
+}
+
+/* Create a new Trie object.
+** Should be destroyed with trie_destroy() when finished with.
+** Returns NULL on failure.
+*/
+Trie *trie_create()
+{
+   Trie *t = malloc(sizeof(Trie));
+   if(t == NULL)
+   {
+      return NULL;
+   }
+
+   t->root = create_trie_node();
+   if(t->root == NULL)
+   {
+      free(t);
+      return NULL;
+   }
+   
+   return t;
+}
+
+/** Given a Trie, free all allocated memory.
+ ** Once this function is called, t is no longer a valid reference and
+ ** should no longer be used.
+ */
+void trie_destroy(Trie * t)
+{
+   if(t == NULL)
+   {
+      return;
+   }
+
+   struct trie_node *cur = t->root;
+   trie_destroy_rec(cur);
+   free(t);
+}
+
+/* Internal function to recursively destroy trie levels. */
+void trie_destroy_rec(struct trie_node *n)
+{
+   for(int i = 0; i < TRIE_WIDTH; i++)
+   {
+      if(n->children[i] != NULL)
+      {
+	 trie_destroy_rec(n->children[i]);
+      }
+   }
+   free(n);
+}
+
+/* Add the given non-empty string to the Trie.
+** str is assumed to contain only the characters 'A'..'Z'.
+** Adding the same string multiple times has no effect.
+**
+** Returns false if t or str are NULL.
+** Returns true if successfully added, false otherwise.  If false, memory
+**   which was allocated in this function may not be immediately freed but
+**   it will be accessible and freed when trie_destroy() is eventually called.
+*/
+int trie_add(Trie *t, const char *str)
+{
+   if(t == NULL || str == NULL)
+   {
+      return 0;
+   }
+   
+   struct trie_node *cur = t->root;
+   int len = strlen(str);
+   int pos;
+   for(int sIdx = 0; sIdx < len; sIdx++)
+   {
+      pos = str[sIdx] - 'A'; // convert captial letters into 0..25
+      
+      if(cur->children[pos] == NULL)
+      {
+	 cur->children[pos] = create_trie_node();
+	 if(cur->children[pos] == NULL)
+	 {
+	    return 0;
+	 }
+      }
+      cur = cur->children[pos];
+   }
+   cur->valid[pos] = 1;
+   return 1;
+}
+
+/* Does the Trie contain the given non-empty string?
+** str is assumed to contain only the characters 'A'..'Z'.
+** Returns true/false if it does/doesn't.
+** Returns false if t or str are NULL.
+*/
+int trie_contains(Trie *t, const char *str)
+{
+   // TODO
+   // CORRECTLY IMPLEMENT THIS FUNCTION
+   return 0;			
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// main function for testing.
+
+int main(int argc, char *argv[])
+{
+   Trie *t = trie_create();
+   if(t == NULL)
+   {
+      printf(""Error creating trie.\n"");
+      exit(1);
+   }
+
+   assert(!trie_contains(NULL, ""A""));
+   assert(!trie_contains(t, NULL));
+   
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""TEST""));
+
+   assert(trie_add(t, ""TEST""));
+   assert(trie_contains(t, ""TEST""));
+   assert(!trie_contains(t, ""TESTING""));
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""BOO""));
+
+   assert(trie_add(t, ""TESTING""));
+   assert(trie_contains(t, ""TEST""));
+   assert(trie_contains(t, ""TESTING""));
+   assert(!trie_contains(t, ""EDT""));
+   assert(!trie_contains(t, ""STRING""));
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""BOO""));
+
+   assert(trie_add(t, ""A""));
+   assert(trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""AA""));
+
+   assert(trie_add(t, ""A""));
+   assert(trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""AA""));
+
+   assert(trie_add(t, ""AA""));
+   assert(trie_contains(t, ""A""));
+   assert(trie_contains(t, ""AA""));
+   assert(!trie_contains(t, ""AAA""));
+
+   assert(trie_add(t, ""AB""));
+   assert(trie_add(t, ""BA""));
+   assert(trie_contains(t, ""A""));
+   assert(trie_contains(t, ""AA""));
+   assert(trie_contains(t, ""AB""));
+   assert(trie_contains(t, ""BA""));
+   assert(!trie_contains(t, ""BB""));
+   assert(!trie_contains(t, ""AAA""));
+   
+   trie_destroy(t);
+   
+   printf(""Tests passed\n"");
+}
+","#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+
+////////////////////////////////////////////////////////////////////////////////
+// Internal definition and functions.  Only to be used by the trie
+// functions themselves.
+
+#define TRIE_WIDTH 26
+
+// Internal structure of each level.
+struct trie_node {
+   int valid[TRIE_WIDTH];	           // Is this the end of a valid word?
+   struct trie_node *children[TRIE_WIDTH];  // The rest of any words with this prefix.
+};
+
+// Overall data-type.
+struct trie {
+   struct trie_node *root;
+};
+
+struct trie_node *create_trie_node();
+void trie_destroy_rec(struct trie_node *n);
+
+////////////////////////////////////////////////////////////////////////////////
+// External definitions and functions.  The ""public interface"" to the Trie.
+typedef struct trie Trie;
+
+Trie *trie_create();
+void trie_destroy(Trie * t);
+int trie_add(Trie *t, const char *str);
+int trie_contains(Trie *t, const char *str);
+
+////////////////////////////////////////////////////////////////////////////////
+// Implementation of the functions.
+
+/* Internal function to allocate and initialise a new level of the trie.
+** Returns NULL on failure. */
+struct trie_node *create_trie_node()
+{
+   struct trie_node *n = malloc(sizeof(struct trie_node));
+   if(n == NULL)
+   {
+      return NULL;
+   }
+
+   for(int i = 0; i < TRIE_WIDTH; i++)
+   {
+      n->valid[i] = 0;
+      n->children[i] = NULL;
+   }
+
+   return n;
+}
+
+/* Create a new Trie object.
+** Should be destroyed with trie_destroy() when finished with.
+** Returns NULL on failure.
+*/
+Trie *trie_create()
+{
+   Trie *t = malloc(sizeof(Trie));
+   if(t == NULL)
+   {
+      return NULL;
+   }
+
+   t->root = create_trie_node();
+   if(t->root == NULL)
+   {
+      free(t);
+      return NULL;
+   }
+   
+   return t;
+}
+
+/** Given a Trie, free all allocated memory.
+ ** Once this function is called, t is no longer a valid reference and
+ ** should no longer be used.
+ */
+void trie_destroy(Trie * t)
+{
+   if(t == NULL)
+   {
+      return;
+   }
+
+   struct trie_node *cur = t->root;
+   trie_destroy_rec(cur);
+   free(t);
+}
+
+/* Internal function to recursively destroy trie levels. */
+void trie_destroy_rec(struct trie_node *n)
+{
+   for(int i = 0; i < TRIE_WIDTH; i++)
+   {
+      if(n->children[i] != NULL)
+      {
+	 trie_destroy_rec(n->children[i]);
+      }
+   }
+   free(n);
+}
+
+/* Add the given non-empty string to the Trie.
+** str is assumed to contain only the characters 'A'..'Z'.
+** Adding the same string multiple times has no effect.
+**
+** Returns false if t or str are NULL.
+** Returns true if successfully added, false otherwise.  If false, memory
+**   which was allocated in this function may not be immediately freed but
+**   it will be accessible and freed when trie_destroy() is eventually called.
+*/
+int trie_add(Trie *t, const char *str)
+{
+   if(t == NULL || str == NULL)
+   {
+      return 0;
+   }
+   
+   struct trie_node *cur = t->root;
+   int len = strlen(str);
+   int pos;
+   for(int sIdx = 0; sIdx < len; sIdx++)
+   {
+      pos = str[sIdx] - 'A'; // convert captial letters into 0..25
+      
+      if(cur->children[pos] == NULL)
+      {
+	 cur->children[pos] = create_trie_node();
+	 if(cur->children[pos] == NULL)
+	 {
+	    return 0;
+	 }
+      }
+      cur = cur->children[pos];
+   }
+   cur->valid[pos] = 1;
+   return 1;
+}
+
+/* Does the Trie contain the given non-empty string?
+** str is assumed to contain only the characters 'A'..'Z'.
+** Returns true/false if it does/doesn't.
+** Returns false if t or str are NULL.
+*/
+int trie_contains(Trie *t, const char *str)
+{
+   // TODO
+   // CORRECTLY IMPLEMENT THIS FUNCTION
+   
+   if(t == NULL || str == NULL)
+   {
+      return 0;
+   }
+   
+   struct trie_node *cur = t->root;
+   int len = strlen(str);
+   int pos;  
+   
+   for(int sIdx = 0; sIdx < len; sIdx++)
+   {
+      pos = str[sIdx] - 'A'; // convert captial letters into 0..25
+      
+      if(cur->children[pos] != NULL)
+	  cur = cur->children[pos];
+      else
+	  return 0;
+   }
+      
+   return 1;			
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// main function for testing.
+
+int main(int argc, char *argv[])
+{
+   Trie *t = trie_create();
+   if(t == NULL)
+   {
+      printf(""Error creating trie.\n"");
+      exit(1);
+   }
+
+   assert(!trie_contains(NULL, ""A""));
+   assert(!trie_contains(t, NULL));
+   
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""TEST""));
+
+   assert(trie_add(t, ""TEST""));
+   assert(trie_contains(t, ""TEST""));
+   assert(!trie_contains(t, ""TESTING""));
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""BOO""));
+
+   assert(trie_add(t, ""TESTING""));
+   assert(trie_contains(t, ""TEST""));
+   assert(trie_contains(t, ""TESTING""));
+   assert(!trie_contains(t, ""EDT""));
+   assert(!trie_contains(t, ""STRING""));
+   assert(!trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""BOO""));
+
+   assert(trie_add(t, ""A""));
+   assert(trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""AA""));
+
+   assert(trie_add(t, ""A""));
+   assert(trie_contains(t, ""A""));
+   assert(!trie_contains(t, ""AA""));
+
+   assert(trie_add(t, ""AA""));
+   assert(trie_contains(t, ""A""));
+   assert(trie_contains(t, ""AA""));
+   assert(!trie_contains(t, ""AAA""));
+
+   assert(trie_add(t, ""AB""));
+   assert(trie_add(t, ""BA""));
+   assert(trie_contains(t, ""A""));
+   assert(trie_contains(t, ""AA""));
+   assert(trie_contains(t, ""AB""));
+   assert(trie_contains(t, ""BA""));
+   assert(!trie_contains(t, ""BB""));
+   assert(!trie_contains(t, ""AAA""));
+   
+   trie_destroy(t);
+   
+   printf(""Tests passed\n"");
+}",,C,0
