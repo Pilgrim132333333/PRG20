@@ -1596,3 +1596,21 @@ int main(int argc, char *argv[])
    
    printf(""Tests passed\n"");
 }",,C,0
+PGA-CW24-01,2024,CW,"Fundamental, Control and Iteration, Operators, Simple Algorithms, Characters and Strings, Strings and Debugging,  Dynamic Memory Allocation","Task
+A simple student grades management software was developed by a computer science
+student, and the executable file is available on Moodle. While the software functions
+correctly with valid user input, it is not fully satisfactory as it does not handle incorrect
+input effectively. Here are a few examples: 1) When the program prompts the user to
+choose an option, it may crash if non-digit characters are entered. 2) The program does
+not validate whether the student names and grades are entered correctly.
+Your task is to write a program that implements the same student grades management
+system but with the ability to handle invalid user input. The requirements for handling
+invalid input are as follows:
+1) Student names must be unique. If a newly entered name matches an existing one, it
+should be considered invalid and discarded.
+2) Grades must be within the range of [0, 100].
+3) A valid name must begin and end with an English alphabetic character. Student
+names can be a maximum of 20 characters long, including spaces.
+4) In the event of invalid input, the program should allow the user to re-enter the
+information without displaying any message.
+You may assume that the maximum number of students is 1000.",,,C,0
