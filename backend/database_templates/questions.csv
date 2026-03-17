@@ -1,44 +1,2151 @@
 ﻿question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path
-PGA-WEB-Q01,N/A,Website,Fundamental,"Write a C program to print your name, date of birth, and mobile number.
-Expected Output:
-
-Name   : Alexandra Abramov  
-DOB    : July 14, 1975  
-Mobile : 99-9999999999","#include <stdio.h>
-
-int main()  
-{
-    // Print Name
-    printf(""Name   : Alexandra Abramov\n""); 
-    
-    // Print Date of Birth
-    printf(""DOB    : July 14, 1975\n""); 
-    
-    // Print Mobile Number
-    printf(""Mobile : 99-9999999999\n""); 
-    
-    // Indicate successful execution
-    return(0); 
-}",
-PGA-LAB02-Q01,2024,Lab Worksheet,Data Type Conversion; User Input; Arithmetic Operations; Output / String Formatting,"Pythagoras Solver
-Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
+PGA-LAB02-Q01,2024,Lab Worksheet,"Floating-point types, input/output, math functions, variable declaration, arithmetic operations, sequential structure","Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
 #include <math.h>
 
 int main() {
     double a, b, c;
 
-    printf(""请输入第一条直角边的长度: "");
-    scanf(""%lf"", &a);
-    printf(""请输入第二条直角边的长度: "");
-    scanf(""%lf"", &b);
+    // Prompt user to enter the lengths of the two shorter sides
+    printf(""Please enter the lengths of the two shorter sides (separated by space): "");
+    scanf(""%lf %lf"", &a, &b);
 
+    // Calculate the length of the hypotenuse
     c = sqrt(a * a + b * b);
 
-    printf(""最长边（斜边）的长度为: %.2f\n"", c);
+    // Output the result
+    printf(""The length of the longest side is: %.2f\n"", c);
 
     return 0;
 }",
-,,,,,,
-,,,,,,
-,,,,,,
-,,,,,,
+PGA-LAB02-Q02,2024,Lab Worksheet,"Conditional statements (if-else), relational operators, input/output, variable declaration ","Using the JTWC Tropical Typhoon intensity scale, write a program which takes wind-speed as input and outputs the classification of intensity (eg, typhoon, violent typhoon, etc).
+
+Intensity Class Wind speed (km/h)
+
+Tropical Depression <= 62
+
+Typhoon 63 - 118
+
+Strong Typhoon 119 - 156
+
+Very Strong Typhoon 157 - 192
+
+Violent Typhoon >=193","#include <stdio.h>
+
+int main() {
+    float wind_speed;
+
+    // Prompt user for wind speed
+    printf(""Enter wind speed (km/h): "");
+    scanf(""%f"", &wind_speed);
+
+    // Classify based on JTWC scale
+    if (wind_speed <= 62) {
+        printf(""Classification: Tropical Depression\n"");
+    } else if (wind_speed <= 118) {
+        printf(""Classification: Typhoon\n"");
+    } else if (wind_speed <= 156) {
+        printf(""Classification: Strong Typhoon\n"");
+    } else if (wind_speed <= 192) {
+        printf(""Classification: Very Strong Typhoon\n"");
+    } else {
+        printf(""Classification: Violent Typhoon\n"");
+    }
+
+    return 0;
+}",
+PGA-LAB02-Q03,2024,Lab Worksheet,"Loops (for), arithmetic operations, output formatting (tabs), integer variables","(Textbook 2.31) (Table of Squares and Cubes) Using only the techniques you learned in this chapter, write
+a program that calculates the squares and cubes of the numbers from 0 to 10 and uses tabs to print
+the following table of values","#include <stdio.h>
+
+int main() {
+    // Print the table header with tabs
+    printf(""number\tsquare\tcube\n"");
+
+    // Loop from 0 to 10 and calculate square and cube
+    for (int i = 0; i <= 10; i++) {
+        printf(""%d\t%d\t%d\n"", i, i * i, i * i * i);
+    }
+
+    return 0;
+}",pga_lab_w02_q02.pdf
+PGA-LAB02-Q04,2024,Lab Worksheet,"nteger division, remainder operator, input/output, integer variables, output formatting","(Textbook 2.30)(Separating Digits in an Integer) Write a program that inputs one five-digit number, separates the number into its individual digits and prints the digits separated from one another by three spaces each. [Hint: Use combinations of integer division and the remainder operation.] For example, if the user types in 42139, the program should print:4   2   1  3  9","#include <stdio.h>
+
+int main() {
+    int number;
+
+    // Prompt user for a five-digit number
+    printf(""Enter a five-digit number: "");
+    scanf(""%d"", &number);
+
+    // Extract each digit using division and remainder
+    int digit1 = number / 10000;         // ten-thousands place
+    int digit2 = (number / 1000) % 10;   // thousands place
+    int digit3 = (number / 100) % 10;    // hundreds place
+    int digit4 = (number / 10) % 10;     // tens place
+    int digit5 = number % 10;             // units place
+
+    // Print digits separated by three spaces
+    printf(""%d   %d   %d   %d   %d\n"", digit1, digit2, digit3, digit4, digit5);
+
+    return 0;
+}",
+PGA-LAB02-Q05,2024,Lab Worksheet,"Integer division, remainder operator, input/output, integer variables, formatted output","(Textbook 2.20)(Converting from seconds to hours, minutes and seconds) Write a program that asks the user to enter the total time elapsed, in seconds, since an event and converts the time to hours, minutes and seconds. The time should be displayed as hours:minutes:seconds. [Hint: Use the remainder operator]","#include <stdio.h>
+
+int main() {
+    int total_seconds, hours, minutes, seconds;
+
+    // Prompt the user for the elapsed time in seconds
+    printf(""Enter the elapsed time in seconds: "");
+    scanf(""%d"", &total_seconds);
+
+    // Calculate hours, minutes, and remaining seconds
+    hours = total_seconds / 3600;          // 1 hour = 3600 seconds
+    minutes = (total_seconds % 3600) / 60; // 1 minute = 60 seconds
+    seconds = total_seconds % 60;
+
+    // Display the result in hh:mm:ss format
+    printf(""%d:%d:%d\n"", hours, minutes, seconds);
+
+    return 0;
+}",
+PGA-LAB02-Q06,2024,Lab Worksheet,"Character constants, integer representation, printf format specifier, ASCII","(Textbook 2.29) (Integer Value of a Character) Here’s a peek ahead. In this chapter you learned about integers and the type int. C can also represent uppercase letters, lowercase letters and a considerable variety of special symbols. C uses small integers internally to represent each different character. The set of characters a computer uses together with the corresponding integer representations for those characters is called that computer’s character set. You can print the integer equivalent of uppercase A, for example, by executing the statement 
+printf( ""%d"", 'A' ); 
+Write a C program that prints the integer equivalents of some uppercase letters, lowercase letters, digits and special symbols. As a minimum, determine the integer equivalents of the following:
+A B C a b c 0 1 2 $ * + / and the blank character.","#include <stdio.h>
+
+int main() {
+    // Print integer equivalents of various characters
+    printf(""Character equivalents:\n"");
+
+    // Uppercase letters
+    printf(""'A' = %d\n"", 'A');
+    printf(""'B' = %d\n"", 'B');
+    printf(""'C' = %d\n"", 'C');
+
+    // Lowercase letters
+    printf(""'a' = %d\n"", 'a');
+    printf(""'b' = %d\n"", 'b');
+    printf(""'c' = %d\n"", 'c');
+
+    // Digits
+    printf(""'0' = %d\n"", '0');
+    printf(""'1' = %d\n"", '1');
+    printf(""'2' = %d\n"", '2');
+
+    // Special symbols
+    printf(""'$' = %d\n"", '$');
+    printf(""'*' = %d\n"", '*');
+    printf(""'+' = %d\n"", '+');
+    printf(""'/' = %d\n"", '/');
+
+    // Blank character (space)
+    printf(""' ' = %d\n"", ' ');
+
+    return 0;
+}",
+PGA-LAB03-Q01,2024,Lab Worksheet,"Nested loops (for), input/output, integer variables ","(Textbook 3.32) (Square of Asterisks) Write a program that reads in the side of a square and then prints that square out of asterisks. Your program should work for squares of all side sizes between 1 and 20. For example, if your program reads a size of 4, it should print","#include <stdio.h>
+
+int main() {
+    int side;
+
+    // Prompt user for the side length of the square
+    printf(""Enter the side length of the square (1-20): "");
+    scanf(""%d"", &side);
+
+    // Print the square of asterisks
+    for (int i = 0; i < side; i++) {
+        for (int j = 0; j < side; j++) {
+            printf(""*"");
+        }
+        printf(""\n"");
+    }
+
+    return 0;
+}",pga_lab_w03_q01.pdf
+PGA-LAB03-Q02,2024,Lab Worksheet,"Nested loops, conditional statements (if-else), input/output, integer variables","(Textbook 3.33)(Hollow Square of Asterisks) Modify the program you wrote in Exercise 3.32 so that it prints a hollow square. For example, if your program reads a size of 5, it should print","#include <stdio.h>
+
+int main() {
+    int side;
+
+    // Prompt the user for the side length
+    printf(""Enter the side length of the square (1-20): "");
+    scanf(""%d"", &side);
+
+    // Print a hollow square
+    for (int row = 0; row < side; row++) {
+        for (int col = 0; col < side; col++) {
+            // Print asterisk on borders, space elsewhere
+            if (row == 0 || row == side - 1 || col == 0 || col == side - 1) {
+                printf(""*"");
+            } else {
+                printf("" "");
+            }
+        }
+        printf(""\n"");
+    }
+
+    return 0;
+}",pga_lab_w03_q02.pdf
+PGA-LAB03-Q03,2024,Lab Worksheet,"Loops (while), floating-point arithmetic, input/output, conditional statements (if), sentinel-controlled repetition ","(Textbook 3.18)(Sales-Commission Calculator) One large chemical company pays its salespeople on a com mission basis. The salespeople receive $200 per week plus 9% of their gross sales for that week. For example, a salesperson who sells $5000 worth of chemicals in a week receives $200 plus 9% of $5000, or a total of $650. Develop a program that will input each salesperson’s gross sales for last week and will calculate and display that salesperson’s earnings. Process one salesperson's figures at a time. Here is a sample input/output dialog:","#include <stdio.h>
+
+int main() {
+    float sales, salary;
+
+    // Loop until user enters -1
+    while (1) {
+        printf(""Enter sales in dollars (-1 to end): "");
+        scanf(""%f"", &sales);
+
+        // Check for sentinel value
+        if (sales == -1) {
+            break;
+        }
+
+        // Calculate salary: $200 + 9% of sales
+        salary = 200 + 0.09 * sales;
+
+        // Display result with two decimal places
+        printf(""Salary is: $%.2f\n"", salary);
+    }
+
+    return 0;
+}",pga_lab_w03_q03.pdf
+PGA-LAB03-Q04,2024,Lab Worksheet,"Nested loops, incrementing counter, output formatting, integer variables","(Textbook 3.34(Floyd's Triangle) Floyd’s Triangle is a right-angled triangular array of natural numbers. It is defined by filling rows with consecutive integers. Thus, row 1 will have the number 1, row 2 will have the numbers 2 and 3, and so on. Write a program that draws a 10-line Floyd’s triangle. An outer loop can control the number of lines to be printed and an inner loop can ensure that each row contains the correct number of integers.","#include <stdio.h>
+
+int main() {
+    int number = 1; // Starting number for Floyd's triangle
+
+    // Outer loop for each row (1 to 10)
+    for (int row = 1; row <= 10; row++) {
+        // Inner loop to print numbers in the current row
+        for (int col = 1; col <= row; col++) {
+            printf(""%d "", number);
+            number++; // Increment number for next position
+        }
+        printf(""\n""); // Move to next line after each row
+    }
+
+    return 0;
+}",
+PGA-LAB03-Q05,2024,Lab Worksheet,"Integer input, loops (while), division and remainder operators, positional values, binary-to-decimal conversion ","(Textbook 3.35)(Printing the Decimal Equivalent of a Binary Number) Input an integer (5 digits or fewer) containing only 0s and 1s (i.e., a “binary” integer) and print its decimal equivalent. [Hint: Use the re mainder and division operators to pick off the “binary” number’s digits one at a time from right to left. Just as in the decimal number system, in which the rightmost digit has a positional value of 1, and the next digit left has a positional value of 10, then 100, then 1000, and so on, in the binary number sys tem the rightmost digit has a positional value of 1, the next digit left has a positional value of 2, then 4, then 8, and so on. Thus the decimal number 234 can be interpreted as 4 * 1 + 3 * 10 + 2 * 100. The decimal equivalent of binary 1101 is 1 * 1 + 0 * 2 + 1 * 4 + 1 * 8 or 1 + 0 + 4 + 8 or 13.]","#include <stdio.h>
+
+int main() {
+    int binary, decimal = 0, base = 1, remainder;
+
+    // Prompt user for binary number
+    printf(""Enter a binary number (up to 5 digits): "");
+    scanf(""%d"", &binary);
+
+    // Convert binary to decimal
+    int temp = binary;
+    while (temp > 0) {
+        remainder = temp % 10;       // Get the last digit
+        decimal += remainder * base; // Add to decimal value
+        base *= 2;                   // Increase power of 2
+        temp /= 10;                  // Remove last digit
+    }
+
+    // Print the result
+    printf(""Decimal equivalent: %d\n"", decimal);
+
+    return 0;
+}",
+PGA-LAB03-Q06,2024,Lab Worksheet,"Integer input/output, division and remainder operators, arithmetic operations, variable assignment, swapping","(Textbook 3.48) (Enforcing Privacy with Cryptography) The explosive growth of Internet communications and data storage on Internet-connected computers has greatly increased privacy concerns. The field of cryptography is concerned with coding data to make it difficult (and hopefully—with the most advanced schemes—impossible) for unauthorized users to read. In this exercise you’ll investigate a simple scheme for encrypting and decrypting data. A company that wants to send data over the In ternet has asked you to write a program that will encrypt it so that it may be transmitted more se curely. All the data is transmitted as four-digit integers. Your application should read a four-digit integer entered by the user and encrypt it as follows: Replace each digit with the result of adding 7 to the digit and getting the remainder after dividing the new value by 10. Then swap the first digit with the third, and swap the second digit with the fourth. Then print the encrypted integer. Write a separate application that inputs an encrypted four-digit integer and decrypts it (by reversing the encryption scheme) to form the original number. [Optional reading project: In industrial-strength applications, you’ll want to use much stronger encryption techniques than presented in this exercise. Research “public key cryptography” in general and the PGP (Pretty Good Privacy) specific public key scheme. You may also want to investigate the RSA scheme, which is widely used in industrial strength applications.]","#include <stdio.h>
+
+int main(void)
+{
+    int input;
+    int digit[4];
+
+    printf(""Enter a 4-digit number:"");
+    scanf(""%d"",&input);
+//    printf(""The input is: %d\n"", input);
+       
+// Split the number into its digits
+    digit[0] = input / 1000;
+    digit[1] = (input / 100) % 10;
+    digit[2] = (input / 10) % 10;
+    digit[3] = input % 10;
+//    printf(""The 4 digits are: %d %d %d %d\n"", digit[0],digit[1],digit[2],digit[3]);
+       
+// Add 7 to each digit and take modulo 10
+    digit[0] = (digit[0] + 7)%10;
+    digit[1] = (digit[1] + 7)%10;
+    digit[2] = (digit[2] + 7)%10;
+    digit[3] = (digit[3] + 7)%10;
+        
+// Swap the first with the third, and the second with the fourth
+	int temp = digit[0];
+	digit[0] = digit[2];
+	digit[2] = temp;
+	temp = digit[1];
+	digit[1] = digit[3];
+	digit[3] = temp;	
+	
+    printf(""The encrypted number is: "");
+	for(int i=0; i<4; i++)
+		printf(""%d"",digit[i]);
+	printf(""\n"");
+		
+    return 0;
+}",
+PGA-LAB03-Q07,2024,Lab Worksheet ,"Loops (do-while), menu display, user input, switch/if-else selection, integer arithmetic, input/output","menu driven calculator: Write a program which displays a text-based menu to the user, allowing them to choose between 3 mathematical operations on numbers. Option 1 should ask for 2 numbers and add them; Option 2 should ask for 2 numbers and multiply them; Option 3 should ask for 2 numbers and calculate the modulus. Option 4 should exit the program. After the operation is complete, the menu show be shown again to allow the user to select another option. The input numbers should be integers but the results should be real numbers if necessary."," #include <stdio.h>
+
+int main() {
+    int choice;
+    int num1, num2;
+    int result;
+
+    do {
+        // Display menu
+        printf(""\nMenu:\n"");
+        printf(""1. Add two numbers\n"");
+        printf(""2. Multiply two numbers\n"");
+        printf(""3. Modulus (remainder) of two numbers\n"");
+        printf(""4. Exit\n"");
+        printf(""Enter your choice: "");
+        scanf(""%d"", &choice);
+
+        switch (choice) {
+            case 1:
+                printf(""Enter two integers: "");
+                scanf(""%d %d"", &num1, &num2);
+                result = num1 + num2;
+                printf(""Result: %d\n"", result);
+                break;
+            case 2:
+                printf(""Enter two integers: "");
+                scanf(""%d %d"", &num1, &num2);
+                result = num1 * num2;
+                printf(""Result: %d\n"", result);
+                break;
+            case 3:
+                printf(""Enter two integers: "");
+                scanf(""%d %d"", &num1, &num2);
+                if (num2 == 0) {
+                    printf(""Error: Modulus by zero is not allowed.\n"");
+                } else {
+                    result = num1 % num2;
+                    printf(""Result: %d\n"", result);
+                }
+                break;
+            case 4:
+                printf(""Exiting program.\n"");
+                break;
+            default:
+                printf(""Invalid choice. Please try again.\n"");
+        }
+    } while (choice != 4);
+
+    return 0;
+}",
+PGA-LAB03-Q08,2024,Lab Worksheet,"Arrays, loops (for), input/output, bubble sort, descending order","Create a program which reads in a sequence of numbers, sorts them into decending order, and prints the numbers in that order. The program should read an integer from the user which is the number of numbers that the program will then read in and sort. The program then reads in that number of integers into an array of the appropriate size. The program should then sort the array into decending numerical order. Finally, the program should print out these numbers from the array in decending order. See section 6.8 of the textbook for a simple sorting algorithm (Bubblesort) that you can modify for your program and use to sort an array of numbers. An example of the program running: zlizpd3$ ./array-sort-nums Enter number of marks: 5 Enter mark 1: 34 Enter mark 2: -16 Enter mark 3: 4 Enter mark 4: 870 Enter mark 5: 77                 870 77 34 4 -16","#include <stdio.h>
+
+int main() {
+    int n;
+
+    // Ask user for number of marks
+    printf(""Enter number of marks: "");
+    scanf(""%d"", &n);
+
+    // Declare array of size n
+    int marks[n];
+
+    // Read each mark
+    for (int i = 0; i < n; i++) {
+        printf(""Enter mark %d: "", i + 1);
+        scanf(""%d"", &marks[i]);
+    }
+
+    // Bubble sort in descending order
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (marks[j] < marks[j + 1]) {
+                // Swap
+                int temp = marks[j];
+                marks[j] = marks[j + 1];
+                marks[j + 1] = temp;
+            }
+        }
+    }
+
+    // Print sorted marks
+    for (int i = 0; i < n; i++) {
+        printf(""%d "", marks[i]);
+    }
+    printf(""\n"");
+
+    return 0;
+}",
+PGA-LAB04-Q01,2024,Lab Worksheet,"Arrays, nested loops, input/output, conditional statements, set intersection ",(Textbook 6.15)Write a program to work out the intersection of two sets of 10 integers entered by the user. Don't waste space by having unnecessarily large arrays but don't worry about working out the smallest theoretical array size to use.,"#include <stdio.h>
+
+int main() {
+    int set1[10], set2[10];
+    int intersection[10]; // To store unique intersection elements
+    int count = 0;
+
+    // Input first set
+    printf(""Enter 10 integers for the first set:\n"");
+    for (int i = 0; i < 10; i++) {
+        scanf(""%d"", &set1[i]);
+    }
+
+    // Input second set
+    printf(""Enter 10 integers for the second set:\n"");
+    for (int i = 0; i < 10; i++) {
+        scanf(""%d"", &set2[i]);
+    }
+
+    // Find intersection
+    for (int i = 0; i < 10; i++) {
+        int current = set1[i];
+        // Check if current is in set2
+        int found = 0;
+        for (int j = 0; j < 10; j++) {
+            if (set2[j] == current) {
+                found = 1;
+                break;
+            }
+        }
+        // If found, check if already in intersection list
+        if (found) {
+            int already = 0;
+            for (int k = 0; k < count; k++) {
+                if (intersection[k] == current) {
+                    already = 1;
+                    break;
+                }
+            }
+            if (!already) {
+                intersection[count++] = current;
+            }
+        }
+    }
+
+    // Output intersection
+    printf(""Intersection: "");
+    if (count == 0) {
+        printf(""(empty)"");
+    } else {
+        for (int i = 0; i < count; i++) {
+            printf(""%d "", intersection[i]);
+        }
+    }
+    printf(""\n"");
+
+    return 0;
+}",
+PGA-LAB04-Q02,2024,Lab Worksheet,"Arrays, nested loops, input/output, bubble sort, selection sort, variable swapping","Bubble sort and Selection sort
+Write two programs to implement bubble sort and selection sort respectively. The programs should sort the array of integers entered by the user.","#include <stdio.h>
+
+int main() {
+    int n;
+
+    printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+
+    int arr[n];
+    printf(""Enter %d integers:\n"", n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    // Bubble sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+
+    printf(""Sorted array (ascending): "");
+    for (int i = 0; i < n; i++) {
+        printf(""%d "", arr[i]);
+    }
+    printf(""\n"");
+
+    return 0;
+}                                     #include <stdio.h>
+
+int main() {
+    int n;
+
+    printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+
+    int arr[n];
+    printf(""Enter %d integers:\n"", n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    // Selection sort
+    for (int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        if (min_idx != i) {
+            int temp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = temp;
+        }
+    }
+
+    printf(""Sorted array (ascending): "");
+    for (int i = 0; i < n; i++) {
+        printf(""%d "", arr[i]);
+    }
+    printf(""\n"");
+
+    return 0;
+}",
+PGA-LAB04-Q03,2024,Lab Worksheet,"2D arrays, characters, nested loops, output formatting ","2D text canvas
+We could have a 2D array of chars that represents the characters we want to show on the screen. We could then ""draw"" things into that array by changing the char values at different elements in the array. We could then ""display"" that array by printing each of the characters out to fill up the screen. Try implementing this idea and play around with drawing to the array then using printf to print the entire array.","#include <stdio.h>
+
+#define ROWS 10
+#define COLS 20
+
+int main() {
+    // Create a 2D canvas initialized with spaces
+    char canvas[ROWS][COLS];
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            canvas[i][j] = ' ';
+        }
+    }
+
+    // Draw a horizontal line across the middle
+    for (int j = 0; j < COLS; j++) {
+        canvas[ROWS/2][j] = '-';
+    }
+
+    // Draw a vertical line in the middle
+    for (int i = 0; i < ROWS; i++) {
+        canvas[i][COLS/2] = '|';
+    }
+
+    // Draw a small rectangle near top-left
+    for (int i = 1; i <= 3; i++) {
+        for (int j = 1; j <= 5; j++) {
+            if (i == 1 || i == 3 || j == 1 || j == 5)
+                canvas[i][j] = '*';
+            else
+                canvas[i][j] = ' ';
+        }
+    }
+
+    // Display the canvas
+    printf(""Canvas:\n"");
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            putchar(canvas[i][j]);
+        }
+        putchar('\n');
+    }
+
+    return 0;
+}",
+PGA-LAB04-Q04,2024,Lab Worksheet,"Arrays, loops (for/while), conditional statements, input validation, variable storage, arithmetic operations, even/odd check","Array operation
+Write a program that allows the user to enter several numbers into an array and print out the even-valued numbers.
+
+The program should start by asking the user to enter how many numbers they are going to input, using the prompt ""Enter number of values: "". This input must be an integer greater than zero. If it is not greater than zero then the program should print the error message ""Invalid array length!"" and then prompt ""Enter a positive number: "" and keep reading values until a positive number is entered. The program should create an int array of that length.
+
+Next, the program should prompt the user to enter a number for each position in the array, starting from position 0, using the prompt ""Enter position XX value: "" (where XX is the zero-based index position in the array that the number will be stored in). The number must be an int value bigger than the first entered number in the array. If the number is not valid, the program should repeatedly prompt the user to enter the number for the same position again, using the message above, until it is valid.
+
+Once all the numbers have been entered, the program should print all the even numbers in the array, 1 per line. The numbers should appear in the order they were input. Zero should be regarded as an even number. Finally, the program should print ""XXX even numbers and YYY odd numbers."" (where XXX and YYY should be the number of evens and odds in the array respectively). Once it is finished, the program should exit.
+
+User input should be on the same line as the prompt. Output messages should be printed on a line by themselves. When the program exits the command prompt should not be on the same line as the output message.
+
+You can assume the user will only enter a single whole number at each prompt (ie, no text, no floating-point numbers, no multiple numbers, no empty input, etc).","#include <stdio.h>
+
+int main() {
+    int n = 0;
+
+    // Prompt the user for a valid number of values
+    printf(""Enter number of values: "");
+    
+    do
+    {
+    	scanf(""%d"", &n);
+       	if(n<=0)
+       	{
+       		printf(""Invalid array length!\n"");
+        	printf(""Enter a positive number: "");
+        }
+        while (getchar() != '\n'); // clear input buffer
+    }while(n<=0);
+
+    
+    int arr[n];
+ 
+    // Prompt the user to enter values into the array
+    printf(""Enter position 0 value: "");
+    scanf(""%d"", &arr[0]);  // First number input without validation
+
+    for (int i = 1; i < n; i++) 
+    {
+        int valid = 0;
+        while (!valid) 
+        {
+            printf(""Enter position %d value: "", i);
+            int num;
+            scanf(""%d"", &num);
+
+            // The number must be greater than the first entered value
+            if (num > arr[0]) 
+            {
+                arr[i] = num;
+                valid = 1;
+            }
+        }
+    }
+
+    // Count and print even numbers
+    int even_count = 0, odd_count = 0;
+    for (int i = 0; i < n; i++) 
+    {
+        if (arr[i] % 2 == 0) 
+        {
+            printf(""%d\n"", arr[i]);
+            even_count++;
+        } 
+        else 
+        {
+            odd_count++;
+        }
+    }
+
+    // Print the summary of even and odd numbers
+    printf(""%d even numbers and %d odd numbers.\n"", even_count, odd_count);
+
+    return 0;
+}",
+PGA-LAB05-Q01,2024,Lab Worksheet,"Function definition (parameters/return value), double data type, math functions (sqrt), input/output, function calls",(Textbook 5.15)(Hypotenuse Calculations) Define a function called hypotenuse that calculates the length of the hypotenuse of a right triangle when the other two sides are given. The function should take two arguments of type double and return the hypotenuse as a double. Test your program with the side values specified in Fig. 5.22.,"#include <stdio.h>
+#include <math.h>
+
+// Function to calculate hypotenuse
+double hypotenuse(double side1, double side2) {
+    return sqrt(side1 * side1 + side2 * side2);
+}
+
+int main() {
+    // Test values (from typical exercise)
+    double test_sides[][2] = {
+        {3.0, 4.0},
+        {5.0, 12.0},
+        {8.0, 15.0}
+    };
+    int num_tests = sizeof(test_sides) / sizeof(test_sides[0]);
+
+    printf(""Hypotenuse Calculations:\n"");
+    for (int i = 0; i < num_tests; i++) {
+        double s1 = test_sides[i][0];
+        double s2 = test_sides[i][1];
+        double hyp = hypotenuse(s1, s2);
+        printf(""Triangle %d: side1 = %.1f, side2 = %.1f => hypotenuse = %.1f\n"",
+               i + 1, s1, s2, hyp);
+    }
+
+    return 0;
+}",pga_lab_w05_q01.pdf
+PGA-LAB05-Q02,2024,Lab Worksheet,"Function definition, remainder operator, integer arguments, return value, loops, input/output","(Textbook 5.18) (Even or Odd) Write a program that inputs a series of integers and passes them one at a time to function isEven, which uses the remainder operator to determine whether an integer is even. The function should take an integer argument and return 1 if the integer is even and 0 otherwise. ","#include <stdio.h>
+
+// Function to determine if an integer is even
+int isEven(int num) {
+    return num % 2 == 0; // Returns 1 if even, 0 otherwise
+}
+
+int main() {
+    int number;
+    
+    printf(""Enter integers to check if they are even (enter -999 to stop):\n"");
+    
+    while (1) {
+        printf(""Enter a number: "");
+        scanf(""%d"", &number);
+        
+        if (number == -999) {
+            break;
+        }
+        
+        if (isEven(number)) {
+            printf(""%d is even.\n"", number);
+        } else {
+            printf(""%d is odd.\n"", number);
+        }
+    }
+    
+    printf(""Program terminated.\n"");
+    return 0;
+}",
+PGA-LAB05-Q03,2024,Lab Worksheet,"Function definition, array parameters, loops, comparison operations, return value","Maximum of an array
+Write a function max_array which takes an integer array as a parameter and returns the maximum value in the array. Remember that an array cannot tell you how long it is, so the function will need a second parameter, the length of the array!","#include <stdio.h>
+
+// Function to find maximum value in an array
+int max_array(int arr[], int length) {
+    if (length <= 0) {
+        // Handle empty array (though not expected in normal use)
+        return 0; // or some error value
+    }
+
+    int max = arr[0];
+    for (int i = 1; i < length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    int n;
+
+    printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+
+    if (n <= 0) {
+        printf(""Invalid array size.\n"");
+        return 1;
+    }
+
+    int arr[n];
+    printf(""Enter %d integers:\n"", n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int maximum = max_array(arr, n);
+    printf(""The maximum value in the array is: %d\n"", maximum);
+
+    return 0;
+}",
+PGA-LAB05-Q04,2024,Lab Worksheet,"Recursive function, function definition, parameters, return value, base case, exponentiation","(Textbook 5.34)(Recursive Exponentiation) Write a recursive function power(base, exponent) that when invoked returns baseexponent For example, power(3, 4) = 3 * 3 * 3 * 3. Assume that exponent is an integer greater than or equal to 1. Hint: The recursion step would use the relationship baseexponent = base * baseexponent–1 and the terminating condition occurs when exponent is equal to 1 because base1 = base","#include <stdio.h>
+
+// Recursive function to compute base^exponent (exponent >= 1)
+int power(int base, int exponent) {
+    // Base case: exponent is 1
+    if (exponent == 1) {
+        return base;
+    }
+    // Recursive step: base^exponent = base * base^(exponent-1)
+    return base * power(base, exponent - 1);
+}
+
+int main() {
+    int base, exponent;
+
+    printf(""Enter base and exponent (exponent >= 1): "");
+    scanf(""%d %d"", &base, &exponent);
+
+    if (exponent < 1) {
+        printf(""Exponent must be at least 1.\n"");
+        return 1;
+    }
+
+    int result = power(base, exponent);
+    printf(""%d^%d = %d\n"", base, exponent, result);
+
+    return 0;
+}",pga_lab_w05_q04.pdf
+PGA-LAB05-Q05,2024,Lab Worksheet,"Recursive function, iterative loop, function definition, input/output, base case","Fibonacci number implementations
+In mathematics, the Fibonacci numbers, also called the Fibonacci sequence, form a sequence such that each number is the sum of the two preceding ones, starting from 0 and 1. The beginning of the sequence is thus: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, … Write two functions to implement fibonacci sequence. When the user enters a positive number X, the function should compute the Fibonacci number at X position in the sequence. One function should calculate it iteratively, the other should calculate it recursively (See textbook and lecture slides for examples of recursion).","#include <stdio.h>
+
+// Iterative function to compute Fibonacci number
+int fib_iterative(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    int a = 0, b = 1, c;
+    for (int i = 2; i <= n; i++) {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+
+// Recursive function to compute Fibonacci number
+int fib_recursive(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fib_recursive(n - 1) + fib_recursive(n - 2);
+}
+
+int main() {
+    int n;
+
+    printf(""Enter a positive integer (n >= 0): "");
+    scanf(""%d"", &n);
+
+    if (n < 0) {
+        printf(""Please enter a non-negative integer.\n"");
+        return 1;
+    }
+
+    printf(""Fibonacci number at position %d:\n"", n);
+    printf(""Iterative: %d\n"", fib_iterative(n));
+    printf(""Recursive: %d\n"", fib_recursive(n));
+
+    return 0;
+}",
+PGA-LAB06-Q01,2024,Lab Worksheet,"Arrays, function definition, parameters, recursion, iteration, loops, comparison operations, search algorithms ","Searching an array
+Write a function to search an array of integers for a target integer. The function could be implemented iteratively or recursively. For the latter, you'd better pass a start and end parameter to the search function to keep track of the start and end section of the array you are searching in, rather than try to actually remove numbers from the array.","#include <stdio.h>
+
+// Iterative linear search
+int search_iterative(int arr[], int length, int target) {
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == target) {
+            return i; // return index if found
+        }
+    }
+    return -1; // not found
+}
+
+// Recursive linear search helper
+int search_recursive_helper(int arr[], int start, int end, int target) {
+    if (start > end) {
+        return -1; // not found
+    }
+    if (arr[start] == target) {
+        return start;
+    }
+    return search_recursive_helper(arr, start + 1, end, target);
+}
+
+// Wrapper for recursive search
+int search_recursive(int arr[], int length, int target) {
+    return search_recursive_helper(arr, 0, length - 1, target);
+}
+
+int main() {
+    int n, target;
+
+    printf(""Enter number of elements: "");
+    scanf(""%d"", &n);
+
+    if (n <= 0) {
+        printf(""Invalid size.\n"");
+        return 1;
+    }
+
+    int arr[n];
+    printf(""Enter %d integers:\n"", n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    printf(""Enter target integer to search: "");
+    scanf(""%d"", &target);
+
+    int iter_result = search_iterative(arr, n, target);
+    int rec_result = search_recursive(arr, n, target);
+
+    printf(""Iterative search: "");
+    if (iter_result != -1) {
+        printf(""Found at index %d\n"", iter_result);
+    } else {
+        printf(""Not found\n"");
+    }
+
+    printf(""Recursive search: "");
+    if (rec_result != -1) {
+        printf(""Found at index %d\n"", rec_result);
+    } else {
+        printf(""Not found\n"");
+    }
+
+    return 0;
+}",
+PGA-LAB06-Q02,2024,Lab Worksheet,"String arrays, random number generation, loops, conditional statements, character handling, input/output, game logic","Word-guessing game
+You are to write a program to implement a simple word guessing game. Given a list of words, 1 word is randomly selected and then the each letter of the word is displayed as underscore characters '_'. The user can guess a letter and if that letter is in the word then the appropriate underscores are replaced with that letter. If the letter is not in the word then the player loses 1 life. The player has 5 lives in total and the game is over when lives reach zero.
+
+The aim of the game is to guess the word. If the user thinks they know the word then, instead of entering an individual character, they can enter an entire word. If the word is correct they win the game. If the word is wrong then they lose a life.
+
+When the program starts, it will prompt to read in an integer which is the number of words in the word list. The program then reads in that number of words. You can assume that all the words in the game have a maximum of 31 characters. After they have all been entered, the program randomly selects a word to use for the next game. (In a future exercise, we will read this list of words from a file; for now we just have the user type them in.)
+
+The game then starts. The player is shown the word with the appropriate number of underscores and is prompted to enter either a word or character guess. The game the proceeds as described above until the player wins or dies. After displaying an appropriate message, the program asks the user if they want to play again. If yes, then a new word is randomly selected from the word list and the game starts again. If no, the program exits.
+
+The words typed in the word list should be single words, only containing lowercase letters 'a' - 'z' and should not contain numbers, punctuation, spaces, etc.
+
+For generating random numbers, you can use the ""rand"" and ""srand"" functions to generate random integers. See the book section 5.10, particularly pages 206 and 210, and example program Fig 5.13.
+
+Example I/O:
+
+Number of words: 4
+Enter word: football
+Enter word: player
+Enter word: apples
+Enter word: incredible
+
+Word: _ _ _ _ _ _
+
+Guess (5 lives): e
+
+Word: _ _ _ _ e _
+
+Guess (5 lives): t
+
+Word: _ _ _ _ e _
+
+Guess (4 lives): heater
+
+Word: _ _ _ _ e _
+
+Guess (3 lives): a
+
+Word: a _ _ _ _ e _
+
+Guess (3 lives): p
+
+Word: a p p _ e _
+
+Guess (3 lives): apples
+
+Correct!
+Do you want to player again (y/n)?  n","#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include <assert.h>
+#include <ctype.h>
+#include <time.h>
+
+
+int main(){
+      
+     char WORDS[10][20]={""Apple"",""Banana"",""Cucumber"",""Dumpling"",""Eggplant"",""Fish"",""Garlic"",""Ham"",""Icecream"",""Jellies""}; 
+       
+      int num;
+      printf(""Enter the number of words to guess (<=10):"");
+      scanf(""%d"",&num);
+      int count[num]; 
+ 
+      srand(time(NULL));
+           
+      for(int i=0;i<num;i++)
+      {
+          count[i] = (int)strlen(WORDS[i]);
+          printf(""%s\n"",WORDS[i]);
+      }
+      printf(""\n"");
+            
+   
+    char again = 'y';
+    while(again == 'y'){
+
+            int x=rand()%(num);
+            int life=5;
+            char guess[20];
+            
+            printf(""Word:"");
+            
+            char new[20];
+            for(int i=0;i<count[x];i++)
+            {
+                *(new+i) = '_';
+            }
+            for(int i=0;i<count[x];i++)
+            {
+                printf("" %c"", new[i]);
+            }
+            printf(""\n\n"");
+            
+            
+            for(;life>0;)
+            {
+                printf(""Guess (%d lives): "",life);
+                scanf(""%s"",guess);
+                printf(""\n"");
+                                
+                if(strlen(guess)!=1)
+                {
+                    if(strlen(guess)==strlen(WORDS[x]))
+                    {
+                        int judge = 0;
+                        for(int i=0;i<count[x];i++)
+                        {
+                            if(guess[i]!= WORDS[x][i])
+                            {
+                                break;
+                            }
+                            judge++;
+                        }
+                        if(judge==count[x])
+                        {
+                            printf(""Correct!\n"");
+                            printf(""Do you want to play again (y/n)? "");
+                            scanf("" %c"",&again);
+		            break;
+                        }
+                    }
+                    printf(""Word:"");
+                    for(int i=0;i<count[x];i++)
+                    {
+                        printf("" %c"", new[i]);
+                    }
+                    printf(""\n\n"");
+                    life--;
+                }
+                else  
+                {
+                    
+                    printf(""Word:"");
+                    if (strstr(WORDS[x],guess)!= NULL)
+                    {
+                        for(int i=0;i<count[x];i++)
+                        {
+                            if(guess[0]==(char)WORDS[x][i])
+                            {
+                                *(new+i) = guess[0];
+                            }
+                        }
+                        int correct = 0;
+                        for(int i=0;i<count[x];i++)
+                        {
+                            if(new[i]!='_')
+                            {
+                                correct++;
+                                continue;
+                            }
+                            break;
+                        }
+                        for(int i=0;i<count[x];i++)
+                        {
+                            printf("" %c"", new[i]);
+                        }
+                        printf(""\n\n"");
+                        if(correct == count[x]){
+                            printf(""Correct!\n"");
+                            printf(""Do you want to play again? "");
+			    scanf(""%c"",&again);
+			      break;
+                        }
+                    }
+                    else
+                    {
+                        for(int i=0;i<count[x];i++)
+                        {
+                            printf("" %c"", new[i]);
+                        }
+                        printf(""\n\n"");
+                    }
+                    life--;
+                    
+                }
+            }
+            if(life == 0){
+                printf(""You have no more lives!\n"");
+                printf(""Do you want to play again (y/n)? "");
+                scanf("" %c"",&again);
+		
+            }
+    }
+   
+    exit(1);
+}",
+PGA-LAB06-Q03,2024,Lab Worksheet,"String arrays, random number generation, loops, conditional statements, character handling, input/output, game logic, ASCII art drawing","Hangman
+The word guessing game above is based on the British game Hangman. In this game, the process of playing the game is exactly the same but as well as writing out the current state of the word, the computer should draw a man hanging from a gallows. As the player gets guesses wrong, more and more of the body of the man is drawn. When the entire body is draw, the player has lost all their lives and the game is over. An example can be seen on the Wikipedia page.","#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <ctype.h>
+
+// Hangman stages (0 = no mistakes, 5 = full body)
+const char *hangman_stages[] = {
+    // 0 mistakes
+    ""  +---+\n""
+    ""      |\n""
+    ""      |\n""
+    ""      |\n""
+    ""      |\n""
+    ""     ===\n"",
+    // 1 mistake (head)
+    ""  +---+\n""
+    ""  O   |\n""
+    ""      |\n""
+    ""      |\n""
+    ""      |\n""
+    ""     ===\n"",
+    // 2 mistakes (head + body)
+    ""  +---+\n""
+    ""  O   |\n""
+    ""  |   |\n""
+    ""      |\n""
+    ""      |\n""
+    ""     ===\n"",
+    // 3 mistakes (head + body + left arm)
+    ""  +---+\n""
+    ""  O   |\n""
+    "" /|   |\n""
+    ""      |\n""
+    ""      |\n""
+    ""     ===\n"",
+    // 4 mistakes (head + body + both arms)
+    ""  +---+\n""
+    ""  O   |\n""
+    "" /|\\  |\n""
+    ""      |\n""
+    ""      |\n""
+    ""     ===\n"",
+    // 5 mistakes (full body)
+    ""  +---+\n""
+    ""  O   |\n""
+    "" /|\\  |\n""
+    "" / \\  |\n""
+    ""      |\n""
+    ""     ===\n""
+};
+
+void print_hangman(int mistakes) {
+    printf(""%s"", hangman_stages[mistakes]);
+}
+
+int main() {
+    srand(time(NULL)); // Seed random number generator
+
+    int num_words;
+    printf(""Number of words: "");
+    scanf(""%d"", &num_words);
+
+    // Read the list of words
+    char words[num_words][32]; // Each word up to 31 chars + null
+    for (int i = 0; i < num_words; i++) {
+        printf(""Enter word: "");
+        scanf(""%31s"", words[i]);
+    }
+
+    char play_again = 'y';
+    while (play_again == 'y' || play_again == 'Y') {
+        // Randomly select a word
+        int index = rand() % num_words;
+        char *secret = words[index];
+        int len = strlen(secret);
+
+        // Initialize display with underscores
+        char display[len + 1];
+        for (int i = 0; i < len; i++) {
+            display[i] = '_';
+        }
+        display[len] = '\0';
+
+        int mistakes = 0; // number of wrong guesses
+        int game_over = 0;
+        int won = 0;
+
+        while (!game_over) {
+            // Print hangman
+            print_hangman(mistakes);
+
+            // Print current word state
+            printf(""Word: "");
+            for (int i = 0; i < len; i++) {
+                printf(""%c "", display[i]);
+            }
+            printf(""\n"");
+
+            // Remaining lives
+            int lives = 5 - mistakes;
+            printf(""Guess (%d lives): "", lives);
+
+            char guess[32];
+            scanf(""%31s"", guess);
+            int guess_len = strlen(guess);
+
+            // Convert to lowercase if necessary
+            for (int i = 0; i < guess_len; i++) {
+                guess[i] = tolower(guess[i]);
+            }
+
+            if (guess_len == 1) {
+                // Guess a single letter
+                char ch = guess[0];
+                int found = 0;
+                for (int i = 0; i < len; i++) {
+                    if (secret[i] == ch && display[i] == '_') {
+                        display[i] = ch;
+                        found = 1;
+                    }
+                }
+                if (!found) {
+                    mistakes++; // Wrong guess
+                }
+            } else {
+                // Guess a whole word
+                if (strcmp(guess, secret) == 0) {
+                    won = 1;
+                    game_over = 1;
+                } else {
+                    mistakes++;
+                }
+            }
+
+            // Check if all letters have been revealed
+            int all_revealed = 1;
+            for (int i = 0; i < len; i++) {
+                if (display[i] == '_') {
+                    all_revealed = 0;
+                    break;
+                }
+            }
+            if (all_revealed) {
+                won = 1;
+                game_over = 1;
+            }
+
+            if (mistakes >= 5) {
+                game_over = 1;
+            }
+        }
+
+        // Final hangman display
+        print_hangman(mistakes);
+
+        // Game over message
+        if (won) {
+            printf(""Correct! The word was: %s\n"", secret);
+        } else {
+            printf(""You lost! The word was: %s\n"", secret);
+        }
+
+        printf(""Do you want to play again (y/n)? "");
+        scanf("" %c"", &play_again);
+    }
+
+    return 0;
+}",
+PGA-LAB07-Q01,2024,Lab Worksheet,"Character arrays, string input/output, loops, character case conversion (toupper/tolower), alternating logic",(Textbook 8.6)(Displaying Strings in Alternating Uppercase and Lowercase) Write a program that inputs a line of text into char array s[100]. Output the line in alternate uppercase letters and lowercase letters.,"#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char s[100];
+    int i = 0;
+    int upper = 1; // Flag: 1 for uppercase, 0 for lowercase
+
+    printf(""Enter a line of text: "");
+    fgets(s, sizeof(s), stdin); // Read a line including spaces
+
+    // Process each character until null terminator
+    while (s[i] != '\0') {
+        if (isalpha(s[i])) {
+            if (upper) {
+                putchar(toupper(s[i]));
+            } else {
+                putchar(tolower(s[i]));
+            }
+            upper = !upper; // Flip flag only for letters
+        } else {
+            putchar(s[i]); // Non-letters printed as is
+        }
+        i++;
+    }
+
+    return 0;
+}",
+PGA-LAB07-Q02,2024,Lab Worksheet,"String input, string-to-integer conversion (atoi/strtol), integer arithmetic, loops, arrays ","(Textbook 2.31)(Converting Strings to Integers for Calculations) Write a program that inputs six strings that represent integers, converts the strings to integers, and calculates the sum and average of the six values.","#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    char str[100];
+    int numbers[6];
+    int sum = 0;
+
+    printf(""Enter six integers as strings:\n"");
+    for (int i = 0; i < 6; i++) {
+        printf(""Enter string %d: "", i + 1);
+        scanf(""%s"", str);
+        numbers[i] = atoi(str); // Convert string to integer
+        sum += numbers[i];
+    }
+
+    double average = sum / 6.0; // Use floating-point division
+
+    printf(""Sum: %d\n"", sum);
+    printf(""Average: %.2f\n"", average);
+
+    return 0;
+}",
+PGA-LAB07-Q03,2024,Lab Worksheet,"ointer arrays (array of strings), random number generation (rand/srand), string concatenation (strcat), loops, character handling (capitalization), arrays","(Textbook 8.11)(Random Sentences) Write a program that uses random-number generation to create sen tences. The program should use four arrays of pointers to char called article, noun, verb and prep osition. The program should create a sentence by selecting a word at random from each array in the following order: article, noun, verb, preposition, article and noun. As each word is picked, it should be concatenated to the previous words in an array large enough to hold the entire sentence. The words should be separated by spaces. When the final sentence is output, it should start with a capital letter and end with a period. The program should generate 20 such sentences. The arrays should be filled as follows: The article array should contain the articles ""the"", ""a"", ""one"", ""some"" and ""any""; the noun array should contain the nouns ""boy"", ""girl"", ""dog"", ""town"" and ""car""; the verb array should contain the verbs ""drove"", ""jumped"", ""ran"", ""walked"" and ""skipped""; the prep osition array should contain the prepositions ""to"", ""from"", ""over"", ""under"" and ""on"". After the preceding program is written and working, modify it to produce a short story con sisting of several of these sentences. (How about the possibility of a random term-paper writer?)","#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <ctype.h>
+
+int main() {
+    // Define arrays of words
+    const char *article[] = {""the"", ""a"", ""one"", ""some"", ""any""};
+    const char *noun[] = {""boy"", ""girl"", ""dog"", ""town"", ""car""};
+    const char *verb[] = {""drove"", ""jumped"", ""ran"", ""walked"", ""skipped""};
+    const char *preposition[] = {""to"", ""from"", ""over"", ""under"", ""on""};
+
+    int num_words = 5; // number of words in each array
+
+    // Seed random number generator
+    srand(time(NULL));
+
+    // Generate 20 sentences
+    for (int i = 0; i < 20; i++) {
+        char sentence[256] = """"; // buffer for the sentence
+        char word[50];
+
+        // Select words in order
+        // First article
+        strcpy(word, article[rand() % num_words]);
+        // Capitalize first letter
+        word[0] = toupper(word[0]);
+        strcat(sentence, word);
+        strcat(sentence, "" "");
+
+        // Noun
+        strcat(sentence, noun[rand() % num_words]);
+        strcat(sentence, "" "");
+
+        // Verb
+        strcat(sentence, verb[rand() % num_words]);
+        strcat(sentence, "" "");
+
+        // Preposition
+        strcat(sentence, preposition[rand() % num_words]);
+        strcat(sentence, "" "");
+
+        // Second article
+        strcat(sentence, article[rand() % num_words]);
+        strcat(sentence, "" "");
+
+        // Second noun
+        strcat(sentence, noun[rand() % num_words]);
+        strcat(sentence, ""."");
+
+        // Print the sentence
+        printf(""%s\n"", sentence);
+    }
+
+    return 0;
+}",
+PGA-LAB07-Q04,2024,Lab Worksheet,"String manipulation, strcmp, strcpy, strtok, loops, input/output, arrays",(Textbook 8.19)(Removing a Particular Word From a Given Line of Text) Write a program that inputs a line of text and a given word. The program should use string library functions strcmp and strcpy to remove all occurrences of the given word from the input line of text. The program should also count the number of words in the given line of text before and after removing the given word using the strtok function.,"#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char text[500];
+    char word[100];
+    char result[500] = """";
+    int before_count = 0, after_count = 0;
+
+    // Input line of text
+    printf(""Enter a line of text: "");
+    fgets(text, sizeof(text), stdin);
+    // Remove trailing newline
+    size_t len = strlen(text);
+    if (len > 0 && text[len-1] == '\n')
+        text[len-1] = '\0';
+
+    // Input word to remove
+    printf(""Enter the word to remove: "");
+    scanf(""%s"", word);
+
+    // Copy for counting words
+    char temp[500];
+    strcpy(temp, text);
+
+    // Count words in original text
+    char *token = strtok(temp, "" "");
+    while (token != NULL) {
+        before_count++;
+        token = strtok(NULL, "" "");
+    }
+
+    // Copy again for removal
+    char temp2[500];
+    strcpy(temp2, text);
+    token = strtok(temp2, "" "");
+    int first = 1;
+    while (token != NULL) {
+        // If token is not the word to remove, add to result
+        if (strcmp(token, word) != 0) {
+            if (!first) {
+                strcat(result, "" "");
+            } else {
+                first = 0;
+            }
+            strcat(result, token);
+            after_count++;
+        }
+        token = strtok(NULL, "" "");
+    }
+
+    // Output results
+    printf(""Original text: %s\n"", text);
+    printf(""Number of words before removal: %d\n"", before_count);
+    printf(""Text after removal: %s\n"", result);
+    printf(""Number of words after removal: %d\n"", after_count);
+
+    return 0;
+}",
+PGA-LAB07-Q05,2024,Lab Worksheet,"2D arrays, character representation, user input, loops, conditional statements, game loop, boundary checking, movement logic","Rogue-like game movement We are going to develop the first stages of a turn-based ""Rogue-like"" game. The most important part of a game is where the players play - ie, the world. In our game, the world will consist of a flat area of land that will be represented using text characters. the map should look like below: ########## #...@....# #........# #........# #........# #........# #........# ########## Command: The dimensions of the map are 10 x 8 locations. The character '@' represents the player, the '#' represents a solid wall which the player cannot move through, and the '.' represents empty space which the player can move through. Below the map there is a blank line then a prompt for the user to enter a command and press return.  If the user enters '8', the character should move 1 location up.  If the user enters '2', the character should move 1 location down.  If the user enters '4', the character should move 1 location left.  If the user enters '6', the character should move 1 location right.  If the user enters '0', the program should exit. If the user tries to move the character into a position that is impossible, the character should stay in the current position, and an error message should appear between the bottom of the map and the command prompt saying ""Invalid move!"". You can represent the game map any way you wish. One way is to use a 2D char array to represent the map.","#include <stdio.h>
+
+void updatemap(char a[8][10],int x, int y);
+void printmap(char a[8][10]);
+
+int main(int argc, char *argv[])
+{
+  char map[8][10];
+ 
+  int i,j;
+  int posix=4, posiy=1;
+
+  for(i=0;i<10;i++)
+    {
+      map[0][i]='#';
+      map[7][i]='#';
+    }
+ 
+  for(i=0;i<8;i++)
+    {
+      map[i][0]='#';
+      map[i][9]='#';
+    }
+
+  for(i=1;i<=6;i++)
+    {
+      for(j=1;j<=8;j++)
+	map[i][j]='.';
+    }
+  map[posiy][posix]='@';
+  printmap(map);
+
+  printf(""Enter a command and press return.\n"");
+  printf(""If entering '8', the @ char moves 1 step up\n"");
+printf(""If entering '2', the @ char moves 1 step down\n"");
+printf(""If entering '4', the @ char moves 1 step left\n"");
+printf(""If entering '6', the @ char moves 1 step right\n"");
+printf(""If entering '0', the program exits\n"");
+
+ int value=1;
+ int control;
+ while(value>0)
+   {
+     scanf(""%d"",&control);
+
+     switch(control)
+       {
+       case 8:
+	 if(posiy>1)
+	   {  posiy--;
+	     updatemap(map,posix,posiy);
+	     printmap(map);
+	   }
+	 else
+	   printf(""Invalid move!\n"");
+	 break;
+      
+       case 2:
+	 if(posiy<6)
+	   {  posiy++;
+	     updatemap(map,posix,posiy);
+	     printmap(map);
+	   }
+	 else
+	   printf(""Invalid move!\n"");
+	 break;
+       
+       case 4:
+	 if(posix>1)
+	   { posix--;
+	     updatemap(map,posix,posiy);
+	     printmap(map);
+	   }
+	 else
+	   printf(""Invalid move!\n"");
+	 break;
+       
+       case 6:
+	 if(posix<8)
+	   { posix++;
+	     updatemap(map,posix,posiy);
+	     printmap(map);
+	   }
+	 else
+	   printf(""Invalid move!\n"");
+	 break;
+
+       case 0:
+	 value=0;
+	 break;
+
+       default:
+	 printf(""Invalid movev!\n"");
+	 break;
+       }
+   }
+
+}
+
+
+
+void updatemap(char a[8][10],int x, int y)
+{
+  int i,j;  
+  for(i=1;i<=6;i++)
+    {
+      for(j=1;j<=8;j++)
+	a[i][j]='.';
+    }
+  a[y][x]='@';
+  
+}
+
+void printmap(char a[8][10])
+{
+  int i,j;
+  for(i=0;i<8;i++)
+    {
+      for(j=0;j<10;j++)
+	printf(""%c"",a[i][j]);
+      printf(""\n"");
+    }
+
+}",
+PGA-LAB08-Q01,2024,Lab Worksheet,"Linked lists, structures, pointers, dynamic memory allocation, list operations (prepend, insert, get, contains, remove, free), loops, conditional statements","Expanding Integer List
+This task is to create functions to handle single-linked lists. The file with the name int_list.c(incomplete) contains the definition of a structure which can hold an integer value and a pointer to the next list structure in the list and a few functions, to append, print the list. Based on the lecture, complete the implementation of such a data-structure with the following functions. In each case, think about what different situations you may have (eg, empty vs non-empty list) and how you could handle errors.
+
+Textbook Chapter 12 also covers data-structures in C and might be helpful (be careful of the type definitions though. The book likes to typedef pointer types, which I think is confusing because it can make things that are pointers look like they are not, and vice-versa).
+
+list_prepend that takes a pointer to a pointer to the first element of a list and a new value, and adds that new value to the start of the list.
+int list_prepend(IntList **start, int newval);
+list_insert that takes a pointer to a pointer to the first element of a list, a new value, and an index, and adds that new value before the n'th element of the list.
+int list_insert(IntList **start, int newval, int index);
+list_get that takes a pointer to the first element of a list and an index, and returns the the value at that index.
+int list_get(IntList *start, int index);
+list_contains that takes a pointer to the first element of a list and a target value, and returns true or false if the list does or does not contain that value.
+int list_contains(IntList *start, int target);
+list_remove that takes a pointer to a pointer to the first element of a list and an index, and removes that element at that index from the list.
+void list_remove(IntList **start, int index);
+list_free that takes a pointer to the first element of a list, and free all allocated memory.
+void list_free(IntList *start)","#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+/* Unsorted integer list. */
+struct int_list {
+   int value;
+   struct int_list *next;
+};
+typedef struct int_list IntList;
+
+// Given a list, print the values in the list.
+void list_print(IntList *start)
+{
+   IntList *cur = start;
+   printf(""["");
+   if(cur != NULL)
+   {
+      printf(""%d"", cur->value);
+      while(cur->next != NULL)
+      {
+	 cur = cur->next;
+	 printf("",%d"", cur->value);
+      }
+   }
+   printf(""]\n"");
+}
+
+// Given a list, append the given value to the list.
+// CHANGE: return true/false on success/failure.
+int list_append(IntList **start, int val)
+{
+   if(*start == NULL)
+   {
+      IntList *n = malloc(sizeof(IntList));
+      if(n == NULL)
+      {
+	 // error, cannot allocate memory for new list node.
+	 return 0;
+      }
+      n->value = val;
+      n->next = NULL;
+      *start = n;
+   }
+   else
+   {
+      IntList *cur = *start;
+      while(cur->next != NULL)
+      {
+	 cur = cur->next;
+      }
+      IntList *n = malloc(sizeof(IntList));
+      if(n == NULL)
+      {
+	 // error, cannot allocate memory for new list node.
+	 return 0;
+      }
+      n->value = val;
+      n->next = NULL;
+      cur->next = n;
+   }
+   return 1;
+}
+
+// Given a list, prepend the given value to the list.
+// CHANGE: return true/false on success/failure.
+int list_prepend(IntList **start, int val)
+{
+   IntList *n = malloc(sizeof(IntList));
+   if(n == NULL)
+   {
+      // error, cannot allocate memory for new list node.
+      return 0;
+   }
+   n->value = val;
+   n->next = NULL;
+
+   if(*start == NULL)
+   {
+      // empty list
+      *start = n;
+   }
+   else
+   {
+      // existing list
+      n->next = *start;
+      *start = n;
+   }
+   return 1;
+}
+
+// Given a list, free all the elements of the list and set the start to NULL
+// so we don't accidentally use it in the future.
+void list_free(IntList **start)
+{
+   IntList *cur = *start;
+   while(cur != NULL)
+   {
+      IntList *temp = cur->next;
+      free(cur);
+      cur = temp;
+   }
+   *start = NULL;
+}
+
+// Given a list, return the value of the n'th position (zero-based).
+// If n is out-of-bounds, return 0.
+int list_get(IntList *start, int n)
+{
+   IntList *cur = start;
+   if(n < 0)
+   {
+      return -1;
+   }
+   while(cur != NULL)
+   {
+      if(n == 0)
+      {
+	 return cur->value;
+      }
+      else
+      {
+	 n--;
+	 cur = cur->next;
+      }
+   }
+   return -1;
+}
+
+// Given a list, return the length of the list.
+int list_length(IntList *start)
+{
+   int len = 0;
+   IntList *cur = start;
+   while(cur != NULL)
+   {
+      len++;
+      cur = cur->next;
+   }
+   return len;
+}
+
+// Given a list, insert a new val after the n'th position of the list (zero-based).
+// If n < 0, insert at beginning.  If n >= length, insert at end.
+// CHANGE: return true/false on success/failure.
+int list_insert(IntList **start, int n, int val)
+{
+   if(*start == NULL || n <= 0)
+   {
+      // if empty, just reuse the prepend function to put it in list.
+      // if n == 0, then we should prepend anyway.
+      return list_prepend(start, val);
+   }
+   else
+   {
+      n--; // we've already dealt with the first position above, so decrement n.
+      IntList *prev = *start;
+      IntList *cur = (*start)->next;
+      
+      IntList *el = malloc(sizeof(IntList));
+      if(el == NULL)
+      {
+	 return 0;
+      }
+      el->value = val;
+      el->next = NULL;  // we overwrite this later, setting NULL here is for safety in case we make a mistake and forget to set it later.
+
+      while(cur != NULL)
+      {
+	 if(n == 0)
+	 {
+	    prev->next = el;
+	    el->next = cur;
+	    return 1;
+	 }
+	 n--;
+	 prev = cur;
+	 cur = cur->next;
+      }
+      prev->next = el;
+      el->next = NULL;
+      return 1;
+   }
+}
+
+// Given a list and a value, return true if it is in the list, false otherwise.
+int list_contains(IntList *start, int target)
+{
+   IntList *cur = start;
+   while(cur != NULL)
+   {
+      if(cur->value == target)
+      {
+	 return 1;
+      }
+      cur = cur->next;
+   }
+   return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	int value;
+		
+	for(;;)
+	{
+		printf(""Input: "");
+		scanf(""%d"", &value);
+		if(value == 0)
+			break;
+	}
+	return 1;
+}
+
+
+
+",
+PGA-LAB09-Q01,2024,Lab Worksheet,"File I/O (fopen/fgets), string arrays, character filtering, random number generation, loops, dynamic memory allocation (optional)","Word-guessing game from dictionary
+In Lab 6, one of the tasks was to create a word guessing game (Hangman). When the program was run, the first stage was for the user to type in all the possible words to randomly pick from. This is rather tedious. Normally, it can be any possible word in the dictionary. Luckily for us, Linux distributions normally have a dictionary text file which contains all the words in the dictionary, 1 word per line. This is stored at ""/usr/share/dict/words"". Be aware that there might be some non-English characters in the dictionary; if you treat each character as just an ASCII code between 0-255 it will be fine. I suggest filtering them in your program to only use the representing letters 'a' - 'z'.
+
+Create a copy of your Lab 6 program and then modify it so that it reads all the words from the dictionary file into the program, then randomly chooses from them each time a new game starts.
+","#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <ctype.h>
+
+// Check if a string contains only lowercase letters a-z
+int is_valid_word(const char *word) {
+    for (int i = 0; word[i] != '\0'; i++) {
+        if (!isalpha(word[i]) || !islower(word[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// Read dictionary from file, return array of words and number of words
+char **read_dictionary(const char *filename, int *word_count) {
+    FILE *file = fopen(filename, ""r"");
+    if (file == NULL) {
+        perror(""Error opening dictionary file"");
+        return NULL;
+    }
+
+    int capacity = 1000;
+    char **words = malloc(capacity * sizeof(char *));
+    if (words == NULL) {
+        fclose(file);
+        return NULL;
+    }
+
+    char buffer[256];
+    int count = 0;
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        // Remove trailing newline
+        size_t len = strlen(buffer);
+        if (len > 0 && buffer[len - 1] == '\n') {
+            buffer[len - 1] = '\0';
+        }
+
+        // Convert to lowercase and check validity
+        char lower[256];
+        int valid = 1;
+        for (int i = 0; buffer[i]; i++) {
+            if (isalpha(buffer[i])) {
+                lower[i] = tolower(buffer[i]);
+            } else {
+                valid = 0;
+                break;
+            }
+        }
+        lower[len] = '\0';
+
+        if (valid && is_valid_word(lower)) {
+            // Expand array if needed
+            if (count >= capacity) {
+                capacity *= 2;
+                char **temp = realloc(words, capacity * sizeof(char *));
+                if (temp == NULL) {
+                    // Clean up and return
+                    for (int i = 0; i < count; i++) free(words[i]);
+                    free(words);
+                    fclose(file);
+                    return NULL;
+                }
+                words = temp;
+            }
+
+            words[count] = malloc(strlen(lower) + 1);
+            if (words[count] == NULL) {
+                // Clean up
+                for (int i = 0; i < count; i++) free(words[i]);
+                free(words);
+                fclose(file);
+                return NULL;
+            }
+            strcpy(words[count], lower);
+            count++;
+        }
+    }
+
+    fclose(file);
+    *word_count = count;
+    return words;
+}
+
+int main() {
+    srand(time(NULL));
+
+    // Read dictionary
+    int num_words;
+    char **words = read_dictionary(""/usr/share/dict/words"", &num_words);
+    if (words == NULL || num_words == 0) {
+        printf(""Failed to load dictionary or no valid words found.\n"");
+        return 1;
+    }
+
+    char play_again = 'y';
+    while (play_again == 'y' || play_again == 'Y') {
+        // Randomly select a word
+        int index = rand() % num_words;
+        char *secret = words[index];
+        int len = strlen(secret);
+
+        // Initialize display with underscores
+        char display[len + 1];
+        for (int i = 0; i < len; i++) {
+            display[i] = '_';
+        }
+        display[len] = '\0';
+
+        int lives = 5;
+        int game_over = 0;
+        int won = 0;
+
+        while (!game_over) {
+            // Print current word state
+            printf(""Word: "");
+            for (int i = 0; i < len; i++) {
+                printf(""%c "", display[i]);
+            }
+            printf(""\n"");
+
+            printf(""Guess (%d lives): "", lives);
+
+            char guess[32];
+            scanf(""%31s"", guess);
+            int guess_len = strlen(guess);
+
+            // Convert guess to lowercase
+            for (int i = 0; i < guess_len; i++) {
+                guess[i] = tolower(guess[i]);
+            }
+
+            if (guess_len == 1) {
+                char ch = guess[0];
+                int found = 0;
+                for (int i = 0; i < len; i++) {
+                    if (secret[i] == ch && display[i] == '_') {
+                        display[i] = ch;
+                        found = 1;
+                    }
+                }
+                if (!found) {
+                    lives--;
+                }
+            } else {
+                if (strcmp(guess, secret) == 0) {
+                    won = 1;
+                    game_over = 1;
+                } else {
+                    lives--;
+                }
+            }
+
+            // Check if all letters revealed
+            int all_revealed = 1;
+            for (int i = 0; i < len; i++) {
+                if (display[i] == '_') {
+                    all_revealed = 0;
+                    break;
+                }
+            }
+            if (all_revealed) {
+                won = 1;
+                game_over = 1;
+            }
+
+            if (lives <= 0) {
+                game_over = 1;
+            }
+        }
+
+        if (won) {
+            printf(""Correct! The word was: %s\n"", secret);
+        } else {
+            printf(""You lost! The word was: %s\n"", secret);
+        }
+
+        printf(""Do you want to play again (y/n)? "");
+        scanf("" %c"", &play_again);
+    }
+
+    // Free allocated memory
+    for (int i = 0; i < num_words; i++) {
+        free(words[i]);
+    }
+    free(words);
+
+    return 0;
+}",
+PGA-LAB010-Q01,2024,Lab Worksheet,"Doubly-linked list, singly-linked list, structures, pointers, dynamic memory allocation, stack operations (push/pop), queue operations (enqueue/dequeue) ","Doubly-linked list
+Copy your integer list code from last lab, then modify the copied code to implement a doubly-linked list rather than a singly-linked list. Change the type and function names so they aren't the same as the previous code (for example, by prepending ""dll_"" for doubly-linked list). You should also add two new functions:
+
+dll_next_element which takes a pointer to a doubly-linked list element and returns a pointer to the next element in the list, or NULL.
+dll_prev_element which takes a pointer to a doubly-linked list element and returns a pointer to the previous element in the list, or NULL.
+After you have done that, also write the equivalent prev_element function for your singely-linked list type (you don't have the prev pointer to help you this time).
+
+Stack
+Implement a stack data-type. It should support the following operations:
+
+stack_create which takes no arguments and returns a pointer to a stack data-structure, or NULL on error.
+stack_push which takes a stack pointer and an integer and adds that number to the top of the stack.
+stack_pop which takes a stack pointer and removes and returns the value from the top of the stack, or indicates an error if there is no numbers left (you can choose how to implement that error).
+Queue
+Implement a queue data-type. It should support the following operations:
+
+queue_create which takes no arguments and returns a pointer to a queue data-structure, or NULL on error.
+queue_enqueue which takes a queue pointer and an integer and adds that number to the back of the queue.
+queue_dequeue which takes a queue pointer and removes and returns the value from the front of the stack, or indicates an error if there is no numbers left (you can choose how to implement that error).","#include <stdio.h>
+#include <stdlib.h>
+
+// ==================== Doubly Linked List ====================
+typedef struct dll_node {
+    int data;
+    struct dll_node *prev;
+    struct dll_node *next;
+} dll_node;
+
+// Helper to create a new node (for demonstration)
+dll_node* dll_create_node(int value) {
+    dll_node *new_node = malloc(sizeof(dll_node));
+    if (new_node) {
+        new_node->data = value;
+        new_node->prev = NULL;
+        new_node->next = NULL;
+    }
+    return new_node;
+}
+
+// Insert at beginning (example)
+void dll_insert_begin(dll_node **head, int value) {
+    dll_node *new_node = dll_create_node(value);
+    if (!new_node) return;
+    new_node->next = *head;
+    if (*head) (*head)->prev = new_node;
+    *head = new_node;
+}
+
+// dll_next_element: return pointer to next element or NULL
+dll_node* dll_next_element(dll_node *element) {
+    return element ? element->next : NULL;
+}
+
+// dll_prev_element: return pointer to previous element or NULL
+dll_node* dll_prev_element(dll_node *element) {
+    return element ? element->prev : NULL;
+}
+
+// ==================== Singly Linked List ====================
+typedef struct sll_node {
+    int data;
+    struct sll_node *next;
+} sll_node;
+
+// Helper for singly linked list
+sll_node* sll_create_node(int value) {
+    sll_node *new_node = malloc(sizeof(sll_node));
+    if (new_node) {
+        new_node->data = value;
+        new_node->next = NULL;
+    }
+    return new_node;
+}
+
+void sll_insert_begin(sll_node **head, int value) {
+    sll_node *new_node = sll_create_node(value);
+    if (!new_node) return;
+    new_node->next = *head;
+    *head = new_node;
+}
+
+// sll_prev_element: return pointer to previous element (must traverse from head)
+sll_node* sll_prev_element(sll_node *head, sll_node *element) {
+    if (!head || !element || head == element) return NULL;
+    sll_node *current = head;
+    while (current && current->next != element) {
+        current = current->next;
+    }
+    return current; // will be NULL if element not found or no previous
+}
+
+// ==================== Stack (using singly linked list) ====================
+typedef struct stack {
+    sll_node *top;
+} stack;
+
+stack* stack_create() {
+    stack *s = malloc(sizeof(stack));
+    if (s) s->top = NULL;
+    return s;
+}
+
+void stack_push(stack *s, int value) {
+    if (!s) return;
+    sll_node *new_node = sll_create_node(value);
+    if (!new_node) return;
+    new_node->next = s->top;
+    s->top = new_node;
+}
+
+// Returns 0 on success, -1 on error (empty stack)
+int stack_pop(stack *s, int *result) {
+    if (!s || !s->top) return -1;
+    sll_node *temp = s->top;
+    *result = temp->data;
+    s->top = temp->next;
+    free(temp);
+    return 0;
+}
+
+// ==================== Queue (using singly linked list with head and tail) ====================
+typedef struct queue {
+    sll_node *front;
+    sll_node *rear;
+} queue;
+
+queue* queue_create() {
+    queue *q = malloc(sizeof(queue));
+    if (q) {
+        q->front = q->rear = NULL;
+    }
+    return q;
+}
+
+void queue_enqueue(queue *q, int value) {
+    if (!q) return;
+    sll_node *new_node = sll_create_node(value);
+    if (!new_node) return;
+    if (q->rear == NULL) {
+        q->front = q->rear = new_node;
+    } else {
+        q->rear->next = new_node;
+        q->rear = new_node;
+    }
+}
+
+// Returns 0 on success, -1 on error (empty queue)
+int queue_dequeue(queue *q, int *result) {
+    if (!q || !q->front) return -1;
+    sll_node *temp = q->front;
+    *result = temp->data;
+    q->front = temp->next;
+    if (q->front == NULL) q->rear = NULL;
+    free(temp);
+    return 0;
+}
+
+// ==================== Test (optional) ====================
+int main() {
+    // Test doubly linked list
+    dll_node *dll_head = NULL;
+    dll_insert_begin(&dll_head, 10);
+    dll_insert_begin(&dll_head, 20);
+    dll_insert_begin(&dll_head, 30);
+    printf(""Doubly linked list forward: "");
+    for (dll_node *p = dll_head; p; p = dll_next_element(p))
+        printf(""%d "", p->data);
+    printf(""\nBackward: "");
+    dll_node *last = dll_head;
+    while (last && last->next) last = last->next;
+    for (dll_node *p = last; p; p = dll_prev_element(p))
+        printf(""%d "", p->data);
+    printf(""\n"");
+
+    // Test singly linked list prev_element
+    sll_node *sll_head = NULL;
+    sll_insert_begin(&sll_head, 5);
+    sll_insert_begin(&sll_head, 15);
+    sll_insert_begin(&sll_head, 25);
+    sll_node *target = sll_head->next; // 15
+    sll_node *prev = sll_prev_element(sll_head, target);
+    if (prev)
+        printf(""Previous of %d is %d\n"", target->data, prev->data);
+    else
+        printf(""No previous element\n"");
+
+    // Test stack
+    stack *s = stack_create();
+    stack_push(s, 100);
+    stack_push(s, 200);
+    int val;
+    if (stack_pop(s, &val) == 0) printf(""Stack pop: %d\n"", val);
+    if (stack_pop(s, &val) == 0) printf(""Stack pop: %d\n"", val);
+    if (stack_pop(s, &val) == -1) printf(""Stack empty\n"");
+
+    // Test queue
+    queue *q = queue_create();
+    queue_enqueue(q, 1);
+    queue_enqueue(q, 2);
+    queue_enqueue(q, 3);
+    if (queue_dequeue(q, &val) == 0) printf(""Queue dequeue: %d\n"", val);
+    if (queue_dequeue(q, &val) == 0) printf(""Queue dequeue: %d\n"", val);
+    if (queue_dequeue(q, &val) == 0) printf(""Queue dequeue: %d\n"", val);
+    if (queue_dequeue(q, &val) == -1) printf(""Queue empty\n"");
+
+    // Free memory (not strictly necessary for this demo, but good practice)
+    // For simplicity, we skip full cleanup. In real code, you'd free all nodes.
+
+    return 0;
+}",
