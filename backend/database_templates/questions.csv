@@ -1,4 +1,4 @@
-question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path,favorites,languages
+question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path,favorite,language
 PGA-WEB-Q01,N/A,Website,Fundamental,"Write a C program to print your name, date of birth, and mobile number.
 Expected Output:
 
@@ -38,7 +38,7 @@ int main() {
 
     return 0;
 }",,0,C
-PGA-WEB-Q02,N/A,Website,Few Advanced Concepts,"Write a C program to get the C version you are using.
+PGA-WEB-Q02,N/A,Website,Type; Functions 1; Data Types and Conversions,"Write a C program to get the C version you are using.
 Expected Output:
 
 We are using C18!","#include <stdio.h>
@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
     return 0;
 }
 ",,0,C
-PGA-WEB-Q03,N/A,Website,Simple Algorithms,"Write a C program that takes n number of positive integers. Find the integer that appears the least number of times among the said integers. If there are multiple such integers, select the smallest one.
+PGA-WEB-Q03,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program that takes n number of positive integers. Find the integer that appears the least number of times among the said integers. If there are multiple such integers, select the smallest one.
 
 Sample Date:
 (1,2,3) -> 1
@@ -166,7 +166,7 @@ printf(""Reverse string (partly): %s\n"", result);
 return 0;
 }
 ",,0,C
-PGA-WEB-Q05,N/A,Website,Fundamental; Control and Iteration,"Write a C program to compute the sum of the two input values. If the two values are the same, then return triple their sum.
+PGA-WEB-Q05,N/A,Website,Type; Data Types and Conversions,"Write a C program to compute the sum of the two input values. If the two values are the same, then return triple their sum.
 Expected Output:
 
 3
@@ -192,7 +192,7 @@ int test(int x, int y)
     return x == y ? (x + y) * 3 : x + y;
 }
 ",,0,C
-PGA-WEB-Q06,N/A,Website,Fundamental; Control and Iteration,"Write a C program that will take a number as input and find the absolute difference between the input number and 51. If the input number is greater than 51, it will return triple the absolute difference.
+PGA-WEB-Q06,N/A,Website,Iteration; Control and Iteration,"Write a C program that will take a number as input and find the absolute difference between the input number and 51. If the input number is greater than 51, it will return triple the absolute difference.
 Expected Output:
 
 6
@@ -281,7 +281,7 @@ printf (""Returned value is: %d.\n"",x);
 return 0;
 } 
 ",,0,C
-PGA-WEB-Q08,N/A,Website,Type; Data Types and Conversions,"Write a C program to convert a string to an unsigned long integer.
+PGA-WEB-Q08,N/A,Website,Characters and Strings,"Write a C program to convert a string to an unsigned long integer.
 
 Test Data and Expected Output :
 
@@ -309,7 +309,7 @@ printf (""Output: %lu\n\n"",ul);
 return 0; // Indicate successful program execution
 }
 ",,0,C
-PGA-WEB-Q09,N/A,Website,Fundamental; Data Types and Conversions,"Write a program that converts Centigrade to Fahrenheit.
+PGA-WEB-Q09,N/A,Website,Type; Data Types and Conversions,"Write a program that converts Centigrade to Fahrenheit.
 Expected Output :
 Input a temperature (in Centigrade): 45
 113.000000 degrees Fahrenheit.","#include <stdio.h>     // Include the standard input/output header file.
@@ -329,7 +329,7 @@ printf(""%f degrees Fahrenheit.\n"", temp_f);    // Print the temperature in fah
 return(0);   // Return 0 to indicate successful execution of the program.
 }
 ",,0,C
-PGA-WEB-Q10,N/A,Website,Fundamental; Data Types and Conversions,"Write a C program that calculates the volume of a sphere.
+PGA-WEB-Q10,N/A,Website,Functions 1; Functions,"Write a C program that calculates the volume of a sphere.
 Expected Output :
 Input the radius of the sphere : 2.56
 The volume of sphere is 70.276237.","#include <stdio.h>     // Include the standard input/output header file.
@@ -352,7 +352,7 @@ printf(""The volume of sphere is %f.\n"", myvolume);  // Print the calculated vo
 return(0);   // Return 0 to indicate successful execution of the program.
 }
 ",,0,C
-PGA-WEB-Q11,N/A,Website,Fundamental; Control and Iteration,"Write a C program to accept two integers and check whether they are equal or not.
+PGA-WEB-Q11,N/A,Website,Operators; Control and Iteration,"Write a C program to accept two integers and check whether they are equal or not.
 Test Data : 15 15
 Expected Output :
 Number1 and Number2 are equal","#include <stdio.h>   // Include the standard input/output header file.
@@ -369,7 +369,7 @@ void main()
         printf(""Number1 and Number2 are not equal\n"");   // Print a message if Number1 and Number2 are not equal.
 }
 ",,0,C
-PGA-WEB-Q12,N/A,Website,Fundamental; Control and Iteration,"Write a C program to check whether a given number is even or odd.
+PGA-WEB-Q12,N/A,Website,Operators; Control and Iteration,"Write a C program to check whether a given number is even or odd.
 Test Data : 15
 Expected Output :
 15 is an odd integer","#include <stdio.h>   // Include the standard input/output header file.
@@ -387,7 +387,7 @@ void main()
         printf(""%d is an odd integer\n"", num1);    // Print a message indicating that 'num1' is an odd integer.
 }
 ",,0,C
-PGA-WEB-Q13,N/A,Website,Fundamental; Control and Iteration,Write a C program to print numbers from 0 to 10 and 10 to 0 using two while loops.,"#include <stdio.h>
+PGA-WEB-Q13,N/A,Website,Iteration; Control and Iteration,Write a C program to print numbers from 0 to 10 and 10 to 0 using two while loops.,"#include <stdio.h>
 
 int main() {
     int i = 0;  // Initialize the loop counter
@@ -413,7 +413,7 @@ int main() {
     return 0;  // Indicate successful program execution
 }
 ",,0,C
-PGA-WEB-Q14,N/A,Website,Fundamental; Control and Iteration,Write a C program that prompts the user to input a series of integers until the user stops entering 0 using a while loop. Calculate and print the sum of all the positive integers entered.,"#include <stdio.h>
+PGA-WEB-Q14,N/A,Website,Iteration; Control and Iteration,Write a C program that prompts the user to input a series of integers until the user stops entering 0 using a while loop. Calculate and print the sum of all the positive integers entered.,"#include <stdio.h>
 
  int main() {
     int number;  // Variable to store the user input
@@ -1519,7 +1519,7 @@ int main() {
     return 0; // Return from the main function
 }
 ",,0,C
-PGA-WEB-Q33,N/A,Website,Simple Algorithms,"Write a C program that implements a basic hash table with functions for insertion, deletion, and retrieval of key-value pairs.","// Including necessary header files
+PGA-WEB-Q33,N/A,Website,Few Advanced Concepts,"Write a C program that implements a basic hash table with functions for insertion, deletion, and retrieval of key-value pairs.","// Including necessary header files
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1675,7 +1675,7 @@ int main() {
     return 0;
 }
 ",,0,C
-PGA-WEB-Q34,N/A,Website,Simple Algorithms,"Implement a basic hash table in C with functions for insertion, deletion, and retrieval of key-value pairs. Write a C program that extends the above basic hash table implementation to handle collisions using techniques such as chaining or open addressing.","// Including necessary header files
+PGA-WEB-Q34,N/A,Website,Few Advanced Concepts,"Implement a basic hash table in C with functions for insertion, deletion, and retrieval of key-value pairs. Write a C program that extends the above basic hash table implementation to handle collisions using techniques such as chaining or open addressing.","// Including necessary header files
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -2175,7 +2175,7 @@ int main() {
     return 0;
 }
 ",,0,C
-PGA-WEB-Q39,N/A,Website,Simple Algorithms,"Write a program in C to check whether a given number is an ugly number or not.
+PGA-WEB-Q39,N/A,Website,Simple Algorithms; Control and Iteration,"Write a program in C to check whether a given number is an ugly number or not.
 
 Expected Output :
 Input an integer number: 25
@@ -2323,7 +2323,7 @@ int main() {
  return 0; // Return 0 to indicate successful execution of the program
 }
 ",,0,C
-PGA-WEB-Q43,N/A,Website,Few Advanced Concepts,"Write a program in C to print the current date and time.
+PGA-WEB-Q43,N/A,Website,Files and IO,"Write a program in C to print the current date and time.
 
 Expected Output :
 
@@ -2355,7 +2355,7 @@ int main(void) {
     exit(EXIT_SUCCESS);
 }
 ",,0,C
-PGA-WEB-Q44,N/A,Website,Few Advanced Concepts,"Write a program in C to compute the number of seconds passed since the beginning of the month.
+PGA-WEB-Q44,N/A,Website,Files and IO,"Write a program in C to compute the number of seconds passed since the beginning of the month.
 
 Expected Output :
 
@@ -2378,7 +2378,7 @@ int main(void) {
     return 0;
 }
 ",,0,C
-PGA-WEB-Q45,N/A,Website,Iteration; Control and Iteration,"Write a C program to reverse the digits of a given integer.
+PGA-WEB-Q45,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to reverse the digits of a given integer.
 
 Example:
 Input:
@@ -2428,7 +2428,7 @@ int main(void)
     return 0;
 }
 ",,0,C
-PGA-WEB-Q46,N/A,Website,Iteration; Control and Iteration,"Write a C program to check whether an integer is a palindrome or not. An integer is a palindrome when it reads the same forward as backward.
+PGA-WEB-Q46,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to check whether an integer is a palindrome or not. An integer is a palindrome when it reads the same forward as backward.
 
 Example:
 Input:
@@ -2534,7 +2534,7 @@ int main()
     return 0;
 }
 ",,0,C
-PGA-WEB-Q49,N/A,Website,Functions 1; Functions,"Write a C program to print the square of array elements using callback function.
+PGA-WEB-Q49,N/A,Website,Functions 1,"Write a C program to print the square of array elements using callback function.
 
 Expected Output:
 
@@ -2573,7 +2573,7 @@ int main()
     return 0;
 }
 ",,0,C
-PGA-WEB-Q50,N/A,Website,Functions 2; Functions,"Write C program to sort an array of integers in ascending or descending order using a callback function to compare the elements.
+PGA-WEB-Q50,N/A,Website,Simple Algorithms; Functions 1; Control and Iteration,"Write C program to sort an array of integers in ascending or descending order using a callback function to compare the elements.
 
 Expected Output:
 
@@ -2686,7 +2686,7 @@ int main() {
   return 0;
 }
 ",,0,C
-PGA-WEB-Q53,N/A,Website,Functions 1; Functions,"Write a program in C to print the first 50 natural numbers using recursion.
+PGA-WEB-Q53,N/A,Website,Functions 2,"Write a program in C to print the first 50 natural numbers using recursion.
 
 Expected Output:
 
@@ -2717,7 +2717,7 @@ int numPrint(int n)
     }
 }
 ",,0,C
-PGA-WEB-Q54,N/A,Website,Functions 1; Functions,"Write a program in C to calculate the sum of numbers from 1 to n using recursion.
+PGA-WEB-Q54,N/A,Website,Functions 2,"Write a program in C to calculate the sum of numbers from 1 to n using recursion.
 
 Test Data :
 Input the last number of the range starting from 1 : 5
@@ -2758,7 +2758,7 @@ int sumOfRange(int n1)
    return (res);
 }
 ",,0,C
-PGA-WEB-Q55,N/A,Website,Few Advanced Concepts,"Write a C program to compute the area of a circle given its radius using inline functions.
+PGA-WEB-Q55,N/A,Website,Functions 1; Type; Functions,"Write a C program to compute the area of a circle given its radius using inline functions.
 
 Expected Output:
 
@@ -2777,7 +2777,7 @@ int main() {
   return 0;
 }
 ",,0,C
-PGA-WEB-Q56,N/A,Website,Few Advanced Concepts,"Write a C program to compute absolute difference between two integers using inline functions.
+PGA-WEB-Q56,N/A,Website,Functions 1; Functions,"Write a C program to compute absolute difference between two integers using inline functions.
 
 Expected Output:
 
@@ -2867,7 +2867,7 @@ void main()
     printf(""\n\n"");
 }
 ",,0,C
-PGA-WEB-Q59,N/A,Website,Simple Algorithms,"Write a C program to find the position of a target value within a sorted array using binary search.
+PGA-WEB-Q59,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to find the position of a target value within a sorted array using binary search.
 
 Binary Search : In computer science, a binary search or half-interval search algorithm finds the position of a target value within a sorted array. The binary search algorithm can be classified as a dichotomies divide-and-conquer search algorithm and executes in logarithmic time.","#include<stdio.h>
 void main()
@@ -2911,7 +2911,7 @@ void main()
         printf(""%d value found at %d position\n"", x, m);
 }
 ",,0,C
-PGA-WEB-Q60,N/A,Website,Simple Algorithms,"Write a C program to find the position of a target value within an array using interpolation search.
+PGA-WEB-Q60,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to find the position of a target value within an array using interpolation search.
 
 From Wikipedia:
 
@@ -2964,7 +2964,7 @@ int main()
     return 0;
 }
 ",,0,C
-PGA-WEB-Q61,N/A,Website,Simple Algorithms,"Write a C program to get the indices of two numbers in a given array of integers. This will enable you to get the sum of two numbers equal to a specific target.
+PGA-WEB-Q61,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to get the indices of two numbers in a given array of integers. This will enable you to get the sum of two numbers equal to a specific target.
 
 Expected Output:
 
@@ -3038,7 +3038,7 @@ int main(void)
 }
 
 ",,0,C
-PGA-WEB-Q62,N/A,Website,Simple Algorithms,"Write a C program to find the length of the longest substring of a given string without repeating characters.
+PGA-WEB-Q62,N/A,Website,Simple Algorithms; Control and Iteration,"Write a C program to find the length of the longest substring of a given string without repeating characters.
 
 Expected Output:
 
