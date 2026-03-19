@@ -1,23 +1,59 @@
+"""Questions 表 CRUD"""
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 from app.models.question import Question
 
-#Input id
-#Output Question
-async def get_question_by_id(db: AsyncSession, question_id: int):
-    result = await db.execute(select(Question).where(Question.id == question_id))
+
+def get_questions_by_ids(db: Session, question_ids: list[int]) -> list:
+    """按 ID 列表获取题目，保持传入顺序"""
+    if not question_ids:
+        return []
+    result = db.execute(
+        select(Question).where(Question.question_id.in_(question_ids))
+    )
+    rows = result.scalars().all()
+    order_map = {qid: i for i, qid in enumerate(question_ids)}
+    return sorted(rows, key=lambda q: order_map.get(q.question_id, 999))
+
+
+def get_questions_all(db: Session, skip: int = 0, limit: int = 100, favourite: int | None = None):
+    """获取所有题目（同步），可选按 favourite 筛选"""
+    stmt = select(Question)
+    if favourite is not None:
+        stmt = stmt.where(Question.favourite == favourite)
+    stmt = stmt.order_by(Question.question_id).offset(skip).limit(limit)
+    result = db.execute(stmt)
+    return result.scalars().all()
+
+
+def update_favourite(db: Session, question_id: int, value: int) -> bool:
+    """设置题目的 favourite 字段，返回是否成功"""
+    result = db.execute(select(Question).where(Question.question_id == question_id))
+    question = result.scalars().first()
+    if not question:
+        return False
+    question.favourite = value
+    db.commit()
+    db.refresh(question)
+    return True
+
+
+async def get_question_by_id(db, question_id: int):
+    result = await db.execute(select(Question).where(Question.question_id == question_id))
     return result.scalar_one_or_none()
 
-#Input unique_code
-#Output Question
-async def get_question_by_unique_code(db: AsyncSession, unique_code: str):
-    result = await db.execute(select(Question).where(Question.unique_code == unique_code))
+
+async def get_question_by_code(db, question_code: str):
+    result = await db.execute(select(Question).where(Question.question_code == question_code))
     return result.scalar_one_or_none()
 
 
-# Input: db, question_id
-# Output: True 删除成功，False 记录不存在
-async def delete_question_by_id(db: AsyncSession, question_id: int) -> bool:
+async def delete_question(db, question: Question):
+    await db.delete(question)
+    await db.flush()
+
+
+async def delete_question_by_id(db, question_id: int) -> bool:
     question = await get_question_by_id(db, question_id)
     if not question:
         return False
@@ -26,12 +62,21 @@ async def delete_question_by_id(db: AsyncSession, question_id: int) -> bool:
     return True
 
 
-# Input: db, unique_code
-# Output: True 删除成功，False 记录不存在
-async def delete_question_by_unique_code(db: AsyncSession, unique_code: str) -> bool:
-    question = await get_question_by_unique_code(db, unique_code)
+async def delete_question_by_code(db, question_code: str) -> bool:
+    question = await get_question_by_code(db, question_code)
     if not question:
         return False
     await db.delete(question)
     await db.flush()
     return True
+
+def select_all_coursework(db, skip: int = 0, limit: int = 100) -> list:
+    """从 Questions 表中选取 source_type='CW' 的题目作为 coursework"""
+    result = db.execute(
+        select(Question)
+        .where(Question.source_type == "CW")
+        .offset(skip)
+        .limit(limit)
+        .order_by(Question.question_id)
+    )
+    return result.scalars().all()

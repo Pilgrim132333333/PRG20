@@ -6,10 +6,10 @@ from typing import Generator
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-# Create the asynchronous engine
+# 同步引擎（create_engine 需用 pymysql，不能用 aiomysql）
 engine = create_engine(
-    settings.DATABASE_URL, 
-    echo=True, 
+    settings.SYNC_DATABASE_URL,
+    echo=True,
     future=True,
     pool_pre_ping=True
 )

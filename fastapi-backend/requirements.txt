@@ -6,3 +6,4 @@ aiosqlite
 pydantic
 pydantic-settings
 python-multipart
+reportlab

@@ -248,32 +248,25 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Programming language</label>
                             <select id="languageFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">Select languages</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="csharp">C#</option>
-                                <option value="cpp">C++</option>
                             </select>
                         </div>
-                       <div id="courseFilterGroup" class="filter-group hidden">
+                       <div id="courseFilterGroup" class="filter-group">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Course</label>
                             <select id="courseFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">ALL</option>
-                                <option value="1036">COMP 1036</option>
-                                <option value="2068">COMP 2068</option>
-                                <option value="1048">COMP 1048</option>
-                                <option value="1046">COMP 1046</option>
                             </select>
                         </div>
                         
-                        <div id="yearFilterGroup" class="filter-group hidden">
+                        <div id="yearFilterGroup" class="filter-group">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Year</label>
                             <select id="yearFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">ALL</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Knowledge Point</label>
+                            <select id="qKnowledgeFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option value="all">ALL</option>
                             </select>
                         </div>
                     </div>
@@ -282,16 +275,17 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Knowledge Point</th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Type</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="questionsTableBody">
-                                <!-- 题目列表将通过JavaScript动态生成 -->
+                                <tr><td colspan="7" class="px-6 py-4 text-center text-gray-400">Loading...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -308,30 +302,18 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1">Programming language</label>
                             <select id="cwLanguageFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">Select languages</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="csharp">C#</option>
-                                <option value="cpp">C++</option>
                             </select>
                         </div>
-                        <div id="cwCourseFilterGroup" class="filter-group hidden">
+                        <div id="cwCourseFilterGroup" class="filter-group">
                             <label class="block text-sm font-medium text-gray-700 mb-1">Course</label>
                             <select id="cwCourseFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">ALL</option>
-                                <option value="1036">COMP 1036</option>
-                                <option value="2068">COMP 2068</option>
-                                <option value="1048">COMP 1048</option>
-                                <option value="1046">COMP 1046</option>
                             </select>
-                        </div>  
-                        <div id="cwStatusFilterGroup" class="filter-group hidden">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-                            <select id="cwStatusFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                        </div>
+                        <div class="filter-group">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Knowledge Point</label>
+                            <select id="cwKnowledgeFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
                                 <option value="all">ALL</option>
-                                <option value="pending">pending</option>
-                                <option value="submitted">submitted</option>
-                                <option value="graded">graded</option>
                             </select>
                         </div>
                     </div>  
@@ -343,13 +325,11 @@
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Deadline</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200" id="courseworkTableBody">
-                                <!-- 作业列表将通过JavaScript动态生成 -->
+                                <tr><td colspan="4" class="px-6 py-4 text-center text-gray-400">Loading...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -361,12 +341,23 @@
                 <h2 class="text-2xl font-bold text-gray-800">My Collection</h2>
                 
                 <div class="card">
-                    <div class="flex items-center justify-between mb-4">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                         <div class="relative w-64">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
                                 <i class="fa fa-search"></i>
                             </span>
                             <input type="text" id="qbSearch" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="搜索题目...">
+                        </div>
+                        <button id="qbExportBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
+                            <i class="fa fa-download mr-2"></i>Export
+                        </button>
+                        <div id="qbExportModeBtns" class="hidden flex items-center gap-2">
+                            <button id="qbExportPdfBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                <i class="fa fa-file-pdf-o mr-2"></i>Export PDF
+                            </button>
+                            <button id="qbExportCancelBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+                                Cancel
+                            </button>
                         </div>
                     </div>
                     
@@ -374,6 +365,9 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
+                                    <th id="qbCheckboxTh" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden">
+                                        <input type="checkbox" id="qbSelectAll" class="rounded border-gray-300" title="全选">
+                                    </th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
@@ -406,13 +400,18 @@
             <div class="p-6" id="modalContent">
                 <!-- 题目详情将通过JavaScript动态生成 -->
             </div>
-            <div class="p-6 border-t border-gray-200 flex justify-end space-x-3">
-                <button id="addToBankBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
-                    <i class="fa fa-folder-plus mr-1"></i> Add to favourites
+            <div class="p-6 border-t border-gray-200 flex justify-between items-center">
+                <button id="viewMaterialsBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+                    <i class="fa fa-file-text mr-1"></i> View Materials
                 </button>
-                <button id="submitAnswerBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
-                    <i class="fa fa-paper-plane mr-1"></i> Submit
-                </button>
+                <div class="flex space-x-3">
+                    <button id="addToBankBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+                        <i class="fa fa-folder-plus mr-1"></i> Add to favourites
+                    </button>
+                    <button id="submitAnswerBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
+                        <i class="fa fa-paper-plane mr-1"></i> Submit
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -495,211 +494,12 @@
     </div>
 
     <script>
-        // 模拟数据
-        const questions = [
-            {
-                id: "q1",
-                title: "实现一个简单的计数器",
-                language: "javascript",
-                course: "1036",
-                courseName: "1036",
-                year: "2023",
-                description: "请实现一个可以增加和减少的计数器组件，要求使用React hooks。",
-                solution: `import React, { useState } from 'react';
+        const API_BASE = 'http://127.0.0.1:8000/api';
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <div className="counter">
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <span>{count}</span>
-      <button onClick={() => setCount(count + 1)}>+</button>
-    </div>
-  );
-}
-
-export default Counter;`,
-                explanation: "这个问题主要考察React组件的状态管理。使用useState hook可以很方便地管理组件的状态。每次点击按钮时，通过setCount更新状态，React会自动重新渲染组件。",
-                knowledgePoint: "React状态管理",
-                pptLink: "#",
-                status: "completed",
-                score: 85
-            },
-            {
-                id: "q2",
-                title: "两数之和",
-                language: "python",
-                course: "1048",
-                courseName: "1048",
-                year: "2022",
-                description: "给定一个整数数组nums和一个整数目标值target，请你在该数组中找出和为目标值的那两个整数，并返回它们的数组下标。",
-                solution: `def twoSum(nums, target):
-    num_map = {}
-    for i, num in enumerate(nums):
-        complement = target - num
-        if complement in num_map:
-            return [num_map[complement], i]
-        num_map[num] = i
-    return []`,
-                explanation: "这个问题可以通过哈希表（字典）来解决，时间复杂度为O(n)。我们遍历数组，对于每个元素，计算它与目标值的差值，如果这个差值已经在哈希表中，说明我们找到了答案；否则，将当前元素及其下标存入哈希表。",
-                knowledgePoint: "哈希表",
-                pptLink: "#",
-                status: "completed",
-                score: 90
-            },
-            {
-                id: "q3",
-                title: "二叉树的层序遍历",
-                language: "java",
-                course: "2068",
-                courseName: "2068",
-                year: "2023",
-                description: "给你一个二叉树，请你返回其按层序遍历得到的节点值。（即逐层地，从左到右访问所有节点）。",
-                solution: `import java.util.*;
-
-public class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<>();
-        if (root == null) return result;
-        
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            List<Integer> currentLevel = new ArrayList<>();
-            
-            for (int i = 0; i < levelSize; i++) {
-                TreeNode node = queue.poll();
-                currentLevel.add(node.val);
-                
-                if (node.left != null) queue.add(node.left);
-                if (node.right != null) queue.add(node.right);
-            }
-            
-            result.add(currentLevel);
-        }
-        
-        return result;
-    }
-}`,
-                explanation: "这个问题可以通过队列来解决。我们使用队列存储每一层的节点，然后依次出队并访问，同时将它们的左右子节点入队。这样就可以实现二叉树的层序遍历。",
-                knowledgePoint: "二叉树遍历",
-                pptLink: "#",
-                status: "completed",
-                score: 80
-            },
-            {
-                id: "q4",
-                title: "最长回文子串",
-                language: "cpp",
-                course: "1036",
-                courseName: "1036",
-                year: "2021",
-                description: "给定一个字符串s，找到s中最长的回文子串。你可以假设s的最大长度为1000。",
-                solution: `#include <string>
-#include <vector>
-using namespace std;
-
-class Solution {
-public:
-    string longestPalindrome(string s) {
-        int n = s.size();
-        if (n == 0) return "";
-        
-        vector<vector<bool>> dp(n, vector<bool>(n, false));
-        int start = 0, maxLength = 1;
-        
-        // 所有长度为1的子串都是回文
-        for (int i = 0; i < n; i++) {
-            dp[i][i] = true;
-        }
-        
-        // 检查长度为2的子串
-        for (int i = 0; i < n - 1; i++) {
-            if (s[i] == s[i + 1]) {
-                dp[i][i + 1] = true;
-                start = i;
-                maxLength = 2;
-            }
-        }
-        
-        // 检查长度大于2的子串
-        for (int length = 3; length <= n; length++) {
-            for (int i = 0; i <= n - length; i++) {
-                int j = i + length - 1;
-                
-                if (dp[i + 1][j - 1] && s[i] == s[j]) {
-                    dp[i][j] = true;
-                    start = i;
-                    maxLength = length;
-                }
-            }
-        }
-        
-        return s.substr(start, maxLength);
-    }
-};`,
-                explanation: "这个问题可以通过动态规划来解决。我们定义dp[i][j]表示字符串s从索引i到j是否是回文子串。状态转移方程为：如果s[i] == s[j]且dp[i+1][j-1]为true，则dp[i][j]为true。我们需要考虑子串长度为1、2和大于2的情况。",
-                knowledgePoint: "动态规划",
-                pptLink: "#",
-                status: "pending",
-                score: 0
-            }
-        ];
-
-        const courseworks = [
-            {
-                id: "cw1",
-                title: "JavaScript数组方法实践",
-                language: "javascript",
-                course: "1036",
-                courseName: "1036",
-                deadline: "2023-12-15",
-                status: "pending"
-            },
-            {
-                id: "cw2",
-                title: "排序算法实现",
-                language: "python",
-                course: "1048",
-                courseName: "1048",
-                deadline: "2023-12-10",
-                status: "submitted"
-            },
-            {
-                id: "cw3",
-                title: "二叉树操作",
-                language: "java",
-                course: "2048",
-                courseName: "2048",
-                deadline: "2023-12-05",
-                status: "graded",
-                score: 85
-            }
-        ];
-
-        const questionBank = [
-            {
-                id: "qb1",
-                title: "实现一个简单的计数器",
-                language: "javascript",
-                course: "1036",
-                courseName: "1036",
-                year: "2023",
-                addedDate: "2023-11-01"
-            },
-            {
-                id: "qb2",
-                title: "两数之和",
-                language: "python",
-                course: "1048",
-                courseName: "1048",
-                year: "2022",
-                addedDate: "2023-10-25"
-            }
-        ];
+        let questions = [];
+        let courseworks = [];
+        let questionBank = [];
+        let qbExportMode = false;
 
         // DOM加载完成后执行
         document.addEventListener('DOMContentLoaded', function() {
@@ -732,6 +532,11 @@ public:
                     // 显示对应的内容区域
                     const targetId = this.getAttribute('data-target');
                     document.getElementById(targetId).classList.remove('hidden');
+                    
+                    // 切换到 Question Bank 时加载收藏题目
+                    if (targetId === 'question-bank') {
+                        fetchQuestionBank();
+                    }
                 });
             });
             
@@ -741,47 +546,74 @@ public:
                 window.location.href = '../login.html';
             });
             
-            // 初始化题目列表
-            renderQuestions();
+            // 从 API 获取题目并渲染
+            fetchQuestions();
             
-            // 初始化课程作业列表
-            renderCourseworks();
+            // 从 API 获取课程作业并渲染
+            fetchCourseworks();
             
-            // 初始化题目收藏库列表
-            renderQuestionBank();
+            // Question Bank 初始为空，切换到该页时由 fetchQuestionBank 加载
             
-            // 语言筛选器事件 - 显示其他筛选条件
-            document.getElementById('languageFilter').addEventListener('change', function() {
-                const languageSelected = this.value !== '';
-                
-                // 显示或隐藏其他筛选条件
-                document.getElementById('courseFilterGroup').classList.toggle('hidden', !languageSelected);
-                document.getElementById('yearFilterGroup').classList.toggle('hidden', !languageSelected);
-                
-                // 筛选题目
-                filterQuestions();
-            });
+            // 语言筛选器事件
+            document.getElementById('languageFilter').addEventListener('change', filterQuestions);
 
             // 课程作业语言筛选器事件
-            document.getElementById('cwLanguageFilter').addEventListener('change', function() {
-                const languageSelected = this.value !== '';
-                
-                // 显示或隐藏其他筛选条件
-                document.getElementById('cwCourseFilterGroup').classList.toggle('hidden', !languageSelected);
-                document.getElementById('cwStatusFilterGroup').classList.toggle('hidden', !languageSelected);
-                
-                // 筛选课程作业
-                filterCourseworks();
-            });
+            document.getElementById('cwLanguageFilter').addEventListener('change', filterCourseworks);
 
             // 其他筛选条件变化时也触发筛选
             document.getElementById('courseFilter').addEventListener('change', filterQuestions);
             document.getElementById('yearFilter').addEventListener('change', filterQuestions);
+            document.getElementById('qKnowledgeFilter').addEventListener('change', filterQuestions);
             document.getElementById('cwCourseFilter').addEventListener('change', filterCourseworks);
-            document.getElementById('cwStatusFilter').addEventListener('change', filterCourseworks);
+            document.getElementById('cwKnowledgeFilter').addEventListener('change', filterCourseworks);
             
             // 搜索题目收藏库
             document.getElementById('qbSearch').addEventListener('input', renderQuestionBank);
+            
+            // Export 按钮：进入导出模式
+            document.getElementById('qbExportBtn').addEventListener('click', function() {
+                qbExportMode = true;
+                document.getElementById('qbExportBtn').classList.add('hidden');
+                document.getElementById('qbExportModeBtns').classList.remove('hidden');
+                document.getElementById('qbCheckboxTh').classList.remove('hidden');
+                renderQuestionBank();
+            });
+            
+            // Cancel：退出导出模式
+            document.getElementById('qbExportCancelBtn').addEventListener('click', function() {
+                qbExportMode = false;
+                document.getElementById('qbExportBtn').classList.remove('hidden');
+                document.getElementById('qbExportModeBtns').classList.add('hidden');
+                document.getElementById('qbCheckboxTh').classList.add('hidden');
+                renderQuestionBank();
+            });
+            
+            // Export PDF
+            document.getElementById('qbExportPdfBtn').addEventListener('click', async function() {
+                const ids = [...document.querySelectorAll('.qb-checkbox:checked')].map(cb => parseInt(cb.dataset.questionId));
+                if (ids.length === 0) return;
+                try {
+                    this.disabled = true;
+                    const res = await fetch(`${API_BASE}/questions/export-pdf`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ question_ids: ids }),
+                    });
+                    if (!res.ok) throw new Error(res.statusText);
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'questions.pdf';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    console.error(err);
+                    alert('导出 PDF 失败');
+                } finally {
+                    updateQbExportState();
+                }
+            });
             
             // 关闭模态框
             document.getElementById('closeModal').addEventListener('click', function() {
@@ -793,12 +625,62 @@ public:
                 document.getElementById('solveModal').classList.add('hidden');
             });
             
-            // 添加到收藏按钮
-            document.getElementById('addToBankBtn').addEventListener('click', function() {
+            // 查看关联材料按钮
+            document.getElementById('viewMaterialsBtn').addEventListener('click', async function() {
                 const questionId = this.getAttribute('data-question-id');
-                // 这里可以添加将题目添加到收藏的逻辑
-                alert('题目已添加到收藏！');
-                document.getElementById('questionModal').classList.add('hidden');
+                if (!questionId) return;
+                const section = document.getElementById('materialsSection');
+                const listEl = document.getElementById('materialsList');
+                if (section.classList.contains('hidden')) {
+                    try {
+                        const res = await fetch(`${API_BASE}/questions/${questionId}/materials`);
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        const materials = await res.json();
+                        listEl.innerHTML = '';
+                        if (materials.length === 0) {
+                            listEl.innerHTML = '<p class="text-gray-500 text-sm">No related materials.</p>';
+                        } else {
+                            materials.forEach(m => {
+                                const item = document.createElement('div');
+                                item.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+                                item.innerHTML = `
+                                    <div>
+                                        <span class="font-medium text-gray-800">${m.title || m.material_code}</span>
+                                        <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">${m.material_type}</span>
+                                    </div>
+                                    <a href="${API_BASE}/materials/${m.material_id}/download" class="text-primary hover:underline text-sm" target="_blank">
+                                        <i class="fa fa-download mr-1"></i>Download
+                                    </a>
+                                `;
+                                listEl.appendChild(item);
+                            });
+                        }
+                        section.classList.remove('hidden');
+                    } catch (err) {
+                        console.error('Failed to fetch materials:', err);
+                        listEl.innerHTML = '<p class="text-red-500 text-sm">Failed to load materials.</p>';
+                        section.classList.remove('hidden');
+                    }
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // 添加到收藏按钮
+            document.getElementById('addToBankBtn').addEventListener('click', async function() {
+                const questionId = this.getAttribute('data-question-id');
+                if (!questionId) return;
+                try {
+                    const res = await fetch(`${API_BASE}/questions/${questionId}/favourite`, { method: 'PUT' });
+                    if (!res.ok) throw new Error('Failed');
+                    const q = questions.find(x => x.question_id == questionId);
+                    if (q) q.favourite = 1;
+                    alert('已添加到收藏！');
+                    document.getElementById('questionModal').classList.add('hidden');
+                } catch (err) {
+                    console.error(err);
+                    alert('添加收藏失败');
+                }
             });
             
             // 提交答案按钮
@@ -889,78 +771,147 @@ public:
             });
         });
 
+        // 从题目数据中提取并填充 Course、Year、Knowledge Point 筛选选项
+        // knowledge_point 可能为分号/逗号分隔的多值字符串，需拆分为独立选项
+        function populateQuestionFilters() {
+            const languages = [...new Set(questions.map(q => q.language).filter(Boolean))].sort();
+            const courses = [...new Set(questions.map(q => q.course_name).filter(Boolean))].sort();
+            const years = [...new Set(questions.map(q => q.source_year).filter(Boolean))].sort((a, b) => (b || '').localeCompare(a || ''));
+            const kpSet = new Set();
+            questions.forEach(q => {
+                const kp = q.knowledge_point;
+                if (!kp) return;
+                kp.split(/;\s*|,\s*/).forEach(part => {
+                    const trimmed = part.trim();
+                    if (trimmed) kpSet.add(trimmed);
+                });
+            });
+            const knowledgePoints = [...kpSet].sort();
+            const langEl = document.getElementById('languageFilter');
+            const courseEl = document.getElementById('courseFilter');
+            const yearEl = document.getElementById('yearFilter');
+            const kpEl = document.getElementById('qKnowledgeFilter');
+            langEl.innerHTML = '<option value="all">Select languages</option>' + languages.map(l => `<option value="${l}">${l}</option>`).join('');
+            courseEl.innerHTML = '<option value="all">ALL</option>' + courses.map(c => `<option value="${c}">${c}</option>`).join('');
+            yearEl.innerHTML = '<option value="all">ALL</option>' + years.map(y => `<option value="${y}">${y}</option>`).join('');
+            kpEl.innerHTML = '<option value="all">ALL</option>' + knowledgePoints.map(kp => `<option value="${kp}">${kp}</option>`).join('');
+        }
+
+        // 从课程作业数据中提取并填充 Language、Course、Knowledge Point 筛选选项
+        // knowledge_point 可能为分号/逗号分隔的多值字符串，需拆分为独立选项
+        function populateCourseworkFilters() {
+            const languages = [...new Set(courseworks.map(cw => cw.language).filter(Boolean))].sort();
+            const courses = [...new Set(courseworks.map(cw => (cw.courseName || cw.course_name || cw.course)).filter(Boolean))].sort();
+            const kpSet = new Set();
+            courseworks.forEach(cw => {
+                const kp = cw.knowledge_point;
+                if (!kp) return;
+                kp.split(/;\s*|,\s*/).forEach(part => {
+                    const trimmed = part.trim();
+                    if (trimmed) kpSet.add(trimmed);
+                });
+            });
+            const knowledgePoints = [...kpSet].sort();
+            const langEl = document.getElementById('cwLanguageFilter');
+            const courseEl = document.getElementById('cwCourseFilter');
+            const kpEl = document.getElementById('cwKnowledgeFilter');
+            langEl.innerHTML = '<option value="all">Select languages</option>' + languages.map(l => `<option value="${l}">${l}</option>`).join('');
+            courseEl.innerHTML = '<option value="all">ALL</option>' + courses.map(c => `<option value="${c}">${c}</option>`).join('');
+            kpEl.innerHTML = '<option value="all">ALL</option>' + knowledgePoints.map(kp => `<option value="${kp}">${kp}</option>`).join('');
+        }
+
+        // 从后端 API 获取题目
+        async function fetchQuestions() {
+            try {
+                const res = await fetch(`${API_BASE}/questions`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                questions = await res.json(); //将json数据转化成javascript数组
+                populateQuestionFilters();
+                renderQuestions();
+            } catch (err) {
+                console.error('Failed to fetch questions:', err);
+                document.getElementById('questionsTableBody').innerHTML =
+                    '<tr><td colspan="7" class="px-6 py-4 text-center text-red-500">Failed to load questions. Is the backend running?</td></tr>';
+            }
+        }
+
+        // 从后端 API 获取课程作业
+        async function fetchCourseworks() {
+            try {
+                const res = await fetch(`${API_BASE}/courseworks`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                courseworks = await res.json();
+                populateCourseworkFilters();
+                renderCourseworks();
+            } catch (err) {
+                console.error('Failed to fetch courseworks:', err);
+                document.getElementById('courseworkTableBody').innerHTML =
+                    '<tr><td colspan="6" class="px-6 py-4 text-center text-red-500">Failed to load courseworks. Is the backend running?</td></tr>';
+            }
+        }
+
         // 渲染题目列表
         function renderQuestions() {
             const languageFilter = document.getElementById('languageFilter').value;
             const courseFilter = document.getElementById('courseFilter').value;
             const yearFilter = document.getElementById('yearFilter').value;
-            
-            const filteredQuestions = questions.filter(question => {
-                return (languageFilter === 'all' || question.language === languageFilter) &&
-                       (courseFilter === 'all' || question.course === courseFilter) &&
-                       (yearFilter === 'all' || question.year === yearFilter);
+            const knowledgeFilter = document.getElementById('qKnowledgeFilter').value;
+
+            const filteredQuestions = questions.filter(q => {
+                if (languageFilter && languageFilter !== 'all' && q.language !== languageFilter) return false;
+                if (courseFilter && courseFilter !== 'all' && q.course_name !== courseFilter) return false;
+                if (yearFilter && yearFilter !== 'all' && q.source_year !== yearFilter) return false;
+                if (knowledgeFilter && knowledgeFilter !== 'all') {
+                    const kpParts = (q.knowledge_point || '').split(/;\s*|,\s*/).map(p => p.trim()).filter(Boolean);
+                    if (!kpParts.includes(knowledgeFilter)) return false;
+                }
+                return true;
             });
-            
+
             const tableBody = document.getElementById('questionsTableBody');
             tableBody.innerHTML = '';
-            
-            filteredQuestions.forEach(question => {
-                let statusBadge = '';
-                
-                if (question.status === 'completed') {
-                    statusBadge = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">已完成 (${question.score})</span>`;
-                } else {
-                    statusBadge = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">未完成</span>`;
-                }
-                
+
+            if (filteredQuestions.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-gray-400">No questions found</td></tr>';
+                return;
+            }
+
+            filteredQuestions.forEach(q => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${question.title}</div>
+                        <div class="text-sm font-medium text-gray-900">${q.question_code}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">${q.language || '-'}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-sm text-gray-700">${q.knowledge_point || '-'}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                            ${question.language}
+                            ${q.source_type || '-'}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${question.courseName}
+                        ${q.source_year || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${question.year}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${statusBadge}
+                        ${q.course_name || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-primary hover:text-blue-700 view-question mr-3" data-question-id="${question.id}">
+                        <button class="text-primary hover:text-blue-700 view-question mr-3" data-question-id="${q.question_id}">
                             view
-                        </button>
-                        <button class="text-green-600 hover:text-green-800 solve-question" data-question-id="${question.id}">
-                            ${question.status === 'completed' ? 'redo' : 'solve'}
                         </button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
-            
-            // 添加查看题目详情事件
+
             document.querySelectorAll('.view-question').forEach(button => {
                 button.addEventListener('click', function() {
-                    const questionId = this.getAttribute('data-question-id');
-                    showQuestionDetails(questionId);
-                });
-            });
-            
-            // 添加做题事件
-            document.querySelectorAll('.solve-question').forEach(button => {
-                button.addEventListener('click', function() {
-                    const questionId = this.getAttribute('data-question-id');
-                    const question = questions.find(q => q.id === questionId);
-                    
-                    if (question) {
-                        showSolveModal(question);
-                    }
+                    const qid = parseInt(this.getAttribute('data-question-id'));
+                    showQuestionDetails(qid);
                 });
             });
         }
@@ -969,153 +920,147 @@ public:
         function renderCourseworks() {
             const languageFilter = document.getElementById('cwLanguageFilter').value;
             const courseFilter = document.getElementById('cwCourseFilter').value;
-            const statusFilter = document.getElementById('cwStatusFilter').value;
-            
-            const filteredCourseworks = courseworks.filter(coursework => {
-                return (languageFilter === 'all' || coursework.language === languageFilter) &&
-                       (courseFilter === 'all' || coursework.course === courseFilter) &&
-                       (statusFilter === 'all' || coursework.status === statusFilter);
+            const knowledgeFilter = document.getElementById('cwKnowledgeFilter').value;
+
+            const filteredCourseworks = courseworks.filter(cw => {
+                if (languageFilter && languageFilter !== 'all' && cw.language !== languageFilter) return false;
+                const cwCourse = cw.courseName || cw.course_name || cw.course;
+                if (courseFilter && courseFilter !== 'all' && cwCourse !== courseFilter) return false;
+                if (knowledgeFilter && knowledgeFilter !== 'all') {
+                    const kpParts = (cw.knowledge_point || '').split(/;\s*|,\s*/).map(p => p.trim()).filter(Boolean);
+                    if (!kpParts.includes(knowledgeFilter)) return false;
+                }
+                return true;
             });
-            
+
             const tableBody = document.getElementById('courseworkTableBody');
             tableBody.innerHTML = '';
-            
-            filteredCourseworks.forEach(coursework => {
-                let statusBadge = '';
-                let actionButton = '';
-                
-                if (coursework.status === 'pending') {
-                    statusBadge = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">pending</span>`;
-                    actionButton = `<button class="text-primary hover:text-blue-700">submit</button>`;
-                } else if (coursework.status === 'submitted') {
-                    statusBadge = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">submitted</span>`;
-                    actionButton = `<button class="text-gray-500 cursor-not-allowed">submitted</button>`;
-                } else if (coursework.status === 'graded') {
-                    statusBadge = `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">graded (${coursework.score})</span>`;
-                    actionButton = `<button class="text-gray-500 cursor-not-allowed">view</button>`;
-                }
-                
-                // 计算截止日期
-                const today = new Date();
-                const deadline = new Date(coursework.deadline);
-                const daysLeft = Math.ceil((deadline - today) / (1000 * 60 * 60 * 24));
-                
-                let deadlineText = coursework.deadline;
-                if (daysLeft < 0) {
-                    deadlineText += `<span class="text-red-500 ml-1">overdue</span>`;
-                } else if (daysLeft <= 3) {
-                    deadlineText += `<span class="text-red-500 ml-1">${daysLeft}days left</span>`;
-                } else if (daysLeft <= 7) {
-                    deadlineText += `<span class="text-yellow-500 ml-1">${daysLeft}days left</span>`;
-                }
-                
+
+            if (filteredCourseworks.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-400">No courseworks found</td></tr>';
+                return;
+            }
+
+            filteredCourseworks.forEach(cw => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${coursework.title}</div>
+                        <div class="text-sm font-medium text-gray-900">${cw.title}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                            ${coursework.language}
+                            ${cw.language}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${coursework.courseName}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                       ${deadlineText}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${statusBadge}
+                        ${cw.courseName || cw.course_name || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        ${actionButton}
+                        <button class="text-primary hover:text-blue-700 view-coursework mr-3" data-question-id="${cw.question_id}">view</button>
+                        <button class="text-green-600 hover:text-green-800 download-coursework" data-question-id="${cw.question_id}">download</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
+
+            document.querySelectorAll('.view-coursework').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const qid = parseInt(this.getAttribute('data-question-id'));
+                    showQuestionDetails(qid);
+                });
+            });
+
+            document.querySelectorAll('.download-coursework').forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const qid = this.getAttribute('data-question-id');
+                    try {
+                        const res = await fetch(`${API_BASE}/questions/${qid}/materials`);
+                        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                        const materials = await res.json();
+                        if (materials.length === 0) {
+                            alert('暂无关联材料可下载');
+                            return;
+                        }
+                        window.location.href = `${API_BASE}/materials/${materials[0].material_id}/download`;
+                    } catch (err) {
+                        console.error(err);
+                        alert('下载失败');
+                    }
+                });
+            });
         }
 
-            // 筛选题目
+        // 筛选题目
         function filterQuestions() {
-            const languageFilter = document.getElementById('languageFilter').value;
-            const courseFilter = document.getElementById('courseFilter').value;
-            const yearFilter = document.getElementById('yearFilter').value;
-            
-            const filteredQuestions = questions.filter(q => {
-                // 如果语言筛选器有值且不匹配，则过滤掉
-                if (languageFilter && q.language !== languageFilter) return false;
-                
-                // 如果课程筛选器有值且不是"all"且不匹配，则过滤掉
-                if (courseFilter && courseFilter !== 'all' && q.course !== courseFilter) return false;
-                
-                // 如果年份筛选器有值且不是"all"且不匹配，则过滤掉
-                if (yearFilter && yearFilter !== 'all' && q.year !== yearFilter) return false;
-                
-                return true;
-            });
-            
-            renderQuestions(filteredQuestions);
+            renderQuestions();
         }
 
         // 筛选课程作业
         function filterCourseworks() {
-            const languageFilter = document.getElementById('cwLanguageFilter').value;
-            const courseFilter = document.getElementById('cwCourseFilter').value;
-            const statusFilter = document.getElementById('cwStatusFilter').value;
-            
-            const filteredCourseworks = courseworks.filter(cw => {
-                // 如果语言筛选器有值且不匹配，则过滤掉
-                if (languageFilter && cw.language !== languageFilter) return false;
-                
-                // 如果课程筛选器有值且不是"all"且不匹配，则过滤掉
-                if (courseFilter && courseFilter !== 'all' && cw.course !== courseFilter) return false;
-                
-                // 如果状态筛选器有值且不是"all"且不匹配，则过滤掉
-                if (statusFilter && statusFilter !== 'all' && cw.status !== statusFilter) return false;
-                
-                return true;
-            });
-            
-            renderCourseworks(filteredCourseworks);
+            renderCourseworks();
         }
 
-        // 渲染题目收藏库列表
+        // 从 API 获取收藏题目并渲染
+        async function fetchQuestionBank() {
+            try {
+                const res = await fetch(`${API_BASE}/questions?favourite=1`);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                questionBank = await res.json();
+                renderQuestionBank();
+            } catch (err) {
+                console.error('Failed to fetch favourites:', err);
+                const errCols = qbExportMode ? 7 : 6;
+                document.getElementById('questionBankTableBody').innerHTML =
+                    `<tr><td colspan="${errCols}" class="px-6 py-4 text-center text-red-500">加载收藏题目失败</td></tr>`;
+            }
+        }
+
+        // 渲染题目收藏库列表；按 Title(question_code) 搜索，支持连续子串匹配
         function renderQuestionBank() {
-            const searchTerm = document.getElementById('qbSearch').value.toLowerCase();
+            const searchTerm = (document.getElementById('qbSearch').value || '').trim().toLowerCase();
             
-            const filteredQuestions = questionBank.filter(question => {
-                return question.title.toLowerCase().includes(searchTerm);
+            const filteredQuestions = questionBank.filter(q => {
+                const title = (q.question_code || '').toLowerCase();
+                return !searchTerm || title.includes(searchTerm);
             });
             
             const tableBody = document.getElementById('questionBankTableBody');
             tableBody.innerHTML = '';
             
+            const colCount = qbExportMode ? 7 : 6;
+            if (filteredQuestions.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="${colCount}" class="px-6 py-4 text-center text-gray-400">暂无收藏题目</td></tr>`;
+                if (qbExportMode) document.getElementById('qbExportPdfBtn').disabled = true;
+                return;
+            }
+            
             filteredQuestions.forEach(question => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
+                const checkboxTd = qbExportMode ? `
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <input type="checkbox" class="qb-checkbox rounded border-gray-300" data-question-id="${question.question_id}">
+                    </td>` : '';
+                row.innerHTML = checkboxTd + `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${question.title}</div>
+                        <div class="text-sm font-medium text-gray-900">${question.question_code || '-'}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                            ${question.language}
+                            ${question.language || '-'}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${question.courseName}
+                        ${question.course_name || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${question.year}
+                        ${question.source_year || '-'}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        ${question.addedDate}
-                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-primary hover:text-blue-700 mr-3 solve-question" data-question-title="${question.title}">
-                            solve
+                        <button class="text-primary hover:text-blue-700 mr-3 view-favourite-question" data-question-id="${question.question_id}">
+                            view
                         </button>
-                        <button class="text-red-600 hover:text-red-800">
+                        <button class="text-red-600 hover:text-red-800 remove-favourite" data-question-id="${question.question_id}">
                             delete
                         </button>
                     </td>
@@ -1123,89 +1068,102 @@ public:
                 tableBody.appendChild(row);
             });
             
-            // 添加做题事件
-            document.querySelectorAll('.solve-question').forEach(button => {
-                button.addEventListener('click', function() {
-                    const questionTitle = this.getAttribute('data-question-title');
-                    const question = questions.find(q => q.title === questionTitle);
-                    
-                    if (question) {
-                        showSolveModal(question);
-                    } else {
-                        alert('There exits no question');
+            document.querySelectorAll('.view-favourite-question').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const qid = parseInt(this.getAttribute('data-question-id'));
+                    showQuestionDetails(qid, true);
+                });
+            });
+            
+            document.querySelectorAll('.remove-favourite').forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const qid = this.getAttribute('data-question-id');
+                    try {
+                        const res = await fetch(`${API_BASE}/questions/${qid}/favourite`, { method: 'DELETE' });
+                        if (!res.ok) throw new Error('Failed');
+                        questionBank = questionBank.filter(q => q.question_id != qid);
+                        const q = questions.find(x => x.question_id == qid);
+                        if (q) q.favourite = 0;
+                        renderQuestionBank();
+                    } catch (err) {
+                        console.error(err);
+                        alert('取消收藏失败');
                     }
                 });
             });
+            
+            if (qbExportMode) {
+                updateQbExportState();
+                document.querySelectorAll('.qb-checkbox').forEach(cb => cb.addEventListener('change', updateQbExportState));
+                const selectAll = document.getElementById('qbSelectAll');
+                if (selectAll) {
+                    selectAll.checked = false;
+                    selectAll.onclick = function() {
+                        const checked = this.checked;
+                        document.querySelectorAll('.qb-checkbox').forEach(cb => { cb.checked = checked; });
+                        updateQbExportState();
+                    };
+                }
+            }
+        }
+        
+        function updateQbExportState() {
+            const btn = document.getElementById('qbExportPdfBtn');
+            const count = document.querySelectorAll('.qb-checkbox:checked').length;
+            btn.disabled = count === 0;
+            const selectAll = document.getElementById('qbSelectAll');
+            if (selectAll) {
+                const total = document.querySelectorAll('.qb-checkbox').length;
+                selectAll.checked = total > 0 && count === total;
+                selectAll.indeterminate = count > 0 && count < total;
+            }
         }
 
-        // 显示题目详情
-        function showQuestionDetails(questionId) {
-            const question = questions.find(q => q.id === questionId);
-            
+        // 显示题目详情；fromFavourites=true 时（从 Question Bank 进入）隐藏“添加到收藏”按钮
+        function showQuestionDetails(questionId, fromFavourites) {
+            const question = questions.find(q => q.question_id === questionId) || questionBank.find(q => q.question_id === questionId);
             if (!question) return;
-            
-            document.getElementById('modalTitle').textContent = question.title;
-            
+
+            document.getElementById('modalTitle').textContent = question.question_code;
+
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
                 <div class="mb-4">
-                    <div class="flex flex-wrap gap-2 mb-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
                         <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                            ${question.language}
+                            ${question.source_type || '-'}
                         </span>
                         <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                            ${question.courseName}
+                            ${question.course_name || '-'}
                         </span>
                         <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
-                            ${question.year}
+                            ${question.source_year || '-'}
                         </span>
+                        ${question.knowledge_point ? `<span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">${question.knowledge_point}</span>` : ''}
                     </div>
-                    <h4 class="font-medium text-gray-800 mb-2">Description of Question</h4>
-                    <p class="text-gray-700 whitespace-pre-line">${question.description}</p>
+                    <h4 class="font-medium text-gray-800 mb-2">Question</h4>
+                    <p class="text-gray-700 whitespace-pre-line">${question.question_text}</p>
                 </div>
-                
-                ${question.status === 'completed' ? `
+                ${question.answer_text ? `
                 <div class="mb-4">
-                    <h4 class="font-medium text-gray-800 mb-2">Your score</h4>
-                    <div class="flex items-center">
-                        <div class="text-3xl font-bold text-primary">${question.score}</div>
-                        <div class="text-gray-500 ml-1">/100</div>
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <h4 class="font-medium text-gray-800 mb-2">Solution</h4>
+                    <h4 class="font-medium text-gray-800 mb-2">Answer</h4>
                     <div class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">
-                        <pre><code>${question.solution}</code></pre>
+                        <pre><code>${question.answer_text}</code></pre>
                     </div>
+                </div>` : ''}
+                <div id="materialsSection" class="mt-4 hidden">
+                    <h4 class="font-medium text-gray-800 mb-2">Related Materials</h4>
+                    <div id="materialsList" class="space-y-2"></div>
                 </div>
-                
-                <div>
-                    <h4 class="font-medium text-gray-800 mb-2">Explanation</h4>
-                    <p class="text-gray-700">${question.explanation}</p>
-                    <div class="mt-2">
-                        <span class="text-sm font-medium text-gray-800">KnowledgePoint：</span>
-                        <span class="text-sm text-primary">${question.knowledgePoint}</span>
-                    </div>
-                </div>
-                ` : ''}
             `;
-            
-            // 设置添加到收藏按钮的题目ID
-            document.getElementById('addToBankBtn').setAttribute('data-question-id', question.id);
-            
-            // 设置提交答案按钮的题目ID
-            document.getElementById('submitAnswerBtn').setAttribute('data-question-id', question.id);
-            
-            // 如果题目已完成，隐藏提交答案按钮
-            if (question.status === 'completed') {
-                document.getElementById('submitAnswerBtn').textContent = 'redo';
-                document.getElementById('submitAnswerBtn').innerHTML = '<i class="fa fa-refresh mr-1"></i> redo';
-            } else {
-                document.getElementById('submitAnswerBtn').innerHTML = '<i class="fa fa-paper-plane mr-1"></i> submit Answer';
-            }
-            
-            // 显示模态框
+
+            document.getElementById('viewMaterialsBtn').setAttribute('data-question-id', question.question_id);
+            document.getElementById('addToBankBtn').setAttribute('data-question-id', question.question_id);
+            document.getElementById('submitAnswerBtn').setAttribute('data-question-id', question.question_id);
+            const addToBankBtn = document.getElementById('addToBankBtn');
+            addToBankBtn.style.display = fromFavourites ? 'none' : '';
+            const materialsSection = document.getElementById('materialsSection');
+            if (materialsSection) materialsSection.classList.add('hidden');
             document.getElementById('questionModal').classList.remove('hidden');
         }
 
