@@ -69,6 +69,22 @@ def run_seed():
                         )
                     """
                     cursor.execute(sql, (row['question_code'].strip(), row['material_code'].strip()))
+            # ==========================================
+            # 5. 读取并导入 users.csv 
+            # ==========================================
+            print("⏳ 正在导入用户表 (Users)...")
+            try:
+                with open('database_templates/users.csv', 'r', encoding='utf-8-sig') as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        sql = "INSERT IGNORE INTO Users (username, email, password_hash) VALUES (%s, %s, %s)"
+                        cursor.execute(sql, (
+                            row['username'].strip(), 
+                            row['email'].strip(), 
+                            row['password_hash'].strip()
+                        ))
+            except FileNotFoundError:
+                print("⚠️ 未找到 users.csv，跳过用户数据导入。")
 
             connection.commit()
             print("🎉 数据同步成功！")
