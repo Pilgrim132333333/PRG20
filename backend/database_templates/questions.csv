@@ -1,5 +1,5 @@
 ﻿question_code,source_year,source_type,knowledge_point,question_text,answer_text,image_path
-PGA-LAB02-Q01,2024,Lab Worksheet,"Floating-point types, input/output, math functions, variable declaration, arithmetic operations, sequential structure","Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
+PGA-LAB02-Q01,2024,Lab Worksheet,"Type, Fundamental, Functions 1, Overview, Data Types and Conversions, Functions","Using the existing right-angled triangle program as an example, write a program which takes two floating-point numbers from the user which represent the lengths of the two shortest sides of a right-angled triangle. The program should then calculate and print the length of the longest side.","#include <stdio.h>
 #include <math.h>
 
 int main() {
@@ -17,7 +17,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB02-Q02,2024,Lab Worksheet,"Conditional statements (if-else), relational operators, input/output, variable declaration ","Using the JTWC Tropical Typhoon intensity scale, write a program which takes wind-speed as input and outputs the classification of intensity (eg, typhoon, violent typhoon, etc).
+PGA-LAB02-Q02,2024,Lab Worksheet,"Selection, Operators, Fundamental, Type, Control and Iteration, Data Types and Conversions","Using the JTWC Tropical Typhoon intensity scale, write a program which takes wind-speed as input and outputs the classification of intensity (eg, typhoon, violent typhoon, etc).
 
 Intensity Class Wind speed (km/h)
 
@@ -53,7 +53,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB02-Q03,2024,Lab Worksheet,"Loops (for), arithmetic operations, output formatting (tabs), integer variables","(Textbook 2.31) (Table of Squares and Cubes) Using only the techniques you learned in this chapter, write
+PGA-LAB02-Q03,2024,Lab Worksheet,"Iteration, Fundamental, Type, Control and Iteration, Data Types and Conversions","(Textbook 2.31) (Table of Squares and Cubes) Using only the techniques you learned in this chapter, write
 a program that calculates the squares and cubes of the numbers from 0 to 10 and uses tabs to print
 the following table of values","#include <stdio.h>
 
@@ -68,7 +68,7 @@ int main() {
 
     return 0;
 }",pga_lab_w02_q02.pdf
-PGA-LAB02-Q04,2024,Lab Worksheet,"nteger division, remainder operator, input/output, integer variables, output formatting","(Textbook 2.30)(Separating Digits in an Integer) Write a program that inputs one five-digit number, separates the number into its individual digits and prints the digits separated from one another by three spaces each. [Hint: Use combinations of integer division and the remainder operation.] For example, if the user types in 42139, the program should print:4   2   1  3  9","#include <stdio.h>
+PGA-LAB02-Q04,2024,Lab Worksheet,"Fundamental, Type, Iteration, Data Types and Conversions, Control and Iteration","(Textbook 2.30)(Separating Digits in an Integer) Write a program that inputs one five-digit number, separates the number into its individual digits and prints the digits separated from one another by three spaces each. [Hint: Use combinations of integer division and the remainder operation.] For example, if the user types in 42139, the program should print:4   2   1  3  9","#include <stdio.h>
 
 int main() {
     int number;
@@ -89,7 +89,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB02-Q05,2024,Lab Worksheet,"Integer division, remainder operator, input/output, integer variables, formatted output","(Textbook 2.20)(Converting from seconds to hours, minutes and seconds) Write a program that asks the user to enter the total time elapsed, in seconds, since an event and converts the time to hours, minutes and seconds. The time should be displayed as hours:minutes:seconds. [Hint: Use the remainder operator]","#include <stdio.h>
+PGA-LAB02-Q05,2024,Lab Worksheet,"Fundamental, Type, Iteration, Data Types and Conversions, Control and Iteration","(Textbook 2.20)(Converting from seconds to hours, minutes and seconds) Write a program that asks the user to enter the total time elapsed, in seconds, since an event and converts the time to hours, minutes and seconds. The time should be displayed as hours:minutes:seconds. [Hint: Use the remainder operator]","#include <stdio.h>
 
 int main() {
     int total_seconds, hours, minutes, seconds;
@@ -108,7 +108,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB02-Q06,2024,Lab Worksheet,"Character constants, integer representation, printf format specifier, ASCII","(Textbook 2.29) (Integer Value of a Character) Here’s a peek ahead. In this chapter you learned about integers and the type int. C can also represent uppercase letters, lowercase letters and a considerable variety of special symbols. C uses small integers internally to represent each different character. The set of characters a computer uses together with the corresponding integer representations for those characters is called that computer’s character set. You can print the integer equivalent of uppercase A, for example, by executing the statement 
+PGA-LAB02-Q06,2024,Lab Worksheet,"Fundamental, Type, Characters and Strings, Data Types and Conversions","(Textbook 2.29) (Integer Value of a Character) Here’s a peek ahead. In this chapter you learned about integers and the type int. C can also represent uppercase letters, lowercase letters and a considerable variety of special symbols. C uses small integers internally to represent each different character. The set of characters a computer uses together with the corresponding integer representations for those characters is called that computer’s character set. You can print the integer equivalent of uppercase A, for example, by executing the statement 
 printf( ""%d"", 'A' ); 
 Write a C program that prints the integer equivalents of some uppercase letters, lowercase letters, digits and special symbols. As a minimum, determine the integer equivalents of the following:
 A B C a b c 0 1 2 $ * + / and the blank character.","#include <stdio.h>
@@ -143,7 +143,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB03-Q01,2024,Lab Worksheet,"Nested loops (for), input/output, integer variables ","(Textbook 3.32) (Square of Asterisks) Write a program that reads in the side of a square and then prints that square out of asterisks. Your program should work for squares of all side sizes between 1 and 20. For example, if your program reads a size of 4, it should print","#include <stdio.h>
+PGA-LAB03-Q01,2024,Lab Worksheet,"Iteration, Fundamental, Type, Control and Iteration, Data Types and Conversions","(Textbook 3.32) (Square of Asterisks) Write a program that reads in the side of a square and then prints that square out of asterisks. Your program should work for squares of all side sizes between 1 and 20. For example, if your program reads a size of 4, it should print","#include <stdio.h>
 
 int main() {
     int side;
@@ -162,7 +162,7 @@ int main() {
 
     return 0;
 }",pga_lab_w03_q01.pdf
-PGA-LAB03-Q02,2024,Lab Worksheet,"Nested loops, conditional statements (if-else), input/output, integer variables","(Textbook 3.33)(Hollow Square of Asterisks) Modify the program you wrote in Exercise 3.32 so that it prints a hollow square. For example, if your program reads a size of 5, it should print","#include <stdio.h>
+PGA-LAB03-Q02,2024,Lab Worksheet,"Iteration, Selection, Fundamental","(Textbook 3.33)(Hollow Square of Asterisks) Modify the program you wrote in Exercise 3.32 so that it prints a hollow square. For example, if your program reads a size of 5, it should print","#include <stdio.h>
 
 int main() {
     int side;
@@ -186,7 +186,7 @@ int main() {
 
     return 0;
 }",pga_lab_w03_q02.pdf
-PGA-LAB03-Q03,2024,Lab Worksheet,"Loops (while), floating-point arithmetic, input/output, conditional statements (if), sentinel-controlled repetition ","(Textbook 3.18)(Sales-Commission Calculator) One large chemical company pays its salespeople on a com mission basis. The salespeople receive $200 per week plus 9% of their gross sales for that week. For example, a salesperson who sells $5000 worth of chemicals in a week receives $200 plus 9% of $5000, or a total of $650. Develop a program that will input each salesperson’s gross sales for last week and will calculate and display that salesperson’s earnings. Process one salesperson's figures at a time. Here is a sample input/output dialog:","#include <stdio.h>
+PGA-LAB03-Q03,2024,Lab Worksheet,"Iteration, Fundamental, Type","(Textbook 3.18)(Sales-Commission Calculator) One large chemical company pays its salespeople on a com mission basis. The salespeople receive $200 per week plus 9% of their gross sales for that week. For example, a salesperson who sells $5000 worth of chemicals in a week receives $200 plus 9% of $5000, or a total of $650. Develop a program that will input each salesperson’s gross sales for last week and will calculate and display that salesperson’s earnings. Process one salesperson's figures at a time. Here is a sample input/output dialog:","#include <stdio.h>
 
 int main() {
     float sales, salary;
@@ -210,7 +210,7 @@ int main() {
 
     return 0;
 }",pga_lab_w03_q03.pdf
-PGA-LAB03-Q04,2024,Lab Worksheet,"Nested loops, incrementing counter, output formatting, integer variables","(Textbook 3.34(Floyd's Triangle) Floyd’s Triangle is a right-angled triangular array of natural numbers. It is defined by filling rows with consecutive integers. Thus, row 1 will have the number 1, row 2 will have the numbers 2 and 3, and so on. Write a program that draws a 10-line Floyd’s triangle. An outer loop can control the number of lines to be printed and an inner loop can ensure that each row contains the correct number of integers.","#include <stdio.h>
+PGA-LAB03-Q04,2024,Lab Worksheet,"Iteration, Fundamental, Type","(Textbook 3.34(Floyd's Triangle) Floyd’s Triangle is a right-angled triangular array of natural numbers. It is defined by filling rows with consecutive integers. Thus, row 1 will have the number 1, row 2 will have the numbers 2 and 3, and so on. Write a program that draws a 10-line Floyd’s triangle. An outer loop can control the number of lines to be printed and an inner loop can ensure that each row contains the correct number of integers.","#include <stdio.h>
 
 int main() {
     int number = 1; // Starting number for Floyd's triangle
@@ -227,7 +227,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB03-Q05,2024,Lab Worksheet,"Integer input, loops (while), division and remainder operators, positional values, binary-to-decimal conversion ","(Textbook 3.35)(Printing the Decimal Equivalent of a Binary Number) Input an integer (5 digits or fewer) containing only 0s and 1s (i.e., a “binary” integer) and print its decimal equivalent. [Hint: Use the re mainder and division operators to pick off the “binary” number’s digits one at a time from right to left. Just as in the decimal number system, in which the rightmost digit has a positional value of 1, and the next digit left has a positional value of 10, then 100, then 1000, and so on, in the binary number sys tem the rightmost digit has a positional value of 1, the next digit left has a positional value of 2, then 4, then 8, and so on. Thus the decimal number 234 can be interpreted as 4 * 1 + 3 * 10 + 2 * 100. The decimal equivalent of binary 1101 is 1 * 1 + 0 * 2 + 1 * 4 + 1 * 8 or 1 + 0 + 4 + 8 or 13.]","#include <stdio.h>
+PGA-LAB03-Q05,2024,Lab Worksheet,"Iteration, Fundamental, Type","(Textbook 3.35)(Printing the Decimal Equivalent of a Binary Number) Input an integer (5 digits or fewer) containing only 0s and 1s (i.e., a “binary” integer) and print its decimal equivalent. [Hint: Use the re mainder and division operators to pick off the “binary” number’s digits one at a time from right to left. Just as in the decimal number system, in which the rightmost digit has a positional value of 1, and the next digit left has a positional value of 10, then 100, then 1000, and so on, in the binary number sys tem the rightmost digit has a positional value of 1, the next digit left has a positional value of 2, then 4, then 8, and so on. Thus the decimal number 234 can be interpreted as 4 * 1 + 3 * 10 + 2 * 100. The decimal equivalent of binary 1101 is 1 * 1 + 0 * 2 + 1 * 4 + 1 * 8 or 1 + 0 + 4 + 8 or 13.]","#include <stdio.h>
 
 int main() {
     int binary, decimal = 0, base = 1, remainder;
@@ -250,7 +250,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB03-Q06,2024,Lab Worksheet,"Integer input/output, division and remainder operators, arithmetic operations, variable assignment, swapping","(Textbook 3.48) (Enforcing Privacy with Cryptography) The explosive growth of Internet communications and data storage on Internet-connected computers has greatly increased privacy concerns. The field of cryptography is concerned with coding data to make it difficult (and hopefully—with the most advanced schemes—impossible) for unauthorized users to read. In this exercise you’ll investigate a simple scheme for encrypting and decrypting data. A company that wants to send data over the In ternet has asked you to write a program that will encrypt it so that it may be transmitted more se curely. All the data is transmitted as four-digit integers. Your application should read a four-digit integer entered by the user and encrypt it as follows: Replace each digit with the result of adding 7 to the digit and getting the remainder after dividing the new value by 10. Then swap the first digit with the third, and swap the second digit with the fourth. Then print the encrypted integer. Write a separate application that inputs an encrypted four-digit integer and decrypts it (by reversing the encryption scheme) to form the original number. [Optional reading project: In industrial-strength applications, you’ll want to use much stronger encryption techniques than presented in this exercise. Research “public key cryptography” in general and the PGP (Pretty Good Privacy) specific public key scheme. You may also want to investigate the RSA scheme, which is widely used in industrial strength applications.]","#include <stdio.h>
+PGA-LAB03-Q06,2024,Lab Worksheet,"Fundamental, Type, Iteration","(Textbook 3.48) (Enforcing Privacy with Cryptography) The explosive growth of Internet communications and data storage on Internet-connected computers has greatly increased privacy concerns. The field of cryptography is concerned with coding data to make it difficult (and hopefully—with the most advanced schemes—impossible) for unauthorized users to read. In this exercise you’ll investigate a simple scheme for encrypting and decrypting data. A company that wants to send data over the In ternet has asked you to write a program that will encrypt it so that it may be transmitted more se curely. All the data is transmitted as four-digit integers. Your application should read a four-digit integer entered by the user and encrypt it as follows: Replace each digit with the result of adding 7 to the digit and getting the remainder after dividing the new value by 10. Then swap the first digit with the third, and swap the second digit with the fourth. Then print the encrypted integer. Write a separate application that inputs an encrypted four-digit integer and decrypts it (by reversing the encryption scheme) to form the original number. [Optional reading project: In industrial-strength applications, you’ll want to use much stronger encryption techniques than presented in this exercise. Research “public key cryptography” in general and the PGP (Pretty Good Privacy) specific public key scheme. You may also want to investigate the RSA scheme, which is widely used in industrial strength applications.]","#include <stdio.h>
 
 int main(void)
 {
@@ -289,7 +289,7 @@ int main(void)
 		
     return 0;
 }",
-PGA-LAB03-Q07,2024,Lab Worksheet ,"Loops (do-while), menu display, user input, switch/if-else selection, integer arithmetic, input/output","menu driven calculator: Write a program which displays a text-based menu to the user, allowing them to choose between 3 mathematical operations on numbers. Option 1 should ask for 2 numbers and add them; Option 2 should ask for 2 numbers and multiply them; Option 3 should ask for 2 numbers and calculate the modulus. Option 4 should exit the program. After the operation is complete, the menu show be shown again to allow the user to select another option. The input numbers should be integers but the results should be real numbers if necessary."," #include <stdio.h>
+PGA-LAB03-Q07,2024,Lab Worksheet ,"Iteration, Selection, Fundamental, Type, Control and Iteration, Functions","menu driven calculator: Write a program which displays a text-based menu to the user, allowing them to choose between 3 mathematical operations on numbers. Option 1 should ask for 2 numbers and add them; Option 2 should ask for 2 numbers and multiply them; Option 3 should ask for 2 numbers and calculate the modulus. Option 4 should exit the program. After the operation is complete, the menu show be shown again to allow the user to select another option. The input numbers should be integers but the results should be real numbers if necessary."," #include <stdio.h>
 
 int main() {
     int choice;
@@ -339,7 +339,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB03-Q08,2024,Lab Worksheet,"Arrays, loops (for), input/output, bubble sort, descending order","Create a program which reads in a sequence of numbers, sorts them into decending order, and prints the numbers in that order. The program should read an integer from the user which is the number of numbers that the program will then read in and sort. The program then reads in that number of integers into an array of the appropriate size. The program should then sort the array into decending numerical order. Finally, the program should print out these numbers from the array in decending order. See section 6.8 of the textbook for a simple sorting algorithm (Bubblesort) that you can modify for your program and use to sort an array of numbers. An example of the program running: zlizpd3$ ./array-sort-nums Enter number of marks: 5 Enter mark 1: 34 Enter mark 2: -16 Enter mark 3: 4 Enter mark 4: 870 Enter mark 5: 77                 870 77 34 4 -16","#include <stdio.h>
+PGA-LAB03-Q08,2024,Lab Worksheet,"Arrays, Iteration, Simple Algorithms","Create a program which reads in a sequence of numbers, sorts them into decending order, and prints the numbers in that order. The program should read an integer from the user which is the number of numbers that the program will then read in and sort. The program then reads in that number of integers into an array of the appropriate size. The program should then sort the array into decending numerical order. Finally, the program should print out these numbers from the array in decending order. See section 6.8 of the textbook for a simple sorting algorithm (Bubblesort) that you can modify for your program and use to sort an array of numbers. An example of the program running: zlizpd3$ ./array-sort-nums Enter number of marks: 5 Enter mark 1: 34 Enter mark 2: -16 Enter mark 3: 4 Enter mark 4: 870 Enter mark 5: 77                 870 77 34 4 -16","#include <stdio.h>
 
 int main() {
     int n;
@@ -377,7 +377,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB04-Q01,2024,Lab Worksheet,"Arrays, nested loops, input/output, conditional statements, set intersection ",(Textbook 6.15)Write a program to work out the intersection of two sets of 10 integers entered by the user. Don't waste space by having unnecessarily large arrays but don't worry about working out the smallest theoretical array size to use.,"#include <stdio.h>
+PGA-LAB04-Q01,2024,Lab Worksheet,"Arrays, Iteration, Simple Algorithms",(Textbook 6.15)Write a program to work out the intersection of two sets of 10 integers entered by the user. Don't waste space by having unnecessarily large arrays but don't worry about working out the smallest theoretical array size to use.,"#include <stdio.h>
 
 int main() {
     int set1[10], set2[10];
@@ -435,7 +435,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB04-Q02,2024,Lab Worksheet,"Arrays, nested loops, input/output, bubble sort, selection sort, variable swapping","Bubble sort and Selection sort
+PGA-LAB04-Q02,2024,Lab Worksheet,"Arrays, Iteration, Simple Algorithms","Bubble sort and Selection sort
 Write two programs to implement bubble sort and selection sort respectively. The programs should sort the array of integers entered by the user.","#include <stdio.h>
 
 int main() {
@@ -505,7 +505,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB04-Q03,2024,Lab Worksheet,"2D arrays, characters, nested loops, output formatting ","2D text canvas
+PGA-LAB04-Q03,2024,Lab Worksheet,"Arrays, Iteration, Fundamental, Simple Algorithms","2D text canvas
 We could have a 2D array of chars that represents the characters we want to show on the screen. We could then ""draw"" things into that array by changing the char values at different elements in the array. We could then ""display"" that array by printing each of the characters out to fill up the screen. Try implementing this idea and play around with drawing to the array then using printf to print the entire array.","#include <stdio.h>
 
 #define ROWS 10
@@ -551,7 +551,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB04-Q04,2024,Lab Worksheet,"Arrays, loops (for/while), conditional statements, input validation, variable storage, arithmetic operations, even/odd check","Array operation
+PGA-LAB04-Q04,2024,Lab Worksheet,"Arrays, Iteration, Fundamental, Type, Control and Iteration, Data Types and Conversions","Array operation
 Write a program that allows the user to enter several numbers into an array and print out the even-valued numbers.
 
 The program should start by asking the user to enter how many numbers they are going to input, using the prompt ""Enter number of values: "". This input must be an integer greater than zero. If it is not greater than zero then the program should print the error message ""Invalid array length!"" and then prompt ""Enter a positive number: "" and keep reading values until a positive number is entered. The program should create an int array of that length.
@@ -626,7 +626,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB05-Q01,2024,Lab Worksheet,"Function definition (parameters/return value), double data type, math functions (sqrt), input/output, function calls",(Textbook 5.15)(Hypotenuse Calculations) Define a function called hypotenuse that calculates the length of the hypotenuse of a right triangle when the other two sides are given. The function should take two arguments of type double and return the hypotenuse as a double. Test your program with the side values specified in Fig. 5.22.,"#include <stdio.h>
+PGA-LAB05-Q01,2024,Lab Worksheet,"Functions 1, Type",(Textbook 5.15)(Hypotenuse Calculations) Define a function called hypotenuse that calculates the length of the hypotenuse of a right triangle when the other two sides are given. The function should take two arguments of type double and return the hypotenuse as a double. Test your program with the side values specified in Fig. 5.22.,"#include <stdio.h>
 #include <math.h>
 
 // Function to calculate hypotenuse
@@ -654,7 +654,7 @@ int main() {
 
     return 0;
 }",pga_lab_w05_q01.pdf
-PGA-LAB05-Q02,2024,Lab Worksheet,"Function definition, remainder operator, integer arguments, return value, loops, input/output","(Textbook 5.18) (Even or Odd) Write a program that inputs a series of integers and passes them one at a time to function isEven, which uses the remainder operator to determine whether an integer is even. The function should take an integer argument and return 1 if the integer is even and 0 otherwise. ","#include <stdio.h>
+PGA-LAB05-Q02,2024,Lab Worksheet,"Functions 1, Type","(Textbook 5.18) (Even or Odd) Write a program that inputs a series of integers and passes them one at a time to function isEven, which uses the remainder operator to determine whether an integer is even. The function should take an integer argument and return 1 if the integer is even and 0 otherwise. ","#include <stdio.h>
 
 // Function to determine if an integer is even
 int isEven(int num) {
@@ -684,7 +684,7 @@ int main() {
     printf(""Program terminated.\n"");
     return 0;
 }",
-PGA-LAB05-Q03,2024,Lab Worksheet,"Function definition, array parameters, loops, comparison operations, return value","Maximum of an array
+PGA-LAB05-Q03,2024,Lab Worksheet,"Functions 1, Arrays","Maximum of an array
 Write a function max_array which takes an integer array as a parameter and returns the maximum value in the array. Remember that an array cannot tell you how long it is, so the function will need a second parameter, the length of the array!","#include <stdio.h>
 
 // Function to find maximum value in an array
@@ -725,7 +725,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB05-Q04,2024,Lab Worksheet,"Recursive function, function definition, parameters, return value, base case, exponentiation","(Textbook 5.34)(Recursive Exponentiation) Write a recursive function power(base, exponent) that when invoked returns baseexponent For example, power(3, 4) = 3 * 3 * 3 * 3. Assume that exponent is an integer greater than or equal to 1. Hint: The recursion step would use the relationship baseexponent = base * baseexponent–1 and the terminating condition occurs when exponent is equal to 1 because base1 = base","#include <stdio.h>
+PGA-LAB05-Q04,2024,Lab Worksheet,"Functions 2, Functions 1","(Textbook 5.34)(Recursive Exponentiation) Write a recursive function power(base, exponent) that when invoked returns baseexponent For example, power(3, 4) = 3 * 3 * 3 * 3. Assume that exponent is an integer greater than or equal to 1. Hint: The recursion step would use the relationship baseexponent = base * baseexponent–1 and the terminating condition occurs when exponent is equal to 1 because base1 = base","#include <stdio.h>
 
 // Recursive function to compute base^exponent (exponent >= 1)
 int power(int base, int exponent) {
@@ -753,7 +753,7 @@ int main() {
 
     return 0;
 }",pga_lab_w05_q04.pdf
-PGA-LAB05-Q05,2024,Lab Worksheet,"Recursive function, iterative loop, function definition, input/output, base case","Fibonacci number implementations
+PGA-LAB05-Q05,2024,Lab Worksheet,"Iteration, Functions 2","Fibonacci number implementations
 In mathematics, the Fibonacci numbers, also called the Fibonacci sequence, form a sequence such that each number is the sum of the two preceding ones, starting from 0 and 1. The beginning of the sequence is thus: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, … Write two functions to implement fibonacci sequence. When the user enters a positive number X, the function should compute the Fibonacci number at X position in the sequence. One function should calculate it iteratively, the other should calculate it recursively (See textbook and lecture slides for examples of recursion).","#include <stdio.h>
 
 // Iterative function to compute Fibonacci number
@@ -795,7 +795,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB06-Q01,2024,Lab Worksheet,"Arrays, function definition, parameters, recursion, iteration, loops, comparison operations, search algorithms ","Searching an array
+PGA-LAB06-Q01,2024,Lab Worksheet,"Arrays, Iteration, Functions 2","Searching an array
 Write a function to search an array of integers for a target integer. The function could be implemented iteratively or recursively. For the latter, you'd better pass a start and end parameter to the search function to keep track of the start and end section of the array you are searching in, rather than try to actually remove numbers from the array.","#include <stdio.h>
 
 // Iterative linear search
@@ -863,7 +863,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB06-Q02,2024,Lab Worksheet,"String arrays, random number generation, loops, conditional statements, character handling, input/output, game logic","Word-guessing game
+PGA-LAB06-Q02,2024,Lab Worksheet,"Arrays, Characters and Strings, Iteration, Selection, Fundamental, Strings and Debugging","Word-guessing game
 You are to write a program to implement a simple word guessing game. Given a list of words, 1 word is randomly selected and then the each letter of the word is displayed as underscore characters '_'. The user can guess a letter and if that letter is in the word then the appropriate underscores are replaced with that letter. If the letter is not in the word then the player loses 1 life. The player has 5 lives in total and the game is over when lives reach zero.
 
 The aim of the game is to guess the word. If the user thinks they know the word then, instead of entering an individual character, they can enter an entire word. If the word is correct they win the game. If the word is wrong then they lose a life.
@@ -1049,7 +1049,7 @@ int main(){
    
     exit(1);
 }",
-PGA-LAB06-Q03,2024,Lab Worksheet,"String arrays, random number generation, loops, conditional statements, character handling, input/output, game logic, ASCII art drawing","Hangman
+PGA-LAB06-Q03,2024,Lab Worksheet,"Iteration, Selection, Arrays, Characters and Strings, Fundamental, Strings and Debugging","Hangman
 The word guessing game above is based on the British game Hangman. In this game, the process of playing the game is exactly the same but as well as writing out the current state of the word, the computer should draw a man hanging from a gallows. As the player gets guesses wrong, more and more of the body of the man is drawn. When the entire body is draw, the player has lost all their lives and the game is over. An example can be seen on the Wikipedia page.","#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1219,7 +1219,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB07-Q01,2024,Lab Worksheet,"Character arrays, string input/output, loops, character case conversion (toupper/tolower), alternating logic",(Textbook 8.6)(Displaying Strings in Alternating Uppercase and Lowercase) Write a program that inputs a line of text into char array s[100]. Output the line in alternate uppercase letters and lowercase letters.,"#include <stdio.h>
+PGA-LAB07-Q01,2024,Lab Worksheet,"Characters and Strings, Iteration, Fundamental, Strings and Debugging",(Textbook 8.6)(Displaying Strings in Alternating Uppercase and Lowercase) Write a program that inputs a line of text into char array s[100]. Output the line in alternate uppercase letters and lowercase letters.,"#include <stdio.h>
 #include <ctype.h>
 
 int main() {
@@ -1247,7 +1247,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB07-Q02,2024,Lab Worksheet,"String input, string-to-integer conversion (atoi/strtol), integer arithmetic, loops, arrays ","(Textbook 2.31)(Converting Strings to Integers for Calculations) Write a program that inputs six strings that represent integers, converts the strings to integers, and calculates the sum and average of the six values.","#include <stdio.h>
+PGA-LAB07-Q02,2024,Lab Worksheet,"Characters and Strings, Fundamental, Strings and Debugging","(Textbook 2.31)(Converting Strings to Integers for Calculations) Write a program that inputs six strings that represent integers, converts the strings to integers, and calculates the sum and average of the six values.","#include <stdio.h>
 #include <stdlib.h>
 
 int main() {
@@ -1270,7 +1270,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB07-Q03,2024,Lab Worksheet,"ointer arrays (array of strings), random number generation (rand/srand), string concatenation (strcat), loops, character handling (capitalization), arrays","(Textbook 8.11)(Random Sentences) Write a program that uses random-number generation to create sen tences. The program should use four arrays of pointers to char called article, noun, verb and prep osition. The program should create a sentence by selecting a word at random from each array in the following order: article, noun, verb, preposition, article and noun. As each word is picked, it should be concatenated to the previous words in an array large enough to hold the entire sentence. The words should be separated by spaces. When the final sentence is output, it should start with a capital letter and end with a period. The program should generate 20 such sentences. The arrays should be filled as follows: The article array should contain the articles ""the"", ""a"", ""one"", ""some"" and ""any""; the noun array should contain the nouns ""boy"", ""girl"", ""dog"", ""town"" and ""car""; the verb array should contain the verbs ""drove"", ""jumped"", ""ran"", ""walked"" and ""skipped""; the prep osition array should contain the prepositions ""to"", ""from"", ""over"", ""under"" and ""on"". After the preceding program is written and working, modify it to produce a short story con sisting of several of these sentences. (How about the possibility of a random term-paper writer?)","#include <stdio.h>
+PGA-LAB07-Q03,2024,Lab Worksheet,"Pointer 2, Characters and Strings, Functions 1, Iteration, Selection, Fundamental, Strings and Debugging, Pointers and Arrays","(Textbook 8.11)(Random Sentences) Write a program that uses random-number generation to create sen tences. The program should use four arrays of pointers to char called article, noun, verb and prep osition. The program should create a sentence by selecting a word at random from each array in the following order: article, noun, verb, preposition, article and noun. As each word is picked, it should be concatenated to the previous words in an array large enough to hold the entire sentence. The words should be separated by spaces. When the final sentence is output, it should start with a capital letter and end with a period. The program should generate 20 such sentences. The arrays should be filled as follows: The article array should contain the articles ""the"", ""a"", ""one"", ""some"" and ""any""; the noun array should contain the nouns ""boy"", ""girl"", ""dog"", ""town"" and ""car""; the verb array should contain the verbs ""drove"", ""jumped"", ""ran"", ""walked"" and ""skipped""; the prep osition array should contain the prepositions ""to"", ""from"", ""over"", ""under"" and ""on"". After the preceding program is written and working, modify it to produce a short story con sisting of several of these sentences. (How about the possibility of a random term-paper writer?)","#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -1327,7 +1327,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB07-Q04,2024,Lab Worksheet,"String manipulation, strcmp, strcpy, strtok, loops, input/output, arrays",(Textbook 8.19)(Removing a Particular Word From a Given Line of Text) Write a program that inputs a line of text and a given word. The program should use string library functions strcmp and strcpy to remove all occurrences of the given word from the input line of text. The program should also count the number of words in the given line of text before and after removing the given word using the strtok function.,"#include <stdio.h>
+PGA-LAB07-Q04,2024,Lab Worksheet,"Characters and Strings, Functions 1, Strings and Debugging, Functions 2, Fundamental, Iteration",(Textbook 8.19)(Removing a Particular Word From a Given Line of Text) Write a program that inputs a line of text and a given word. The program should use string library functions strcmp and strcpy to remove all occurrences of the given word from the input line of text. The program should also count the number of words in the given line of text before and after removing the given word using the strtok function.,"#include <stdio.h>
 #include <string.h>
 
 int main() {
@@ -1386,7 +1386,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB07-Q05,2024,Lab Worksheet,"2D arrays, character representation, user input, loops, conditional statements, game loop, boundary checking, movement logic","Rogue-like game movement We are going to develop the first stages of a turn-based ""Rogue-like"" game. The most important part of a game is where the players play - ie, the world. In our game, the world will consist of a flat area of land that will be represented using text characters. the map should look like below: ########## #...@....# #........# #........# #........# #........# #........# ########## Command: The dimensions of the map are 10 x 8 locations. The character '@' represents the player, the '#' represents a solid wall which the player cannot move through, and the '.' represents empty space which the player can move through. Below the map there is a blank line then a prompt for the user to enter a command and press return.  If the user enters '8', the character should move 1 location up.  If the user enters '2', the character should move 1 location down.  If the user enters '4', the character should move 1 location left.  If the user enters '6', the character should move 1 location right.  If the user enters '0', the program should exit. If the user tries to move the character into a position that is impossible, the character should stay in the current position, and an error message should appear between the bottom of the map and the command prompt saying ""Invalid move!"". You can represent the game map any way you wish. One way is to use a 2D char array to represent the map.","#include <stdio.h>
+PGA-LAB07-Q05,2024,Lab Worksheet,"Arrays, Iteration, Fundamental","Rogue-like game movement We are going to develop the first stages of a turn-based ""Rogue-like"" game. The most important part of a game is where the players play - ie, the world. In our game, the world will consist of a flat area of land that will be represented using text characters. the map should look like below: ########## #...@....# #........# #........# #........# #........# #........# ########## Command: The dimensions of the map are 10 x 8 locations. The character '@' represents the player, the '#' represents a solid wall which the player cannot move through, and the '.' represents empty space which the player can move through. Below the map there is a blank line then a prompt for the user to enter a command and press return.  If the user enters '8', the character should move 1 location up.  If the user enters '2', the character should move 1 location down.  If the user enters '4', the character should move 1 location left.  If the user enters '6', the character should move 1 location right.  If the user enters '0', the program should exit. If the user tries to move the character into a position that is impossible, the character should stay in the current position, and an error message should appear between the bottom of the map and the command prompt saying ""Invalid move!"". You can represent the game map any way you wish. One way is to use a 2D char array to represent the map.","#include <stdio.h>
 
 void updatemap(char a[8][10],int x, int y);
 void printmap(char a[8][10]);
@@ -1510,7 +1510,7 @@ void printmap(char a[8][10])
     }
 
 }",
-PGA-LAB08-Q01,2024,Lab Worksheet,"Linked lists, structures, pointers, dynamic memory allocation, list operations (prepend, insert, get, contains, remove, free), loops, conditional statements","Expanding Integer List
+PGA-LAB08-Q01,2024,Lab Worksheet,"Singly Linked List, Structures, Pointers and Arrays, Dynamic Memory Allocation, Fundamental, Iteration","Expanding Integer List
 This task is to create functions to handle single-linked lists. The file with the name int_list.c(incomplete) contains the definition of a structure which can hold an integer value and a pointer to the next list structure in the list and a few functions, to append, print the list. Based on the lecture, complete the implementation of such a data-structure with the following functions. In each case, think about what different situations you may have (eg, empty vs non-empty list) and how you could handle errors.
 
 Textbook Chapter 12 also covers data-structures in C and might be helpful (be careful of the type definitions though. The book likes to typedef pointer types, which I think is confusing because it can make things that are pointers look like they are not, and vice-versa).
@@ -1743,7 +1743,7 @@ int main(int argc, char *argv[])
 
 
 ",
-PGA-LAB09-Q01,2024,Lab Worksheet,"File I/O (fopen/fgets), string arrays, character filtering, random number generation, loops, dynamic memory allocation (optional)","Word-guessing game from dictionary
+PGA-LAB09-Q01,2024,Lab Worksheet,"Files and IO, Characters and Strings, Arrays, Iteration, Functions 1, Strings and Debugging","Word-guessing game from dictionary
 In Lab 6, one of the tasks was to create a word guessing game (Hangman). When the program was run, the first stage was for the user to type in all the possible words to randomly pick from. This is rather tedious. Normally, it can be any possible word in the dictionary. Luckily for us, Linux distributions normally have a dictionary text file which contains all the words in the dictionary, 1 word per line. This is stored at ""/usr/share/dict/words"". Be aware that there might be some non-English characters in the dictionary; if you treat each character as just an ASCII code between 0-255 it will be fine. I suggest filtering them in your program to only use the representing letters 'a' - 'z'.
 
 Create a copy of your Lab 6 program and then modify it so that it reads all the words from the dictionary file into the program, then randomly chooses from them each time a new game starts.
@@ -1939,7 +1939,7 @@ int main() {
 
     return 0;
 }",
-PGA-LAB010-Q01,2024,Lab Worksheet,"Doubly-linked list, singly-linked list, structures, pointers, dynamic memory allocation, stack operations (push/pop), queue operations (enqueue/dequeue) ","Doubly-linked list
+PGA-LAB010-Q01,2024,Lab Worksheet,"Doubly Linked List, Stack and Queue, Structures, Dynamic Memory Allocation, Pointers and Arrays, Iteration","Doubly-linked list
 Copy your integer list code from last lab, then modify the copied code to implement a doubly-linked list rather than a singly-linked list. Change the type and function names so they aren't the same as the previous code (for example, by prepending ""dll_"" for doubly-linked list). You should also add two new functions:
 
 dll_next_element which takes a pointer to a doubly-linked list element and returns a pointer to the next element in the list, or NULL.
