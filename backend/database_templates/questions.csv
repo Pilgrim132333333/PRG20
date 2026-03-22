@@ -1614,3 +1614,628 @@ names can be a maximum of 20 characters long, including spaces.
 4) In the event of invalid input, the program should allow the user to re-enter the
 information without displaying any message.
 You may assume that the maximum number of students is 1000.",,,C,0
+PGA-SAM23-Q01,2023,Sample Paper,Functions 1;Pointer 1,"Question 1: What is the difference between call by value and call by reference in C
+programming? (2 marks)","Answer: When using call by value, you are sending the value of a variable as parameter to a
+function, whereas call by reference sends the address of the variable. (1 mark) Also under call by
+value, the value of the caller function is not affected by the operations in the called function, while
+in the case of call by reference, values of caller can be affected by the called function. (1 mark)",,C,0
+PGA-SAM23-Q02,2023,Sample Paper,Dynamic Memory Allocation,"Question 2: What does dynamic memory allocation mean? What are the functions in the C
+Standard Library that deal with dynamic memory allocation of variables? Write two simple C
+statements that allocate and release memory for an integer array that contains 1000 elements. (2
+marks)","Answer: Dynamic memory allocation means that a program obtains and releases memory
+space (on the heap) at execution time rather than at compilation time. (0.5 mark)
+malloc() and free() (0.5 mark)
+
+int *ptr = malloc(1000 * sizeof(int));
+free(ptr);
+
+(1 mark)",,C,0
+PGA-SAM23-Q03,2023,Sample Paper,Fundamental;Functions 2,"Question 3: Explain what would happen when the program exam.c, as shown in Figure 1, is
+compiled using the command as shown in Figure 2 on cslinux. (2 marks)","Answer: The program will not compile because -lm is not included as one of the parameters
+when compiling the program. [1 mark]
+The program will also have a warning, because math.h is not included in the code. [1 mark]",pga_sam23_q03_1_img.png; pga_sam23_q03_2_img.png,C,0
+PGA-SAM23-Q04,2023,Sample Paper,Iteration,"Question 4: Use a while loop to implement the same output as the following code. (2 marks)
+
+for(a=1; a<=100; a++)
+ printf(""%d\n"", a*a);","Answer: a = 1;
+while(a <= 100)
+{
+ printf(""%d\n"", a * a);
+ a++;
+}",,C,0
+PGA-SAM23-Q05,2023,Sample Paper,Structures;Characters and Strings;Functions 2,"Question 5: There are several mistakes contained in the following C program. Identify and
+correct them in order to compile and run without error. (4 marks).
+
+#include <stdio.h>
+
+struct emp
+{
+ char n[20];
+ int age;
+};
+
+int main(void)
+{
+ struct emp e1 = {""David"", 23};
+ struct emp e2;
+ scanf(""%s %d"", e2.n, e2.age);
+ if(structcmp(e1, e2) == 0)
+  printf(""Equal structs."");
+ else
+  printf(""Unequal structs."");
+}
+
+structcmp (struct emp x, struct emp y)
+{
+ if(x.n == y.n)
+  if(x.age == y.age)
+   return 0;
+ return 1;
+}","Answer: The function structcmp should have a return type.
+int structcmp(struct emp x, struct emp y)
+
+The function structcmp should have a declaration.
+int structcmp(struct emp x, struct emp y);
+
+Two strings cannot be compared by using ==.
+if(x.n == y.n) => if(strcmp(x.n, y.n) == 0)
+
+Parameters of scanf() should be address or pointers.
+scanf(""%s %d"", e2.n, e2.age); => scanf(""%s %d"", e2.n, &e2.age);
+
+[1 mark] for finding each mistake and correction.",,C,0
+PGA-SAM23-Q06,2023,Sample Paper,Functions 1;Operators;Pointer 1,"Question 6: Complete the function body of check in the program below. This function should
+take two arguments, a variable of type integer called input and a pointer called ptr that points to
+an integer. A calculation to determine whether the input is odd, even or zero must be done within
+this function. If input is zero, the program should print 0. If input is odd, the program prints -1. If
+input is even, the program should print 1. You may assume that the user will only enter a single
+whole number in each prompt (i.e., no text, no floating-point numbers, no empty input, etc.) (3 marks)
+
+#include <stdio.h>
+
+void check(int input, int *ptr);
+
+int main(void)
+{
+ int in = 0;
+ int out = 0;
+
+ while(in != -9999)
+ {
+  scanf(""%d"", &in);
+  check(in, &out);
+  printf(""%d\n"", out);
+ }
+ return 0;
+}","Answer: void check(int input, int *ptr)
+{
+ if(input == 0)
+  *ptr = 0;
+ else if((input % 2) == 0)
+  *ptr = 1;
+ else
+  *ptr = -1;
+}
+
+[1 mark] for correct function definition, [2 marks] for the if-else control structure in function
+body.",,C,0
+PGA-SAM23-Q07,2023,Sample Paper,Singly Linked List,"Question 7: An incomplete C program that employs a singly linked list is given below.
+Complete the printList function which prints out all values in the linked list. Each value should
+be printed on a different line. (3 marks)
+
+struct node{
+ int data;
+ struct node *next;
+};
+typedef struct node Node;
+
+Node *head;
+
+void InsertNodeAtFront(int data);
+void printList();
+
+void InsertNodeAtFront(int data)
+{
+    Node *temp = new Node;
+    temp->data = data;
+    temp->next = head;
+    head = temp;
+}","Answer: void printList()
+{
+ Node *tmp = head;
+ while(tmp != NULL)
+ {
+  printf(""%d\n"", tmp->data);
+  tmp = tmp->next;
+ }
+}
+
+[1 mark] for defining the tmp node, [2 marks] for the iteration to print each item in the list.",,C,0
+PGA-SAM23-Q08,2023,Sample Paper,Dynamic Memory Allocation;Structures;Characters and Strings,"Question 8: Identify potential mistakes contained in the function func and suggest how to
+correct them. (3 marks)
+
+#include <stdio.h>
+#include <stdlib.h>
+struct ex
+{
+     int i;
+     float j;
+     char *s;
+};
+
+void func (void)
+{
+struct ex *p = malloc(sizeof(struct ex));
+p->s = malloc(20 * sizeof(char));
+scanf(""%s"", &p->s);
+printf(""%s"", p->s)
+free(p);
+}","Answer: &p->s in the line scanf(""%s"", &p->s); should be p->s [1 mark]
+There is potential memory leak because allocated memory does not freed. Add free(p->s); before
+free(p); [2 marks]",,C,0
+PGA-SAM23-Q09,2023,Sample Paper,Functions 1;Pointer 1,"Question 9: What is the output of the following program? (4 marks)
+
+#include <stdio.h>
+
+int f1(int x, int y)
+{
+ x = x + 2;
+ y = y + 3;
+ return x + y;
+}
+
+int f2(int *x, int y)
+{
+ *x = *x + 2;
+ y = y + 3;
+ return *x + y;
+}
+
+int f3(int *x, int *y)
+{
+ *x = *x + 2;
+ *y = *y + 3;
+ return *x + *y;
+}
+
+int f4(int x, int *y, int *z)
+{
+ x = x + *y;
+ *y = *z + 3;
+ z = &x;
+ *z = *y * 2;
+ return *z;
+}
+
+int main(int argc, char *argv[])
+{
+ int k = 1, m = 3, r = 2;
+ printf(""1) %d %d %d \n"", k, m, r);
+ r = f1(k, m);
+ printf(""2) %d %d %d \n"", k, m, r);
+ r = f2(&k, m);
+ printf(""3) %d %d %d \n"", k, m, r);
+ r = f3(&k, &m);
+ printf(""4) %d %d %d \n"", k, m, r);
+ r = f4(k, &m, &r);
+ printf(""5) %d %d %d \n"", k, m, r);
+ return 0;
+}","Answer: 1) 1 3 2
+2) 1 3 9
+3) 3 3 9
+4) 5 6 11
+5) 5 14 28
+
+[1 mark] for each line of 2-5.",,C,0
+PGA-SAM24-Q01,2024,Sample Paper,Dynamic Memory Allocation,Question 1: What is the reason and consequence of memory leaks in C? [2 Marks],"Solution:
+[Knowledge](Difficulty level: easy) A memory leak in C occurs when a program allocates memory on the heap
+(using functions like malloc(), calloc(), or realloc()) and fails to release it using free() after it is no longer needed.
+This causes the allocated memory to remain reserved and inaccessible, even though the program has no way to
+use it, which eventually exhausts available memory, leading to performance degradation or a system crash.
+
+Marking Scheme: 1 mark for the reason of memory leaks and another 1 mark for its consequences.",,C,0
+PGA-SAM24-Q02,2024,Sample Paper,Pointer 1;Pointers to Pointers,"Question 2: What is a pointer to a pointer in C? Write a C program that uses a pointer to a pointer to change the
+value of an integer variable.
+[5 Marks]","Solution:
+[Knowledge](Difficulty level: easy) A pointer to a pointer is a variable that stores the address of another pointer.
+
+#include <stdio.h>
+
+void changeValue(int **ptr) {
+    **ptr = 100;
+}
+
+int main() {
+    int value = 50;
+    int *ptr = &value;
+    int **dptr = &ptr;
+
+    printf(""Before: %d\n"", value);
+    changeValue(dptr);
+    printf(""After: %d\n"", value);
+    return 0;
+}
+
+Marking Scheme: 1 mark for defining pointer to pointer. 1 mark for declaring an integer pointer variable and
+assigning the address of a variable to it. 1 mark for declaring a pointer to a pointer variable. 1 mark for assigning the
+address of the pointer variable to the pointer to a pointer variable. 1 mark for assigning an integer value to the
+pointer to pointer variable print both the old and new values.",,C,0
+PGA-SAM24-Q03,2024,Sample Paper,Arrays;Iteration,"Question 3: Error Identification and Correction
+The following C program is intended to read a list of integers from the user, calculate their sum, and print the
+result. However, it contains several errors. Identify and correct these errors. Provide the corrected code and
+explain each correction you made.
+[4 Marks]
+
+1    #include <stdio.h>
+2    void main() {
+3         int n, i, sum;
+4         printf(""Enter the number of elements: "");
+5         scanf(""%d"", n);
+6         int arr[n];
+7         printf(""Enter %d integers:\n"", n);
+8         for(i = 0; i <= n; i++) {
+9              scanf(""%d"", &arr);
+10       }
+11       sum = 0;
+12       for(i = 0; i < n; i++) {
+13            sum = arr[i];
+14        }
+15        printf(""Sum of the elements: %d\n"", sum);
+16    }","Solution:
+[Comprehension](Difficulty level: medium) Errors Identified:
+1. scanf(""%d"", n)in line 5 should be scanf(""%d"", &n) - the address of n is needed.
+2. The loop for(i = 0; i <= n; i++) in line 8 should be for(i = 0; i < n; i++) - The loop runs out of bounds.
+3. scanf(""%d"", &arr) in line 9 should be scanf(""%d"", &arr[i]) - the array index is missing.
+4. sum = arr[i] in line 13 should be sum += arr[i] - cumulative summation operation is missing.
+
+Corrected Code:
+#include <stdio.h>
+
+int main() {
+    int n, i, sum;
+    printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+    int arr[n];
+    printf(""Enter %d integers:\n"", n);
+    for(i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+    sum = 0;
+    for(i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+    printf(""Sum of the elements: %d\n"", sum);
+    return 0;
+}
+
+Explanation of Corrections:
+1. Corrected scanf for n: Changed scanf(""%d"", n) to scanf(""%d"", &n) in line 5 because scanf requires the
+address of the variable where it stores the input value.
+2. Fixed Loop Condition: Changed for(i = 0; i <= n; i++) to for(i = 0; i < n; i++) in line 8 to ensure the loop runs
+exactly n times without going out of bounds.
+3. Corrected scanf for array index: Changed for scanf(""%d"", &arr) to scanf(""%d"", &arr[i]) in line 9 for storing
+each input element in each individual location of the array.
+4. Fixed Cumulative Summation Operation: Changed for sum = arr[i] to sum += arr[i] in line 13 to perform
+cumulative summation operation of each individual input with the intermittent result.
+
+Marking Scheme: 0.5 mark for identifying each of the mistakes in the program and 0.5 mark for correction for each
+of the mistakes and explanations.",,C,0
+PGA-SAM24-Q04,2024,Sample Paper,Arrays;Simple Algorithms,"Question 4: Array Manipulation and Sorting [6 Marks]
+Problem:
+Write a C program that reads 10 integers into an array, sorts the array in ascending order, and then print the sorted
+array to the screen.
+Instructions:
+- Read 10 integers from the user into an array.
+- Sort the array in ascending order using any sorting algorithm.
+- Print every item in the sorted array.","Solution:
+[Comprehension, Application](Difficulty level: medium)
+#include <stdio.h>
+
+void sort(int arr[], int size) {
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[10];
+    printf(""Enter 10 integers: "");
+    for (int i = 0; i < 10; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+    sort(arr, 10);
+    for (int i = 0; i < 10; i++) {
+        printf(""%d\t"", arr[i]);
+    }
+    return 0;
+}
+
+Marking Scheme: 2 marks for successfully implementing each of the instructions.",,C,0
+PGA-SAM24-Q05,2024,Sample Paper,Characters and Strings;Iteration,"Question 5: Write a C program that counts the number of English alphabetic characters in a given string. The
+program should prompt the user to input a string, then iterate through each character to count how many are
+English letters (both uppercase and lowercase). Finally, it should display the total count of English alphabetic
+characters. The program must not use any built-in string manipulation and character handling functions. You can
+assume that the input string will contain no more than 1000 characters.
+[8 Marks]","Solution:
+[Application](Difficulty level: hard)
+#include <stdio.h>
+
+int main() {
+    char str[1000];
+    int i = 0, count = 0;
+
+    printf(""Enter a string: "");
+    fgets(str, sizeof(str), stdin);
+
+    while (str[i] != '\0') {
+        if ((str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= 'a' && str[i] <= 'z')) {
+            count++;
+        }
+        i++;
+    }
+
+    printf(""Number of English characters: %d\n"", count);
+    return 0;
+}
+
+Marking Scheme: 1 mark for properly declaring the array. 2 marks for properly taking input. 2 marks for properly
+writing the loop. 2 marks for properly writing the selection statement for English letter identification. 1 mark for
+printing the number of characters in the input string.",,C,0
+PGA-SAM25-Q01I,2025,Sample Paper,Operators,"Question 1.i: What will be the output of the following code snippet?
+#include <stdio.h>
+int main() {
+    int a = 5, b = 2;
+    printf(""%d"", a / b);
+    return 0;
+}
+
+a. 2.5
+b. 2
+c. 3
+d. Compilation error
+[1 Mark]","Answer:
+[Application] (Difficulty level: medium)
+b [1 Mark]",,C,0
+PGA-SAM25-Q01II,2025,Sample Paper,Miscellaneous,"Question 1.ii: Which of the following statements about the static keyword in C is correct?
+a. It limits the scope of a variable to the current file only.
+b. It limits the scope of a variable to the current function and maintains its value
+between function calls.
+c. It makes a function visible to other files.
+d. It allocates memory on the heap.
+[1 Mark]","Answer:
+[Comprehension] (Difficulty level: easy)
+b [1 Mark]",,C,0
+PGA-SAM25-Q01III,2025,Sample Paper,Characters and Strings;Iteration,"Question 1.iii: What is the output of the following code?
+#include <stdio.h>
+int main() {
+    char s[] = ""Hello"";
+    int i = 0;
+    while(s[i]) {
+        printf(""%c"", s[i++]);
+    }
+    return 0;
+}
+
+a. H
+b. H e l l o
+c. Hello
+d. Compilation error
+[1 Mark]","Answer:
+[Application] (Difficulty level: medium)
+c [1 Mark]",,C,0
+PGA-SAM25-Q01IV,2025,Sample Paper,Functions 2,"Question 1.iv: Given the following function, what will be printed when func(5) is called?
+void func(int n) {
+    if (n > 0) {
+        func(n - 1);
+        printf(""%d"", n);
+    }
+}
+
+a. 5 4 3 2 1
+b. 1 2 3 4 5
+c. 5
+d. 1 5
+[1 Mark]","Answer:
+[Application] (Difficulty level: medium)
+b [1 Mark]",,C,0
+PGA-SAM25-Q01V,2025,Sample Paper,Pointer 1,"Question 1.v: Consider the following code for pointer arithmetic. What is the output?
+#include <stdio.h>
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int *p = arr;
+    printf(""%d"", *(p + 3));
+    return 0;
+}
+
+a. 1
+b. 3
+c. 4
+d. 5
+[1 Mark]","Answer:
+[Application] (Difficulty level: medium)
+c [1 Mark]",,C,0
+PGA-SAM25-Q02,2025,Sample Paper,Pointer 1,"Question 2: What is a NULL pointer in the C programming language? Is it equivalent
+to an uninitialized pointer? Provide code examples for both.
+[5 Marks]","Answer:
+[Knowledge, Comprehension, Application] (Difficulty level: easy)
+A NULL pointer in C is a pointer that does not point to any valid memory address or object. The value
+of a NULL pointer is defined by the macro NULL (usually zero), indicating that the pointer is
+intentionally set to have no reference. This is useful for checking whether a pointer is pointing to
+something valid or not.
+
+Example of a NULL pointer:
+
+#include <stdio.h>
+
+int main() {
+    int *p = NULL;
+    if (p == NULL) {
+        printf(""Pointer p is NULL and does not point to any memory location.\n"");
+    }
+    return 0;
+}
+
+Is it equivalent to an uninitialized pointer?
+
+No, a NULL pointer is not equivalent to an uninitialized pointer.
+- NULL pointer: Is explicitly assigned the value NULL, indicating it points to nothing.
+- Uninitialized pointer: Is not assigned any value, so it holds an unpredictable, garbage address
+  (whatever happened to be in that memory location). Using an uninitialized pointer is dangerous
+  and can cause bugs or crashes.
+
+Example of an uninitialized pointer:
+
+#include <stdio.h>
+
+int main() {
+    int *q;
+    printf(""%d"", *q);
+    return 0;
+}
+
+Marking Scheme: 1 mark for defining the NULL pointer, 1 mark for its code example, 2 marks for writing their
+differences, and 1 mark for the code example of uninitialized pointer.",,C,0
+PGA-SAM25-Q03,2025,Sample Paper,Arrays;Iteration,"Question 3: Error Identification and Correction
+The following C program is designed to count and print the number of even numbers
+in an array entered by the user. However, it contains several errors. Identify and
+correct these errors. Explain each correction that you made.
+[5 Marks]
+
+1 #include <stdio.h>
+
+2 int main() {
+3 int n, i, count;
+4 int arr[10];
+5 printf(""Enter number of elements (not more than 10): "");
+6 scanf(""%d"", n);
+
+7 printf(""Enter %d integers:\n"", n);
+8 for (i = 1; i <= n; i++) {
+9      scanf(""%d"", arr[i]);
+10 }
+
+11 for (i = 0; i < n; i++);
+12     if (arr[] % 2 == 0)
+13        count++;
+
+14 printf(""Number of even numbers: %d"", count);
+15 return 0;
+16 }","Answer:
+[Comprehension, Application](Difficulty level: medium) Error Identification:
+
+1. Missing address operator in scanf for variable n in line 6:
+Should be scanf(""%d"", &n); not scanf(""%d"", n);
+2. Array input loop starts at index 1 and goes to n (inclusive) in line 8:
+Should be for(i = 0; i < n; i++) to cover valid indices 0 to n-1.
+3. Missing address operator in scanf for array input in line 9:
+Should be scanf(""%d"", &arr[i]); not scanf(""%d"", arr[i]);
+4. Uninitialized variable count before line 11:
+The count variable is not initialized, leading to garbage value. Should have count = 0; before
+using.
+5. Semicolon after the for loop causes an empty loop and incorrect even counting in line 11:
+The line for(i = 0; i < n; i++); has a semicolon at the end, making the
+subsequent if statement apply only once with i==n. Should remove the semicolon.
+6. Array index is missing in line 12:
+Should be if(arr[i] % 2 == 0) not if(arr[] % 2 == 0) to select individual elements from the
+array.
+
+Corrected Code:
+1 #include <stdio.h>
+
+2 int main() {
+3 int n, i, count;
+4 int arr[10];
+5 printf(""Enter number of elements: "");
+6 scanf(""%d"", &n);
+
+7 printf(""Enter %d integers:\n"", n);
+8 for (i = 0; i < n; i++) {
+9      scanf(""%d"", &arr[i]);
+10 }
+
+11 count = 0;
+12 for (i = 0; i < n; i++)
+13     if (arr[i] % 2 == 0)
+14        count++;
+
+15 printf(""Number of even numbers: %d"", count);
+16 return 0;
+17 }
+
+Marking Scheme: 0.5 mark for identifying each error of any five errors in the program, and 0.5 mark for correcting
+each of the errors and providing explanations.",,C,0
+PGA-SAM25-Q04,2025,Sample Paper,Arrays;Simple Algorithms;Iteration,"Question 4: Array Manipulation and Counting [7 Marks]
+Problem Statement: Write a C program that reads an integer array of size n (where 2 <= n <= 20)
+from the user, then determines and displays all unique pairs of elements whose sum is equal
+to a given target value (also input by the user).
+For each pair, print the indices of the two elements (indices start at 0) and their values. If no
+such pairs are found, print an appropriate message.","Answer:
+[Comprehension, Application] (Difficulty level: hard)
+#include <stdio.h>
+
+int main() {
+    int n, arr[20], target, i, j, found = 0;
+
+    printf(""Enter number of elements: "");
+    scanf(""%d"", &n);
+    if (n < 2 || n > 20) {
+        printf(""Invalid size. Please enter n between 2 and 20.\n"");
+        return 1;
+    }
+
+    printf(""Enter array elements: "");
+    for (i = 0; i < n; i++)
+        scanf(""%d"", &arr[i]);
+
+    printf(""Enter target sum: "");
+    scanf(""%d"", &target);
+
+    printf(""\nPairs with sum %d:\n"", target);
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (arr[i] + arr[j] == target) {
+                printf(""Indices: %d, %d => Values: %d, %d\n"", i, j, arr[i], arr[j]);
+                found = 1;
+            }
+        }
+    }
+    if (!found)
+        printf(""No pairs found with the given sum.\n"");
+
+    return 0;
+}
+
+Marking Scheme: correct input & validation - 2 marks, nested loop logic for unique pairs - 2 marks, correct
+sum check - 1 mark, clear output (pairs or message) - 2 marks",,C,0
+PGA-SAM25-Q05,2025,Sample Paper,Structures,"Question 5: Explain with an example how a nested structure (structure within a
+structure) can be defined and used in C to represent hierarchical data.
+[3 Marks]","Answer:
+[Knowledge](Difficulty level: easy)
+In C, nested structures allow hierarchical organization of data by including one structure as a member
+of another. This is useful for representing entities that have sub-attributes grouped together.
+
+Example:
+
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct Employee {
+    char name[50];
+    int id;
+    struct Date joining_date;
+};
+
+Here, the Employee structure contains a Date structure for the joining date. This approach makes
+managing complex, related data more organized and efficient.
+
+Marking Scheme: 1 mark for explaining the nested structure, 1 mark for defining the inner structure, and 1 mark for
+defining the outer structure.",,C,0
