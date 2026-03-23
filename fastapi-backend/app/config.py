@@ -1,4 +1,6 @@
 # 配置：DATABASE_URL、JWT、CORS 等
+from urllib.parse import quote_plus
+
 from pydantic_settings import BaseSettings
 from pydantic import ConfigDict
 
@@ -13,6 +15,7 @@ class Settings(BaseSettings):
 
     DATABASE_HOST: str = "localhost"
     DATABASE_PORT: int = 3306
+    DB_PORT: int | None = None  # 与 DB_HOST 同用时可覆盖端口
     DATABASE_USER: str = "root"
     DATABASE_PASSWORD: str = ""
     DATABASE_NAME: str = "pga_platform"
@@ -37,15 +40,24 @@ class Settings(BaseSettings):
     def _db_name(self) -> str:
         return self.DB_NAME or self.DATABASE_NAME
 
+    def _port(self) -> int:
+        return self.DB_PORT if self.DB_PORT is not None else self.DATABASE_PORT
+
+    def _encoded_credentials(self) -> tuple[str, str]:
+        """用户名/密码中的 @ : / ? # ! 等需 URL 编码，否则 pymysql 解析错误"""
+        return quote_plus(self._user(), safe=""), quote_plus(self._password(), safe="")
+
     @property
     def DATABASE_URL(self) -> str:
         """异步连接（aiomysql）"""
-        return f"mysql+aiomysql://{self._user()}:{self._password()}@{self._host()}:{self.DATABASE_PORT}/{self._db_name()}?charset=utf8mb4"
+        u, p = self._encoded_credentials()
+        return f"mysql+aiomysql://{u}:{p}@{self._host()}:{self._port()}/{self._db_name()}?charset=utf8mb4"
 
     @property
     def SYNC_DATABASE_URL(self) -> str:
         """同步连接（pymysql）"""
-        return f"mysql+pymysql://{self._user()}:{self._password()}@{self._host()}:{self.DATABASE_PORT}/{self._db_name()}?charset=utf8mb4"
+        u, p = self._encoded_credentials()
+        return f"mysql+pymysql://{u}:{p}@{self._host()}:{self._port()}/{self._db_name()}?charset=utf8mb4"
 
 
 settings = Settings()

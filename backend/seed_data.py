@@ -1,74 +1,146 @@
-import os
-import pymysql
 import csv
-from dotenv import load_dotenv
+import os
+from pathlib import Path
 
-# 加载 .env（在 Workspace 根目录或 backend 同目录）
-load_dotenv()
-load_dotenv("../.env")
+import pymysql
 
-# CSV 路径：基于本脚本所在目录（backend/）
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATES_DIR = os.path.join(SCRIPT_DIR, "database_templates")
+try:
+    from dotenv import load_dotenv
+except ImportError:
+    load_dotenv = None
 
-# ==========================================
-# 1. 数据库连接配置，优先从 .env 读取
-# ==========================================
-DB_CONFIG = {
-    'host': os.getenv('DB_HOST', os.getenv('DATABASE_HOST', 'localhost')),
-    'user': os.getenv('DB_USER', os.getenv('DATABASE_USER', 'root')),
-    'password': os.getenv('DB_PASSWORD', os.getenv('DATABASE_PASSWORD', '')),
-    'database': os.getenv('DB_NAME', os.getenv('DATABASE_NAME', 'pga_platform')),
-    'charset': os.getenv('DB_CHARSET', 'utf8mb4'),
-}
+# 本脚本在 backend/；项目根目录为上一级（与 fastapi-backend 共用 Workspace/.env）
+BACKEND_DIR = Path(__file__).resolve().parent
+ROOT_DIR = BACKEND_DIR.parent
+
+if load_dotenv:
+    load_dotenv(ROOT_DIR / ".env")
+
+
+def _env(key: str, default: str = "") -> str:
+    v = os.getenv(key)
+    if v is None:
+        return default
+    v = v.strip()
+    if len(v) >= 2 and ((v[0] == v[-1] == '"') or (v[0] == v[-1] == "'")):
+        v = v[1:-1]
+    return v
+
+
+def get_db_config() -> dict:
+    """与 fastapi-backend/app/config.py 一致：优先 DB_*，否则 DATABASE_*"""
+    host = _env("DB_HOST") or _env("DATABASE_HOST", "localhost")
+    port = int(_env("DB_PORT") or _env("DATABASE_PORT") or "3306")
+    user = _env("DB_USER") or _env("DATABASE_USER", "root")
+    password = _env("DB_PASSWORD") or _env("DATABASE_PASSWORD", "")
+    database = _env("DB_NAME") or _env("DATABASE_NAME", "pga_platform")
+    charset = _env("DB_CHARSET", "utf8mb4")
+    return {
+        "host": host,
+        "port": port,
+        "user": user,
+        "password": password,
+        "database": database,
+        "charset": charset,
+    }
+
+
+def csv_path(name: str) -> Path:
+    return BACKEND_DIR / "database_templates" / name
+
 
 def get_full_path(material_type, filename):
-    """自动拼接相对路径"""
     paths = {
-        'PPT': f"/static/lectures/{filename}",
-        'Tutorial': f"/static/tutorials/{filename}",
-        'Lab Worksheet': f"/static/labs/{filename}",
-        'CW': f"/static/courseworks/{filename}"
+        "PPT": f"/static/lectures/{filename}",
+        "Tutorial": f"/static/tutorials/{filename}",
+        "Lab Worksheet": f"/static/labs/{filename}",
+        "CW": f"/static/courseworks/{filename}",
     }
     return paths.get(material_type, f"/static/others/{filename}")
 
+
+def ensure_user_tables(cursor) -> None:
+    """
+    若库是旧版只建了 Materials/Questions/Link，会缺少 Users、User_Question_State。
+    与 backend/init_schema.sql 中定义一致。
+    """
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS Users (
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) UNIQUE NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
+            password_hash VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        """
+    )
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS User_Question_State (
+            user_id INT NOT NULL,
+            question_id INT NOT NULL,
+            is_favourite TINYINT(1) DEFAULT 0,
+            is_completed TINYINT(1) DEFAULT 0,
+            PRIMARY KEY (user_id, question_id),
+            CONSTRAINT fk_seed_uqs_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+            CONSTRAINT fk_seed_uqs_q FOREIGN KEY (question_id) REFERENCES Questions(question_id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        """
+    )
+
+
 def run_seed():
-    connection = pymysql.connect(**DB_CONFIG)
+    db = get_db_config()
+    print(f"📡 连接 MySQL: {db['user']}@{db['host']}:{db['port']}/{db['database']}")
+    connection = pymysql.connect(**db)
     try:
         with connection.cursor() as cursor:
-            # --- 导入物料 ---
             print("⏳ 正在导入物料表 (Materials)...")
-            with open(os.path.join(TEMPLATES_DIR, 'materials.csv'), 'r', encoding='utf-8-sig') as f:
+            with open(csv_path("materials.csv"), "r", encoding="utf-8-sig") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    path = get_full_path(row['material_type'], row['file_path'])
+                    path = get_full_path(row["material_type"], row["file_path"])
                     sql = "INSERT IGNORE INTO Materials (material_code, material_type, week_number, title, file_path) VALUES (%s, %s, %s, %s, %s)"
-                    cursor.execute(sql, (row['material_code'].strip(), row['material_type'].strip(), row['week_number'].strip(), row['title'].strip(), path))
+                    cursor.execute(
+                        sql,
+                        (
+                            row["material_code"].strip(),
+                            row["material_type"].strip(),
+                            row["week_number"].strip(),
+                            row["title"].strip(),
+                            path,
+                        ),
+                    )
 
-            # --- 导入题库 (已更新 language 和 favourite) ---
             print("⏳ 正在导入题库表 (Questions)...")
-            with open(os.path.join(TEMPLATES_DIR, 'questions.csv'), 'r', encoding='utf-8-sig') as f:
+            with open(csv_path("questions.csv"), "r", encoding="utf-8-sig") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    img_path = row['image_path'] if row.get('image_path', '').strip() else None
-                    # 获取编程语言，默认 C；获取收藏状态，默认 0
-                    lang = row.get('language', 'C').strip()
-                    fav = row.get('favourite', '0').strip()
-                    
+                    img_path = row["image_path"] if row.get("image_path", "").strip() else None
+                    lang = row.get("language", "C").strip()
+
                     sql = """
                         INSERT IGNORE INTO Questions 
-                        (question_code, source_year, source_type, knowledge_point, question_text, answer_text, image_path, language, favourite) 
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        (question_code, source_year, source_type, knowledge_point, question_text, answer_text, image_path, language) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                     """
-                    cursor.execute(sql, (
-                        row['question_code'].strip(), row['source_year'].strip(), row['source_type'].strip(),
-                        row['knowledge_point'].strip(), row['question_text'].strip(), row['answer_text'].strip(),
-                        img_path, lang, fav
-                    ))
+                    cursor.execute(
+                        sql,
+                        (
+                            row["question_code"].strip(),
+                            row["source_year"].strip(),
+                            row["source_type"].strip(),
+                            row["knowledge_point"].strip(),
+                            row["question_text"].strip(),
+                            row["answer_text"].strip(),
+                            img_path,
+                            lang,
+                        ),
+                    )
 
-            # --- 建立关联 ---
             print("⏳ 正在建立关联 (Links)...")
-            with open(os.path.join(TEMPLATES_DIR, 'links.csv'), 'r', encoding='utf-8-sig') as f:
+            with open(csv_path("links.csv"), "r", encoding="utf-8-sig") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     sql = """
@@ -78,7 +150,52 @@ def run_seed():
                             (SELECT material_id FROM Materials WHERE material_code = %s)
                         )
                     """
-                    cursor.execute(sql, (row['question_code'].strip(), row['material_code'].strip()))
+                    cursor.execute(sql, (row["question_code"].strip(), row["material_code"].strip()))
+
+            print("⏳ 检查/创建 Users、User_Question_State 表（依赖 Questions 已存在）...")
+            ensure_user_tables(cursor)
+
+            print("⏳ 正在导入用户表 (Users)...")
+            try:
+                with open(csv_path("users.csv"), "r", encoding="utf-8-sig") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        sql = "INSERT IGNORE INTO Users (username, email, password_hash) VALUES (%s, %s, %s)"
+                        cursor.execute(
+                            sql,
+                            (
+                                row["username"].strip(),
+                                row["email"].strip(),
+                                row["password_hash"].strip(),
+                            ),
+                        )
+            except FileNotFoundError:
+                print("⚠️ 未找到 users.csv")
+
+            print("⏳ 正在导入用户状态表 (User_Question_State)...")
+            try:
+                with open(csv_path("user_question_state.csv"), "r", encoding="utf-8-sig") as f:
+                    reader = csv.DictReader(f)
+                    for row in reader:
+                        sql = """
+                            INSERT IGNORE INTO User_Question_State (user_id, question_id, is_favourite, is_completed)
+                            VALUES (
+                                (SELECT user_id FROM Users WHERE username = %s),
+                                (SELECT question_id FROM Questions WHERE question_code = %s),
+                                %s, %s
+                            )
+                        """
+                        cursor.execute(
+                            sql,
+                            (
+                                row["username"].strip(),
+                                row["question_code"].strip(),
+                                row["is_favourite"].strip(),
+                                row["is_completed"].strip(),
+                            ),
+                        )
+            except FileNotFoundError:
+                print("⚠️ 未找到 user_question_state.csv")
 
             connection.commit()
             print("🎉 数据同步成功！")
@@ -86,8 +203,10 @@ def run_seed():
     except Exception as e:
         print(f"❌ 出错了: {e}")
         connection.rollback()
+        raise
     finally:
         connection.close()
+
 
 if __name__ == "__main__":
     run_seed()

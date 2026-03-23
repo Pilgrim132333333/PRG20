@@ -1,56 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Programming Question Bank - Student Portal</title>
-    <!-- Tailwind CSS v3 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#165DFF',
-                        secondary: '#36D399',
+                        primary: '#10a37f',
+                        secondary: '#19c37d',
                         warning: '#FF9F43',
-                        dark: '#374151',
-                        light: '#F3F4F6'
+                        dark: '#0a0a0a',
+                        light: '#ececf1'
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif']
                     },
                     boxShadow: {
-                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)'
+                        card: '0 0 0 1px rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.35)',
+                        'card-hover': '0 0 0 1px rgba(255,255,255,0.1), 0 12px 40px rgba(0,0,0,0.45)'
                     }
                 }
             }
         }
     </script>
+    <style>
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        .gpt-bg {
+            background: #0a0a0a;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 163, 127, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 100% 100%, rgba(59, 130, 246, 0.06), transparent),
+                radial-gradient(ellipse 50% 30% at 0% 100%, rgba(139, 92, 246, 0.05), transparent);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
     <style type="text/tailwindcss">
         @layer utilities {
-            .bg-gradient-primary {
-                background: linear-gradient(135deg, #165DFF 0%, #0F3AAA 100%);
-            }
-            .transition-all-300 {
-                transition: all 300ms ease-in-out;
-            }
+            .transition-all-300 { transition: all 300ms ease-in-out; }
             .nav-item {
-                @apply flex items-center space-x-3 px-4 py-3 rounded-lg transition hover:bg-blue-100 transition-all-300;
+                @apply flex items-center space-x-3 px-4 py-3 rounded-xl text-[#8e8ea0] transition-all-300;
+            }
+            .nav-item:hover {
+                @apply bg-white/5 text-[#ececf1];
             }
             .nav-item.active {
-                @apply bg-blue-100 text-primary font-medium;
+                @apply bg-[#10a37f]/15 text-[#10a37f] font-medium border border-[#10a37f]/25;
             }
             .card {
-                @apply bg-white rounded-lg shadow-card p-6 transition-all-300 hover:shadow-card-hover;
+                @apply rounded-xl border border-white/[0.08] bg-white/[0.04] backdrop-blur-md p-6 text-[#ececf1] shadow-card transition-all-300 hover:border-white/15 hover:shadow-card-hover;
             }
             .code-editor {
-                @apply font-mono text-sm bg-gray-800 text-white p-4 rounded-lg overflow-x-auto min-h-[300px] focus:outline-none;
+                @apply font-mono text-sm bg-[#0d0d0d] text-[#ececf1] border border-white/10 p-4 rounded-lg overflow-x-auto min-h-[300px] focus:outline-none focus:ring-2 focus:ring-[#10a37f]/40;
             }
-             .filter-group {
+            .input-gpt, select.input-gpt {
+                @apply w-full rounded-lg border border-white/15 bg-[#141414]/90 text-[#ececf1] px-3 py-2 text-sm;
+            }
+            .input-gpt:focus, select.input-gpt:focus {
+                @apply outline-none ring-2 ring-[#10a37f]/30 border-[#10a37f]/40;
+            }
+            .filter-group {
                 @apply transition-all duration-300 overflow-hidden;
             }
             .filter-group.hidden {
@@ -64,22 +89,23 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="gpt-bg min-h-screen flex flex-col text-[#ececf1] antialiased relative">
+    <div class="absolute inset-0 shimmer pointer-events-none z-0"></div>
     <!-- 顶部导航栏 -->
-    <header class="bg-white shadow-sm">
+    <header class="relative z-20 border-b border-white/10 bg-black/40 backdrop-blur-md">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2">
-                <div class="text-primary text-2xl">
+                <div class="text-[#10a37f] text-2xl">
                     <i class="fa fa-code"></i>
                 </div>
-                <h1 class="text-xl font-bold text-gray-800">AI Programming Question Bank</h1>
+                <h1 class="text-xl font-semibold text-[#ececf1] tracking-tight">AI Programming Question Bank</h1>
             </div>
             <div class="flex items-center space-x-4">
-                <div class="text-sm text-gray-600">
+                <div class="text-sm text-[#8e8ea0]">
                     <span class="font-medium">Welcome, </span>
-                    <span id="username">Student</span>
+                    <span id="username" class="text-[#ececf1]">Student</span>
                 </div>
-                <button id="logoutBtn" class="text-gray-500 hover:text-red-500 transition-all-300">
+                <button id="logoutBtn" type="button" class="text-[#8e8ea0] hover:text-red-400 transition-all-300 p-2 rounded-lg hover:bg-white/5" title="Log out">
                     <i class="fa fa-sign-out"></i>
                 </button>
             </div>
@@ -87,9 +113,9 @@
     </header>
 
     <!-- 主内容区 -->
-    <div class="flex flex-1 container mx-auto my-6 px-4 gap-6">
+    <div class="relative z-10 flex flex-1 container mx-auto my-6 px-4 gap-6">
         <!-- 左侧导航 -->
-        <aside class="w-64 bg-white rounded-xl shadow-sm p-4">
+        <aside class="w-64 shrink-0 rounded-xl border border-white/10 bg-[#121212]/80 backdrop-blur-md p-4">
             <nav class="space-y-1">
                 <a href="#" class="nav-item active" data-target="dashboard">
                     <i class="fa fa-dashboard w-5 text-center"></i>
@@ -108,184 +134,140 @@
                     <span>Question Bank</span>
                 </a>
             </nav>
-            <div class="mt-8 pt-4 border-t border-gray-100">
-                <div class="text-sm text-gray-500 px-4 mb-2">role</div>
-                <div class="flex items-center space-x-2 px-4 py-2 bg-blue-50 rounded-lg">
-                    <span class="h-2 w-2 rounded-full bg-green-500"></span>
-                    <span class="text-sm font-medium text-primary">student</span>
+            <div class="mt-8 pt-4 border-t border-white/10">
+                <div class="text-xs uppercase tracking-wide text-[#6e6e80] px-4 mb-2">role</div>
+                <div class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-[#10a37f]/10 border border-[#10a37f]/20">
+                    <span class="h-2 w-2 rounded-full bg-[#10a37f] shadow-[0_0_8px_rgba(16,163,127,0.6)]"></span>
+                    <span class="text-sm font-medium text-[#10a37f]">student</span>
                 </div>
             </div>
         </aside>
 
         <!-- 右侧内容区 -->
-        <main class="flex-1">
+        <main class="flex-1 min-w-0 relative z-10">
             <!-- 控制台 -->
             <section id="dashboard" class="space-y-6">
                 <div class="flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gray-800">console</h2>
-                    <div class="text-sm text-gray-500">
+                    <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">console</h2>
+                    <div class="text-sm text-[#8e8ea0]">
                         <span id="currentDate"></span>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="card bg-gradient-to-br from-blue-500 to-blue-700 text-white">
+                    <div class="card bg-gradient-to-br from-[#0f766e] to-[#064e3b] text-white border-emerald-500/20">
                         <div class="flex items-center justify-between">
                             <div>
                                 <div class="text-sm opacity-80">Completed questions</div>
-                                <div class="text-3xl font-bold mt-1">XX</div>
+                                <div class="text-3xl font-bold mt-1" id="dashboardCompletedCount">0</div>
                             </div>
                             <div class="text-4xl opacity-80">
                                 <i class="fa fa-check-circle"></i>
                             </div>
                         </div>
                         <div class="mt-4 text-sm">
-                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">Total number: XXX</span>
+                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">Total number: <span id="dashboardTotalCount">0</span></span>
                         </div>
                     </div>
                     
-                    <div class="card bg-gradient-to-br from-green-500 to-green-700 text-white">
+                    <div class="card bg-gradient-to-br from-[#10a37f] to-[#047857] text-white border-emerald-400/20">
                         <div class="flex items-center justify-between">
                             <div>
-                                <div class="text-sm opacity-80">Active Courses</div>
-                                <div class="text-3xl font-bold mt-1">X</div>
+                                <div class="text-sm opacity-80">Completed coursework</div>
+                                <div class="text-3xl font-bold mt-1" id="dashboardCompletedCourseworkCount">0</div>
                             </div>
                             <div class="text-4xl opacity-80">
                                 <i class="fa fa-book"></i>
                             </div>
                         </div>
                         <div class="mt-4 text-sm">
-                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">This term</span>
+                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">Total coursework: <span id="dashboardTotalCourseworkCount">0</span></span>
                         </div>
                     </div>
                     
-                    <div class="card bg-gradient-to-br from-purple-500 to-purple-700 text-white">
+                    <div class="card bg-gradient-to-br from-[#4f46e5] to-[#312e81] text-white border-indigo-400/20">
                         <div class="flex items-center justify-between">
                             <div>
-                                <div class="text-sm opacity-80">Average score</div>
-                                <div class="text-3xl font-bold mt-1">XX</div>
+                                <div class="text-sm opacity-80">Question Bank</div>
+                                <div class="text-3xl font-bold mt-1" id="dashboardQuestionBankCount">0</div>
                             </div>
                             <div class="text-4xl opacity-80">
-                                <i class="fa fa-line-chart"></i>
+                                <i class="fa fa-folder-open"></i>
                             </div>
                         </div>
                         <div class="mt-4 text-sm">
-                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">+XX%</span>
+                            <span class="bg-white bg-opacity-20 px-2 py-1 rounded-full">Favourited questions</span>
                         </div>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="card">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recently completed</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0">
-                                    <i class="fa fa-check"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">两数之和</p>
-                                    <p class="text-xs text-gray-500">Python · Comp1036 · Score: 90</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0">
-                                    <i class="fa fa-check"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">实现一个简单的计数器</p>
-                                    <p class="text-xs text-gray-500">JavaScript · Web开发 · 得分: 85</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-500 flex-shrink-0">
-                                    <i class="fa fa-check"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">二叉树的层序遍历</p>
-                                    <p class="text-xs text-gray-500">Java · 数据结构 · 得分: 80</p>
-                                </div>
-                            </div>
+                        <h3 class="text-lg font-semibold text-[#ececf1] mb-4">Recently completed</h3>
+                        <div id="recentCompletedList" class="space-y-4">
+                            <p class="text-sm text-[#8e8ea0]">加载中…</p>
                         </div>
                     </div>
                     
                     <div class="card">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">即将截止的作业</h3>
-                        <div class="space-y-3">
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center justify-between">
-                                    <h4 class="font-medium text-gray-800">JavaScript数组方法实践</h4>
-                                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">3天后截止</span>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-1">Web开发 · 2023-12-15</p>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center justify-between">
-                                    <h4 class="font-medium text-gray-800">排序算法实现</h4>
-                                    <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">8天后截止</span>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-1">算法 · 2023-12-10</p>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-lg">
-                                <div class="flex items-center justify-between">
-                                    <h4 class="font-medium text-gray-800">二叉树操作</h4>
-                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">13天后截止</span>
-                                </div>
-                                <p class="text-xs text-gray-500 mt-1">数据结构 · 2023-12-05</p>
-                            </div>
+                        <h3 class="text-lg font-semibold text-[#ececf1] mb-1">知识点占题库比例</h3>
+                        <p class="text-xs text-[#8e8ea0] mb-4">按每道题「首个知识点」归类，统计在整库题目中的占比</p>
+                        <div class="relative w-full max-h-[280px] mx-auto flex justify-center items-center min-h-[200px]">
+                            <canvas id="knowledgePieChart" aria-label="知识点占比扇形图"></canvas>
                         </div>
+                        <p id="knowledgePieEmpty" class="hidden text-sm text-[#8e8ea0] text-center py-8">暂无题目数据，加载题库后将显示分布。</p>
                     </div>
                 </div>
             </section>
 
             <!-- Question功能 -->
             <section id="question" class="hidden space-y-6">
-                <h2 class="text-2xl font-bold text-gray-800">Exercise Questions</h2>
+                <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">Exercise Questions</h2>
                 
                 <div class="card">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Programming language</label>
-                            <select id="languageFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Programming language</label>
+                            <select id="languageFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">Select languages</option>
                             </select>
                         </div>
                        <div id="courseFilterGroup" class="filter-group">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Course</label>
-                            <select id="courseFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Course</label>
+                            <select id="courseFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">ALL</option>
                             </select>
                         </div>
                         
                         <div id="yearFilterGroup" class="filter-group">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Year</label>
-                            <select id="yearFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Year</label>
+                            <select id="yearFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">ALL</option>
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Knowledge Point</label>
-                            <select id="qKnowledgeFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Knowledge Point</label>
+                            <select id="qKnowledgeFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">ALL</option>
                             </select>
                         </div>
                     </div>
                     
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-white/10">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Knowledge Point</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Type</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Code</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Language</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Knowledge Point</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Source Type</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Year</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Course</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Operation</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="questionsTableBody">
-                                <tr><td colspan="7" class="px-6 py-4 text-center text-gray-400">Loading...</td></tr>
+                            <tbody class="bg-black/20 divide-y divide-white/10" id="questionsTableBody">
+                                <tr><td colspan="7" class="px-6 py-4 text-center text-[#6e6e80]">Loading...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -294,42 +276,42 @@
 
             <!-- Coursework功能 -->
             <section id="coursework" class="hidden space-y-6">
-                <h2 class="text-2xl font-bold text-gray-800">Coursework</h2>
+                <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">Coursework</h2>
                 
                 <div class="card">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Programming language</label>
-                            <select id="cwLanguageFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Programming language</label>
+                            <select id="cwLanguageFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">Select languages</option>
                             </select>
                         </div>
                         <div id="cwCourseFilterGroup" class="filter-group">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Course</label>
-                            <select id="cwCourseFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Course</label>
+                            <select id="cwCourseFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">ALL</option>
                             </select>
-                        </div>
+                        </div>  
                         <div class="filter-group">
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Knowledge Point</label>
-                            <select id="cwKnowledgeFilter" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Knowledge Point</label>
+                            <select id="cwKnowledgeFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">ALL</option>
                             </select>
                         </div>
                     </div>  
                     
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-white/10">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Title</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Language</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Course</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Operation</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="courseworkTableBody">
-                                <tr><td colspan="4" class="px-6 py-4 text-center text-gray-400">Loading...</td></tr>
+                            <tbody class="bg-black/20 divide-y divide-white/10" id="courseworkTableBody">
+                                <tr><td colspan="4" class="px-6 py-4 text-center text-[#6e6e80]">Loading...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -338,45 +320,45 @@
 
             <!-- Question Bank功能 -->
             <section id="question-bank" class="hidden space-y-6">
-                <h2 class="text-2xl font-bold text-gray-800">My Collection</h2>
+                <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">My Collection</h2>
                 
                 <div class="card">
                     <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
                         <div class="relative w-64">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6e6e80]">
                                 <i class="fa fa-search"></i>
                             </span>
-                            <input type="text" id="qbSearch" class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="搜索题目...">
+                            <input type="text" id="qbSearch" class="input-gpt w-full pl-10 pr-3 py-2 rounded-lg" placeholder="搜索题目...">
                         </div>
-                        <button id="qbExportBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
+                        <button id="qbExportBtn" type="button" class="bg-[#10a37f] hover:bg-[#0d8f6e] text-white px-4 py-2 rounded-lg transition-all-300">
                             <i class="fa fa-download mr-2"></i>Export
                         </button>
                         <div id="qbExportModeBtns" class="hidden flex items-center gap-2">
-                            <button id="qbExportPdfBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <button id="qbExportPdfBtn" type="button" class="bg-[#10a37f] hover:bg-[#0d8f6e] text-white px-4 py-2 rounded-lg transition-all-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                                 <i class="fa fa-file-pdf-o mr-2"></i>Export PDF
                             </button>
-                            <button id="qbExportCancelBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+                            <button id="qbExportCancelBtn" type="button" class="border border-white/15 bg-white/5 hover:bg-white/10 text-[#ececf1] px-4 py-2 rounded-lg transition-all-300">
                                 Cancel
                             </button>
                         </div>
                     </div>
                     
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
+                        <table class="min-w-full divide-y divide-white/10">
                             <thead>
                                 <tr>
-                                    <th id="qbCheckboxTh" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden">
-                                        <input type="checkbox" id="qbSelectAll" class="rounded border-gray-300" title="全选">
+                                    <th id="qbCheckboxTh" class="px-4 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider hidden">
+                                        <input type="checkbox" id="qbSelectAll" class="rounded border-white/25 bg-[#0a0a0a] text-[#10a37f] focus:ring-[#10a37f]" title="全选">
                                     </th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Language</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Added Date</th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Operation</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Title</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Language</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Course</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Year</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Added Date</th>
+                                    <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Operation</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="questionBankTableBody">
+                            <tbody class="bg-black/20 divide-y divide-white/10" id="questionBankTableBody">
                                 <!-- 收藏题目列表将通过JavaScript动态动态生成 -->
                             </tbody>
                         </table>
@@ -387,12 +369,12 @@
     </div>
 
     <!-- 题目详情模态框 -->
-    <div id="questionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl shadow-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b border-gray-200">
+    <div id="questionModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-[#141414] border border-white/10 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto text-[#ececf1]">
+            <div class="p-6 border-b border-white/10">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-bold text-gray-800" id="modalTitle">Question Details</h3>
-                    <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <h3 class="text-xl font-semibold text-[#ececf1]" id="modalTitle">Question Details</h3>
+                    <button id="closeModal" type="button" class="text-[#8e8ea0] hover:text-white p-2 rounded-lg hover:bg-white/10">
                         <i class="fa fa-times"></i>
                     </button>
                 </div>
@@ -400,29 +382,29 @@
             <div class="p-6" id="modalContent">
                 <!-- 题目详情将通过JavaScript动态生成 -->
             </div>
-            <div class="p-6 border-t border-gray-200 flex justify-between items-center">
-                <button id="viewMaterialsBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+            <div class="p-6 border-t border-white/10 flex justify-between items-center flex-wrap gap-3">
+                <button id="viewMaterialsBtn" type="button" class="border border-white/15 bg-white/5 hover:bg-white/10 text-[#ececf1] px-4 py-2 rounded-lg transition-all-300">
                     <i class="fa fa-file-text mr-1"></i> View Materials
                 </button>
-                <div class="flex space-x-3">
-                    <button id="addToBankBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
-                        <i class="fa fa-folder-plus mr-1"></i> Add to favourites
-                    </button>
-                    <button id="submitAnswerBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
-                        <i class="fa fa-paper-plane mr-1"></i> Submit
-                    </button>
+                <div class="flex flex-wrap gap-3">
+                <button id="addToBankBtn" type="button" class="border border-white/15 bg-white/5 hover:bg-white/10 text-[#ececf1] px-4 py-2 rounded-lg transition-all-300">
+                    <i class="fa fa-folder-plus mr-1"></i> Add to favourites
+                </button>
+                <button id="submitAnswerBtn" type="button" class="bg-[#10a37f] hover:bg-[#0d8f6e] text-white px-4 py-2 rounded-lg transition-all-300">
+                        <i class="fa fa-check mr-1"></i> Mark as complete
+                </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- 做题模态框 -->
-    <div id="solveModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl shadow-lg w-full max-w-5xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b border-gray-200">
+    <div id="solveModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
+        <div class="bg-[#141414] border border-white/10 rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto text-[#ececf1]">
+            <div class="p-6 border-b border-white/10">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-xl font-bold text-gray-800" id="solveModalTitle">Solve the problem</h3>
-                    <button id="closeSolveModal" class="text-gray-500 hover:text-gray-700">
+                    <h3 class="text-xl font-semibold text-[#ececf1]" id="solveModalTitle">Solve the problem</h3>
+                    <button id="closeSolveModal" type="button" class="text-[#8e8ea0] hover:text-white p-2 rounded-lg hover:bg-white/10">
                         <i class="fa fa-times"></i>
                     </button>
                 </div>
@@ -432,31 +414,31 @@
                     <div>
                         <div class="mb-4">
                             <div class="flex flex-wrap gap-2 mb-2">
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800" id="solveLanguage">
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30" id="solveLanguage">
                                     javascript
                                 </span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800" id="solveCourse">
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-[#10a37f]/20 text-[#10a37f] border border-[#10a37f]/30" id="solveCourse">
                                     1036
                                 </span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800" id="solveYear">
+                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-white/10 text-[#ececf1] border border-white/15" id="solveYear">
                                     2023
                                 </span>
                             </div>
-                            <h4 class="font-medium text-gray-800 mb-2">Problem Description</h4>
-                            <p class="text-gray-700 whitespace-pre-line" id="solveDescription">
+                            <h4 class="font-medium text-[#ececf1] mb-2">Problem Description</h4>
+                            <p class="text-[#8e8ea0] whitespace-pre-line" id="solveDescription">
                                 请实现一个可以增加和减少的计数器组件，要求使用React hooks。
                             </p>
                         </div>
                         
                         <div class="mb-4">
-                            <h4 class="font-medium text-gray-800 mb-2">测试用例</h4>
+                            <h4 class="font-medium text-[#ececf1] mb-2">测试用例</h4>
                             <div class="space-y-2" id="testCases">
-                                <div class="p-2 bg-gray-50 rounded text-sm">
-                                    <div class="font-medium">输入:</div>
+                                <div class="p-2 bg-white/5 border border-white/10 rounded text-sm text-[#8e8ea0]">
+                                    <div class="font-medium text-[#ececf1]">输入:</div>
                                     <div>初始值 0</div>
                                 </div>
-                                <div class="p-2 bg-gray-50 rounded text-sm">
-                                    <div class="font-medium">预期输出:</div>
+                                <div class="p-2 bg-white/5 border border-white/10 rounded text-sm text-[#8e8ea0]">
+                                    <div class="font-medium text-[#ececf1]">预期输出:</div>
                                     <div>点击"+"按钮后显示 1</div>
                                     <div>点击"-"按钮后显示 0</div>
                                 </div>
@@ -467,8 +449,8 @@
                     <div>
                         <div class="mb-4">
                             <div class="flex items-center justify-between mb-2">
-                                <h4 class="font-medium text-gray-800">Your answer</h4>
-                                <div class="text-xs text-gray-500">
+                                <h4 class="font-medium text-[#ececf1]">Your answer</h4>
+                                <div class="text-xs text-[#8e8ea0]">
                                     <span id="charCount">0</span> string
                                 </div>
                             </div>
@@ -476,11 +458,11 @@
                         </div>
                         
                         <div class="flex justify-end space-x-3">
-                            <button id="runCodeBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition-all-300">
+                            <button id="runCodeBtn" type="button" class="border border-white/15 bg-white/5 hover:bg-white/10 text-[#ececf1] px-4 py-2 rounded-lg transition-all-300">
                                 <i class="fa fa-play mr-1"></i> run
                             </button>
-                            <button id="submitCodeBtn" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-all-300">
-                                <i class="fa fa-paper-plane mr-1"></i> submit
+                            <button id="submitCodeBtn" type="button" class="bg-[#10a37f] hover:bg-[#0d8f6e] text-white px-4 py-2 rounded-lg transition-all-300">
+                                <i class="fa fa-check mr-1"></i> Mark as complete
                             </button>
                         </div>
                         
@@ -495,6 +477,209 @@
 
     <script>
         const API_BASE = 'http://127.0.0.1:8000/api';
+
+        function getUserId() {
+            try {
+                const u = JSON.parse(localStorage.getItem('currentUser') || '{}');
+                if (u.userId != null) return u.userId;
+                if (u.user_id != null) return u.user_id;
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function escapeHtml(s) {
+            if (s == null || s === '') return '';
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        /** Console「Recently completed」：展示当前用户已标记完成的题目（来自 /questions?user_id= 的 is_completed） */
+        function renderRecentCompleted() {
+            const el = document.getElementById('recentCompletedList');
+            if (!el) return;
+            const completed = (questions || []).filter(q => Number(q.is_completed) === 1);
+            completed.sort((a, b) => (Number(b.question_id) || 0) - (Number(a.question_id) || 0));
+            const top = completed.slice(0, 8);
+            if (top.length === 0) {
+                el.innerHTML =
+                    '<p class="text-sm text-[#8e8ea0]">暂无已完成题目。在 Question 中打开题目并点击「Mark as complete」即可记录。</p>';
+                return;
+            }
+            el.innerHTML = top
+                .map(q => {
+                    const title = escapeHtml(q.question_code || '-');
+                    const lang = escapeHtml(q.language || '-');
+                    const course = escapeHtml(q.course_name || '-');
+                    const kpRaw = (q.knowledge_point || '').split(/[,;]/)[0].trim();
+                    const kp = kpRaw ? escapeHtml(kpRaw) : '';
+                    const sub = kp ? `${lang} · ${course} · ${kp}` : `${lang} · ${course}`;
+                    return `
+                        <div class="flex items-start space-x-3">
+                            <div class="h-8 w-8 rounded-full bg-[#10a37f]/15 border border-[#10a37f]/30 flex items-center justify-center text-[#10a37f] flex-shrink-0">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-medium text-[#ececf1] truncate" title="${title}">${title}</p>
+                                <p class="text-xs text-[#8e8ea0]">${sub}</p>
+                            </div>
+                        </div>`;
+                })
+                .join('');
+        }
+
+        /** 扇形图：按每道题「首个知识点」归类，统计占整库题目数比例 */
+        let knowledgePieChartInstance = null;
+        const KP_PIE_COLORS = [
+            '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899',
+            '#06B6D4', '#84CC16', '#F97316', '#6366F1', '#14B8A6', '#A855F7', '#64748B',
+        ];
+
+        function getKnowledgePieData() {
+            const counts = {};
+            for (const q of questions || []) {
+                const raw = (q.knowledge_point || '').trim();
+                let label = '未分类';
+                if (raw) {
+                    const parts = raw.split(/[,;]/).map(s => s.trim()).filter(Boolean);
+                    label = parts[0] || '未分类';
+                }
+                counts[label] = (counts[label] || 0) + 1;
+            }
+            let entries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+            const MAX_SLICES = 12;
+            if (entries.length > MAX_SLICES) {
+                const top = entries.slice(0, MAX_SLICES - 1);
+                const rest = entries.slice(MAX_SLICES - 1);
+                const otherSum = rest.reduce((s, e) => s + e[1], 0);
+                entries = otherSum > 0 ? [...top, ['其他', otherSum]] : top;
+            }
+            return {
+                labels: entries.map(e => e[0]),
+                data: entries.map(e => e[1]),
+            };
+        }
+
+        function renderKnowledgePieChart() {
+            const canvas = document.getElementById('knowledgePieChart');
+            const emptyEl = document.getElementById('knowledgePieEmpty');
+            if (!canvas || typeof Chart === 'undefined') return;
+
+            if (knowledgePieChartInstance) {
+                knowledgePieChartInstance.destroy();
+                knowledgePieChartInstance = null;
+            }
+
+            const n = (questions || []).length;
+            if (n === 0) {
+                canvas.classList.add('hidden');
+                if (emptyEl) emptyEl.classList.remove('hidden');
+                return;
+            }
+            canvas.classList.remove('hidden');
+            if (emptyEl) emptyEl.classList.add('hidden');
+
+            const { labels, data } = getKnowledgePieData();
+            const bg = labels.map((_, i) => KP_PIE_COLORS[i % KP_PIE_COLORS.length]);
+            const total = data.reduce((a, b) => a + b, 0) || 1;
+
+            knowledgePieChartInstance = new Chart(canvas, {
+                type: 'pie',
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            data,
+                            backgroundColor: bg,
+                            borderWidth: 1,
+                            borderColor: '#ffffff',
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 10,
+                                padding: 8,
+                                font: { size: 10 },
+                                color: '#8e8ea0',
+                            },
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(20,20,20,0.95)',
+                            titleColor: '#ececf1',
+                            bodyColor: '#8e8ea0',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            callbacks: {
+                                label(ctx) {
+                                    const v = Number(ctx.raw) || 0;
+                                    const pct = ((v / total) * 100).toFixed(1);
+                                    const label = ctx.label || '';
+                                    return ` ${label}: ${v} 题（占题库 ${pct}%）`;
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        }
+
+        function updateDashboardStats() {
+            const total = questions.length;
+            const done = questions.filter(q => Number(q.is_completed) === 1).length;
+            const elDone = document.getElementById('dashboardCompletedCount');
+            const elTotal = document.getElementById('dashboardTotalCount');
+            if (elDone) elDone.textContent = String(done);
+            if (elTotal) elTotal.textContent = String(total);
+
+            // Coursework：Coursework 页题目中已标记完成的数量 / 课程作业总数
+            const qById = new Map((questions || []).map(q => [Number(q.question_id), q]));
+            let completedCw = 0;
+            for (const cw of courseworks || []) {
+                const qid = Number(cw.question_id);
+                const q = qById.get(qid);
+                if (q && Number(q.is_completed) === 1) completedCw++;
+            }
+            const totalCw = (courseworks || []).length;
+            const elCwDone = document.getElementById('dashboardCompletedCourseworkCount');
+            const elCwTotal = document.getElementById('dashboardTotalCourseworkCount');
+            if (elCwDone) elCwDone.textContent = String(completedCw);
+            if (elCwTotal) elCwTotal.textContent = String(totalCw);
+
+            // Question Bank：收藏题目数量（与列表 is_favourite 一致）
+            const favCount = (questions || []).filter(q => Number(q.is_favourite) === 1).length;
+            const elQb = document.getElementById('dashboardQuestionBankCount');
+            if (elQb) elQb.textContent = String(favCount);
+
+            renderRecentCompleted();
+            renderKnowledgePieChart();
+        }
+
+        async function markQuestionCompleteById(questionId) {
+            const uid = getUserId();
+            if (uid == null || uid === '') {
+                alert('请先登录（需包含 userId，请重新登录一次）');
+                return false;
+            }
+            const res = await fetch(`${API_BASE}/questions/${questionId}/complete?user_id=${encodeURIComponent(uid)}`, { method: 'PUT' });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            const q = questions.find(x => x.question_id === questionId || x.question_id == questionId);
+            if (q) q.is_completed = 1;
+            const qb = questionBank.find(x => x.question_id == questionId);
+            if (qb) qb.is_completed = 1;
+            renderQuestions();
+            updateDashboardStats();
+            return true;
+        }
 
         let questions = [];
         let courseworks = [];
@@ -543,7 +728,7 @@
             // 退出登录
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 localStorage.removeItem('currentUser');
-                window.location.href = '../login.html';
+                window.location.href = 'login.html';
             });
             
             // 从 API 获取题目并渲染
@@ -638,17 +823,17 @@
                         const materials = await res.json();
                         listEl.innerHTML = '';
                         if (materials.length === 0) {
-                            listEl.innerHTML = '<p class="text-gray-500 text-sm">No related materials.</p>';
+                            listEl.innerHTML = '<p class="text-[#8e8ea0] text-sm">No related materials.</p>';
                         } else {
                             materials.forEach(m => {
                                 const item = document.createElement('div');
-                                item.className = 'flex items-center justify-between p-3 bg-gray-50 rounded-lg';
+                                item.className = 'flex items-center justify-between p-3 bg-white/5 border border-white/10 rounded-lg';
                                 item.innerHTML = `
                                     <div>
-                                        <span class="font-medium text-gray-800">${m.title || m.material_code}</span>
-                                        <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-100 text-blue-800">${m.material_type}</span>
+                                        <span class="font-medium text-[#ececf1]">${m.title || m.material_code}</span>
+                                        <span class="ml-2 px-2 py-0.5 text-xs rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">${m.material_type}</span>
                                     </div>
-                                    <a href="${API_BASE}/materials/${m.material_id}/download" class="text-primary hover:underline text-sm" target="_blank">
+                                    <a href="${API_BASE}/materials/${m.material_id}/download" class="text-[#10a37f] hover:text-[#19c37d] hover:underline text-sm" target="_blank">
                                         <i class="fa fa-download mr-1"></i>Download
                                     </a>
                                 `;
@@ -670,11 +855,17 @@
             document.getElementById('addToBankBtn').addEventListener('click', async function() {
                 const questionId = this.getAttribute('data-question-id');
                 if (!questionId) return;
+                const uid = getUserId();
+                if (uid == null || uid === '') {
+                    alert('请先登录');
+                    return;
+                }
                 try {
-                    const res = await fetch(`${API_BASE}/questions/${questionId}/favourite`, { method: 'PUT' });
+                    const res = await fetch(`${API_BASE}/questions/${questionId}/favourite?user_id=${encodeURIComponent(uid)}`, { method: 'PUT' });
                     if (!res.ok) throw new Error('Failed');
                     const q = questions.find(x => x.question_id == questionId);
-                    if (q) q.favourite = 1;
+                    if (q) q.is_favourite = 1;
+                    updateDashboardStats();
                     alert('已添加到收藏！');
                     document.getElementById('questionModal').classList.add('hidden');
                 } catch (err) {
@@ -683,17 +874,18 @@
                 }
             });
             
-            // 提交答案按钮
-            document.getElementById('submitAnswerBtn').addEventListener('click', function() {
-                const questionId = this.getAttribute('data-question-id');
-                const question = questions.find(q => q.id === questionId);
-                
-                if (question) {
-                    // 显示做题模态框
-                    showSolveModal(question);
-                }
-                
+            // 标记完成（题目详情模态框）
+            document.getElementById('submitAnswerBtn').addEventListener('click', async function() {
+                const questionId = parseInt(this.getAttribute('data-question-id'), 10);
+                if (!questionId) return;
+                try {
+                    await markQuestionCompleteById(questionId);
+                    alert('已标记为完成');
                 document.getElementById('questionModal').classList.add('hidden');
+                } catch (err) {
+                    console.error(err);
+                    alert('标记完成失败');
+                }
             });
             
             // 运行代码按钮
@@ -703,12 +895,12 @@
                 
                 // 模拟代码运行
                 resultDiv.innerHTML = `
-                    <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="p-3 rounded-lg border border-[#10a37f]/35 bg-[#0d0d0d]/90 text-[#ececf1]">
                         <div class="flex items-center space-x-2">
-                            <i class="fa fa-check-circle text-green-500"></i>
-                            <span class="font-medium text-green-800">代码运行成功</span>
+                            <i class="fa fa-check-circle text-[#10a37f]"></i>
+                            <span class="font-medium text-[#10a37f]">代码运行成功</span>
                         </div>
-                        <div class="mt-2 text-sm text-gray-700">
+                        <div class="mt-2 text-sm text-[#8e8ea0]">
                             <p>测试用例 1: 通过</p>
                             <p>测试用例 2: 通过</p>
                         </div>
@@ -716,52 +908,26 @@
                 `;
             });
             
-            // 提交代码按钮
-            document.getElementById('submitCodeBtn').addEventListener('click', function() {
-                const code = document.getElementById('codeEditor').value;
+            // 做题模态框：标记完成
+            document.getElementById('submitCodeBtn').addEventListener('click', async function() {
+                const questionId = parseInt(this.getAttribute('data-question-id'), 10);
+                if (!questionId) return;
                 const resultDiv = document.getElementById('codeResult');
-                
-                // 模拟代码提交和评分
-                resultDiv.innerHTML = `
-                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                        <div class="flex items-center space-x-2">
-                            <i class="fa fa-info-circle text-blue-500"></i>
-                            <span class="font-medium text-blue-800">submitted</span>
-                        </div>
-                        <div class="mt-2 text-sm text-gray-700">
-                            <p>Grading...</p>
-                        </div>
-                    </div>
-                `;
-                
-                // 模拟评分延迟
-                setTimeout(() => {
-                    // 随机生成一个分数（80-100之间）
-                    const score = Math.floor(Math.random() * 21) + 80;
-                    
+                try {
+                    await markQuestionCompleteById(questionId);
                     resultDiv.innerHTML = `
-                        <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <div class="p-3 rounded-lg border border-[#10a37f]/35 bg-[#0d0d0d]/90">
                             <div class="flex items-center space-x-2">
-                                <i class="fa fa-check-circle text-green-500"></i>
-                                <span class="font-medium text-green-800">评分完成</span>
-                            </div>
-                            <div class="mt-2 text-sm text-gray-700">
-                                <p>得分: <span class="font-bold">${score}</span>/100</p>
-                                <p class="mt-1">恭喜！你已成功完成这道题目。</p>
+                                <i class="fa fa-check-circle text-[#10a37f]"></i>
+                                <span class="font-medium text-[#ececf1]">已标记为完成</span>
                             </div>
                         </div>
                     `;
-                    
-                    // 更新题目状态
-                    const questionId = document.getElementById('submitCodeBtn').getAttribute('data-question-id');
-                    const question = questions.find(q => q.id === questionId);
-                    
-                    if (question) {
-                        question.status = 'completed';
-                        question.score = score;
-                        renderQuestions();
-                    }
-                }, 2000);
+                    document.getElementById('solveModal').classList.add('hidden');
+                } catch (err) {
+                    console.error(err);
+                    resultDiv.innerHTML = '<p class="text-sm text-red-400">标记完成失败</p>';
+                }
             });
             
             // 代码编辑器字符计数
@@ -823,11 +989,14 @@
         // 从后端 API 获取题目
         async function fetchQuestions() {
             try {
-                const res = await fetch(`${API_BASE}/questions`);
+                const uid = getUserId();
+                const qs = uid != null && uid !== '' ? `?user_id=${encodeURIComponent(uid)}` : '';
+                const res = await fetch(`${API_BASE}/questions${qs}`);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 questions = await res.json(); //将json数据转化成javascript数组
                 populateQuestionFilters();
                 renderQuestions();
+                updateDashboardStats();
             } catch (err) {
                 console.error('Failed to fetch questions:', err);
                 document.getElementById('questionsTableBody').innerHTML =
@@ -843,6 +1012,7 @@
                 courseworks = await res.json();
                 populateCourseworkFilters();
                 renderCourseworks();
+                updateDashboardStats();
             } catch (err) {
                 console.error('Failed to fetch courseworks:', err);
                 document.getElementById('courseworkTableBody').innerHTML =
@@ -867,47 +1037,51 @@
                 }
                 return true;
             });
-
+            
             const tableBody = document.getElementById('questionsTableBody');
             tableBody.innerHTML = '';
-
+            
             if (filteredQuestions.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-gray-400">No questions found</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="7" class="px-6 py-4 text-center text-[#6e6e80]">No questions found</td></tr>';
                 return;
             }
 
             filteredQuestions.forEach(q => {
                 const row = document.createElement('tr');
+                const completed = Number(q.is_completed) === 1;
+                if (completed) {
+                    row.classList.add('bg-white/[0.04]', 'text-[#8e8ea0]');
+                }
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${q.question_code}</div>
+                        <div class="text-sm font-medium ${completed ? 'text-[#8e8ea0]' : 'text-[#ececf1]'}">${q.question_code}${completed ? ' <span class="text-xs text-[#6e6e80]">(done)</span>' : ''}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">${q.language || '-'}</span>
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">${q.language || '-'}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="text-sm text-gray-700">${q.knowledge_point || '-'}</span>
+                        <span class="text-sm text-[#8e8ea0]">${q.knowledge_point || '-'}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#10a37f]/15 text-[#10a37f] border border-[#10a37f]/25">
                             ${q.source_type || '-'}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">
                         ${q.source_year || '-'}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">
                         ${q.course_name || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-primary hover:text-blue-700 view-question mr-3" data-question-id="${q.question_id}">
+                        <button type="button" class="text-[#10a37f] hover:text-[#19c37d] view-question mr-3" data-question-id="${q.question_id}">
                             view
                         </button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
-
+            
             document.querySelectorAll('.view-question').forEach(button => {
                 button.addEventListener('click', function() {
                     const qid = parseInt(this.getAttribute('data-question-id'));
@@ -932,12 +1106,12 @@
                 }
                 return true;
             });
-
+            
             const tableBody = document.getElementById('courseworkTableBody');
             tableBody.innerHTML = '';
-
+            
             if (filteredCourseworks.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-gray-400">No courseworks found</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="4" class="px-6 py-4 text-center text-[#6e6e80]">No courseworks found</td></tr>';
                 return;
             }
 
@@ -945,19 +1119,19 @@
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${cw.title}</div>
+                        <div class="text-sm font-medium text-[#ececf1]">${cw.title}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                             ${cw.language}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">
                         ${cw.courseName || cw.course_name || '-'}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-primary hover:text-blue-700 view-coursework mr-3" data-question-id="${cw.question_id}">view</button>
-                        <button class="text-green-600 hover:text-green-800 download-coursework" data-question-id="${cw.question_id}">download</button>
+                        <button type="button" class="text-[#10a37f] hover:text-[#19c37d] view-coursework mr-3" data-question-id="${cw.question_id}">view</button>
+                        <button type="button" class="text-[#10a37f]/90 hover:text-[#19c37d] download-coursework" data-question-id="${cw.question_id}">download</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -977,11 +1151,29 @@
                         const res = await fetch(`${API_BASE}/questions/${qid}/materials`);
                         if (!res.ok) throw new Error(`HTTP ${res.status}`);
                         const materials = await res.json();
-                        if (materials.length === 0) {
-                            alert('暂无关联材料可下载');
+                        const cwMaterials = (materials || []).filter(m => {
+                            const t = m.material_type || m.materialType || '';
+                            return String(t).toUpperCase() === 'CW';
+                        });
+                        if (cwMaterials.length === 0) {
+                            alert('暂无关联的 CW（课程作业）材料可下载');
                             return;
                         }
-                        window.location.href = `${API_BASE}/materials/${materials[0].material_id}/download`;
+                        // 同一用户手势内依次触发多个下载，避免只下第一个
+                        for (let i = 0; i < cwMaterials.length; i++) {
+                            const m = cwMaterials[i];
+                            const url = `${API_BASE}/materials/${m.material_id}/download`;
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.target = '_blank';
+                            a.rel = 'noopener noreferrer';
+                            document.body.appendChild(a);
+                            a.click();
+                            document.body.removeChild(a);
+                            if (i < cwMaterials.length - 1) {
+                                await new Promise(r => setTimeout(r, 250));
+                            }
+                        }
                     } catch (err) {
                         console.error(err);
                         alert('下载失败');
@@ -1003,7 +1195,15 @@
         // 从 API 获取收藏题目并渲染
         async function fetchQuestionBank() {
             try {
-                const res = await fetch(`${API_BASE}/questions?favourite=1`);
+                const uid = getUserId();
+                if (uid == null || uid === '') {
+                    questionBank = [];
+                    renderQuestionBank();
+                    document.getElementById('questionBankTableBody').innerHTML =
+                        '<tr><td colspan="6" class="px-6 py-4 text-center text-amber-600">请先登录后再查看收藏</td></tr>';
+                    return;
+                }
+                const res = await fetch(`${API_BASE}/questions?favourite=1&user_id=${encodeURIComponent(uid)}`);
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 questionBank = await res.json();
                 renderQuestionBank();
@@ -1029,7 +1229,7 @@
             
             const colCount = qbExportMode ? 7 : 6;
             if (filteredQuestions.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="${colCount}" class="px-6 py-4 text-center text-gray-400">暂无收藏题目</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="${colCount}" class="px-6 py-4 text-center text-[#6e6e80]">暂无收藏题目</td></tr>`;
                 if (qbExportMode) document.getElementById('qbExportPdfBtn').disabled = true;
                 return;
             }
@@ -1038,29 +1238,29 @@
                 const row = document.createElement('tr');
                 const checkboxTd = qbExportMode ? `
                     <td class="px-4 py-4 whitespace-nowrap">
-                        <input type="checkbox" class="qb-checkbox rounded border-gray-300" data-question-id="${question.question_id}">
+                        <input type="checkbox" class="qb-checkbox rounded border-white/25 bg-[#0a0a0a] text-[#10a37f]" data-question-id="${question.question_id}">
                     </td>` : '';
                 row.innerHTML = checkboxTd + `
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${question.question_code || '-'}</div>
+                        <div class="text-sm font-medium text-[#ececf1]">${question.question_code || '-'}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                             ${question.language || '-'}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">
                         ${question.course_name || '-'}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">
                         ${question.source_year || '-'}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#8e8ea0]">-</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button class="text-primary hover:text-blue-700 mr-3 view-favourite-question" data-question-id="${question.question_id}">
+                        <button type="button" class="text-[#10a37f] hover:text-[#19c37d] mr-3 view-favourite-question" data-question-id="${question.question_id}">
                             view
                         </button>
-                        <button class="text-red-600 hover:text-red-800 remove-favourite" data-question-id="${question.question_id}">
+                        <button type="button" class="text-red-400 hover:text-red-300 remove-favourite" data-question-id="${question.question_id}">
                             delete
                         </button>
                     </td>
@@ -1079,11 +1279,17 @@
                 btn.addEventListener('click', async function() {
                     const qid = this.getAttribute('data-question-id');
                     try {
-                        const res = await fetch(`${API_BASE}/questions/${qid}/favourite`, { method: 'DELETE' });
+                        const uid = getUserId();
+                        if (uid == null || uid === '') {
+                            alert('请先登录');
+                            return;
+                        }
+                        const res = await fetch(`${API_BASE}/questions/${qid}/favourite?user_id=${encodeURIComponent(uid)}`, { method: 'DELETE' });
                         if (!res.ok) throw new Error('Failed');
                         questionBank = questionBank.filter(q => q.question_id != qid);
                         const q = questions.find(x => x.question_id == qid);
-                        if (q) q.favourite = 0;
+                        if (q) q.is_favourite = 0;
+                        updateDashboardStats();
                         renderQuestionBank();
                     } catch (err) {
                         console.error(err);
@@ -1123,36 +1329,36 @@
         function showQuestionDetails(questionId, fromFavourites) {
             const question = questions.find(q => q.question_id === questionId) || questionBank.find(q => q.question_id === questionId);
             if (!question) return;
-
+            
             document.getElementById('modalTitle').textContent = question.question_code;
-
+            
             const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = `
                 <div class="mb-4">
                     <div class="flex flex-wrap gap-2 mb-3">
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/25">
                             ${question.source_type || '-'}
                         </span>
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-[#10a37f]/15 text-[#10a37f] border border-[#10a37f]/25">
                             ${question.course_name || '-'}
                         </span>
-                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-800">
+                        <span class="px-2 py-1 text-xs font-semibold rounded-full bg-white/10 text-[#ececf1] border border-white/15">
                             ${question.source_year || '-'}
                         </span>
-                        ${question.knowledge_point ? `<span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">${question.knowledge_point}</span>` : ''}
+                        ${question.knowledge_point ? `<span class="px-2 py-1 text-xs font-semibold rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/25">${question.knowledge_point}</span>` : ''}
                     </div>
-                    <h4 class="font-medium text-gray-800 mb-2">Question</h4>
-                    <p class="text-gray-700 whitespace-pre-line">${question.question_text}</p>
+                    <h4 class="font-medium text-[#ececf1] mb-2">Question</h4>
+                    <p class="text-[#8e8ea0] whitespace-pre-line">${question.question_text}</p>
                 </div>
                 ${question.answer_text ? `
                 <div class="mb-4">
-                    <h4 class="font-medium text-gray-800 mb-2">Answer</h4>
-                    <div class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto">
+                    <h4 class="font-medium text-[#ececf1] mb-2">Answer</h4>
+                    <div class="bg-[#0a0a0a] border border-white/10 text-[#ececf1] p-4 rounded-lg overflow-x-auto">
                         <pre><code>${question.answer_text}</code></pre>
                     </div>
                 </div>` : ''}
                 <div id="materialsSection" class="mt-4 hidden">
-                    <h4 class="font-medium text-gray-800 mb-2">Related Materials</h4>
+                    <h4 class="font-medium text-[#ececf1] mb-2">Related Materials</h4>
                     <div id="materialsList" class="space-y-2"></div>
                 </div>
             `;
@@ -1160,6 +1366,12 @@
             document.getElementById('viewMaterialsBtn').setAttribute('data-question-id', question.question_id);
             document.getElementById('addToBankBtn').setAttribute('data-question-id', question.question_id);
             document.getElementById('submitAnswerBtn').setAttribute('data-question-id', question.question_id);
+            const submitBtn = document.getElementById('submitAnswerBtn');
+            const done = Number(question.is_completed) === 1;
+            submitBtn.disabled = done;
+            submitBtn.innerHTML = done
+                ? '<i class="fa fa-check mr-1"></i> Completed'
+                : '<i class="fa fa-check mr-1"></i> Mark as complete';
             const addToBankBtn = document.getElementById('addToBankBtn');
             addToBankBtn.style.display = fromFavourites ? 'none' : '';
             const materialsSection = document.getElementById('materialsSection');
@@ -1169,14 +1381,13 @@
 
         // 显示做题模态框
         function showSolveModal(question) {
-            document.getElementById('solveModalTitle').textContent = question.title;
-            document.getElementById('solveLanguage').textContent = question.language;
-            document.getElementById('solveCourse').textContent = question.courseName;
-            document.getElementById('solveYear').textContent = question.year;
-            document.getElementById('solveDescription').textContent = question.description;
+            document.getElementById('solveModalTitle').textContent = question.title || question.question_code || 'Solve';
+            document.getElementById('solveLanguage').textContent = question.language || '-';
+            document.getElementById('solveCourse').textContent = question.courseName || question.course_name || '-';
+            document.getElementById('solveYear').textContent = question.year || question.source_year || '-';
+            document.getElementById('solveDescription').textContent = question.description || question.question_text || '';
             
-            // 设置提交代码按钮的题目ID
-            document.getElementById('submitCodeBtn').setAttribute('data-question-id', question.id);
+            document.getElementById('submitCodeBtn').setAttribute('data-question-id', question.question_id || question.id);
             
             // 清空代码编辑器和结果
             document.getElementById('codeEditor').value = '';

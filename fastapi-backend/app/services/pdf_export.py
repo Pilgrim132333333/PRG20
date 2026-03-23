@@ -1,4 +1,3 @@
-"""将选定题目合并导出为 PDF"""
 import io
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle

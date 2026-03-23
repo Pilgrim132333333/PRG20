@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log in — AI Programming Question Bank</title>
+    <title>Sign up — AI Programming Question Bank</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,12 +66,12 @@
                 </svg>
             </div>
             <h1 class="text-xl sm:text-2xl font-semibold tracking-tight text-[#ececf1] text-center">AI Programming Question Bank</h1>
-            <p class="text-sm text-[#8e8ea0] mt-2 text-center">Log in to continue</p>
+            <p class="text-sm text-[#8e8ea0] mt-2 text-center">Create your account</p>
         </div>
 
         <div class="card-gpt rounded-2xl p-6 sm:p-8 shadow-2xl">
             <p id="formError" class="hidden mb-4 text-sm text-red-400 bg-red-950/40 border border-red-800/50 rounded-lg px-3 py-2"></p>
-            <form id="loginForm" class="space-y-5">
+            <form id="signupForm" class="space-y-5">
                 <div>
                     <label for="username" class="block text-sm font-medium text-[#8e8ea0] mb-1.5">User name</label>
                     <div class="relative">
@@ -81,23 +81,39 @@
                     </div>
                 </div>
                 <div>
+                    <label for="email" class="block text-sm font-medium text-[#8e8ea0] mb-1.5">Email</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6e6e80]"><i class="fa fa-envelope-o"></i></span>
+                        <input type="email" id="email" name="email" maxlength="100" class="input-gpt w-full pl-10 pr-3 py-2.5 rounded-lg text-[15px]"
+                               placeholder="name@example.com" required autocomplete="email">
+                    </div>
+                </div>
+                <div>
                     <label for="password" class="block text-sm font-medium text-[#8e8ea0] mb-1.5">Password</label>
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6e6e80]"><i class="fa fa-lock"></i></span>
                         <input type="password" id="password" name="password" maxlength="255" class="input-gpt w-full pl-10 pr-3 py-2.5 rounded-lg text-[15px]"
-                               placeholder="••••••••" required autocomplete="current-password">
+                               placeholder="••••••••" required autocomplete="new-password">
+                    </div>
+                </div>
+                <div>
+                    <label for="password2" class="block text-sm font-medium text-[#8e8ea0] mb-1.5">Confirm password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6e6e80]"><i class="fa fa-lock"></i></span>
+                        <input type="password" id="password2" name="password2" maxlength="255" class="input-gpt w-full pl-10 pr-3 py-2.5 rounded-lg text-[15px]"
+                               placeholder="••••••••" required autocomplete="new-password">
                     </div>
                 </div>
                 <button type="submit" id="submitBtn" class="btn-submit w-full font-medium py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-[15px] mt-2">
-                    <span>Log in</span>
+                    <span>Sign up</span>
                     <i class="fa fa-arrow-right text-sm opacity-90"></i>
                 </button>
             </form>
         </div>
 
         <p class="mt-6 text-center text-sm text-[#8e8ea0]">
-            No account?
-            <a href="signup.html" class="text-[#10a37f] hover:underline">Sign up</a>
+            Already have an account?
+            <a href="login.html" class="text-[#10a37f] hover:underline">Log in</a>
         </p>
         <p class="mt-4 text-center">
             <a href="index.html" class="text-sm text-[#8e8ea0] hover:text-[#ececf1] transition-colors">← Back to home</a>
@@ -118,23 +134,29 @@
             document.getElementById('formError').classList.add('hidden');
         }
 
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             hideError();
             const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
+            const password2 = document.getElementById('password2').value;
+            if (password !== password2) {
+                showError('The two passwords do not match.');
+                return;
+            }
             const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             try {
-                const res = await fetch(API_BASE + '/auth/login', {
+                const res = await fetch(API_BASE + '/auth/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password }),
+                    body: JSON.stringify({ username, email, password }),
                 });
                 const data = await res.json().catch(() => ({}));
                 if (!res.ok) {
                     const d = data.detail;
-                    const msg = typeof d === 'string' ? d : (Array.isArray(d) ? ((d[0] && d[0].msg) || 'Validation error') : (res.statusText || 'Login failed'));
+                    const msg = typeof d === 'string' ? d : (Array.isArray(d) ? (d[0] && d[0].msg) || 'Validation error' : (res.statusText || 'Registration failed'));
                     showError(msg);
                     return;
                 }
@@ -142,7 +164,7 @@
                     userId: data.user_id,
                     username: data.username,
                     email: data.email,
-                    role: data.role || 'student'
+                    role: 'student'
                 }));
                 window.location.href = 'student.html';
             } catch (err) {

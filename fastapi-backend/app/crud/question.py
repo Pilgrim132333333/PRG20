@@ -1,7 +1,14 @@
 """Questions 表 CRUD"""
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
 from app.models.question import Question
+from app.models.user_question_state import UserQuestionState
+
+
+def get_question_by_id_sync(db: Session, question_id: int) -> Question | None:
+    r = db.execute(select(Question).where(Question.question_id == question_id))
+    return r.scalars().first()
 
 
 def get_questions_by_ids(db: Session, question_ids: list[int]) -> list:
@@ -16,26 +23,27 @@ def get_questions_by_ids(db: Session, question_ids: list[int]) -> list:
     return sorted(rows, key=lambda q: order_map.get(q.question_id, 999))
 
 
-def get_questions_all(db: Session, skip: int = 0, limit: int = 100, favourite: int | None = None):
-    """获取所有题目（同步），可选按 favourite 筛选"""
+def get_questions_all(
+    db: Session,
+    skip: int = 0,
+    limit: int = 10000,
+    user_id: int | None = None,
+    favourite: int | None = None,
+):
+    """获取所有题目；favourite=1 时需 user_id，按 User_Question_State.is_favourite 筛选"""
     stmt = select(Question)
-    if favourite is not None:
-        stmt = stmt.where(Question.favourite == favourite)
+    if user_id is not None and favourite == 1:
+        stmt = (
+            stmt.join(UserQuestionState, Question.question_id == UserQuestionState.question_id)
+            .where(UserQuestionState.user_id == user_id)
+            .where(UserQuestionState.is_favourite == 1)
+        )
+    elif favourite == 1:
+        # 无 user_id 时无法按收藏筛选，返回空
+        return []
     stmt = stmt.order_by(Question.question_id).offset(skip).limit(limit)
     result = db.execute(stmt)
     return result.scalars().all()
-
-
-def update_favourite(db: Session, question_id: int, value: int) -> bool:
-    """设置题目的 favourite 字段，返回是否成功"""
-    result = db.execute(select(Question).where(Question.question_id == question_id))
-    question = result.scalars().first()
-    if not question:
-        return False
-    question.favourite = value
-    db.commit()
-    db.refresh(question)
-    return True
 
 
 async def get_question_by_id(db, question_id: int):
