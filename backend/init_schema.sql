@@ -19,7 +19,7 @@ CREATE TABLE Questions (
     course_name VARCHAR(100) DEFAULT 'Programming and Algorithms',
     source_year VARCHAR(20),                     
     source_type ENUM('Sample Paper', 'CW', 'Lab Worksheet', 'Tutorial'),
-    knowledge_point VARCHAR(100),                
+    knowledge_point VARCHAR(200),                
     question_text TEXT NOT NULL,                 
     answer_text TEXT,                            
     image_path VARCHAR(255) DEFAULT NULL,
