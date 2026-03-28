@@ -11,3 +11,4 @@ pymysql
 cryptography  # MySQL 8 caching_sha2_password 时 pymysql 需要
 passlib[bcrypt]
 email-validator
+httpx

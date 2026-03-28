@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import questions, courseworks, materials, auth
+from app.api.routes import questions, courseworks, materials, auth, ai
 
 app = FastAPI(title="AI Programming Question Bank API")
 
@@ -18,6 +18,7 @@ app.include_router(questions.router, prefix="/api")
 app.include_router(courseworks.router, prefix="/api")
 app.include_router(materials.router, prefix="/api")
 app.include_router(auth.router, prefix="/api")
+app.include_router(ai.router, prefix="/api")
 
 
 @app.get("/")

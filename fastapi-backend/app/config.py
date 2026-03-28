@@ -1,14 +1,24 @@
 # 配置：DATABASE_URL、JWT、CORS 等
+from pathlib import Path
 from urllib.parse import quote_plus
 
+from pydantic import ConfigDict, field_validator
 from pydantic_settings import BaseSettings
-from pydantic import ConfigDict
+
+# app/config.py -> fastapi-backend/ -> Workspace/
+_BACKEND_DIR = Path(__file__).resolve().parent.parent
+_WORKSPACE_DIR = _BACKEND_DIR.parent
+_ENV_FILES = tuple(
+    str(p)
+    for p in (_WORKSPACE_DIR / ".env", _BACKEND_DIR / ".env")
+    if p.is_file()
+)
 
 
 class Settings(BaseSettings):
     """支持 DB_*（本机 pga_platform）或 DATABASE_*（远程）"""
     model_config = ConfigDict(
-        env_file=("../.env", ".env"),
+        env_file=_ENV_FILES if _ENV_FILES else (".env",),
         env_file_encoding="utf-8",
         extra="ignore",
     )
@@ -27,6 +37,22 @@ class Settings(BaseSettings):
 
     # 材料文件根目录，例如 /path/to/Workspace/backend/static
     STATIC_FILES_ROOT: str | None = None
+
+    # AI assistant: OpenAI-compatible POST {AI_API_BASE}/chat/completions
+    # DeepSeek (default): set AI_API_KEY in Workspace/.env — never commit keys.
+    # OpenAI: AI_API_BASE=https://api.openai.com/v1  AI_MODEL=gpt-4o-mini
+    AI_API_KEY: str = ""
+    AI_API_BASE: str = "https://api.deepseek.com"
+    AI_MODEL: str = "deepseek-chat"
+    AI_TEMPERATURE: float = 0.35
+    AI_TIMEOUT_SECONDS: float = 120.0
+
+    @field_validator("AI_API_KEY", mode="before")
+    @classmethod
+    def _strip_ai_api_key(cls, v):
+        if v is None:
+            return ""
+        return str(v).strip()
 
     def _host(self) -> str:
         return self.DB_HOST or self.DATABASE_HOST

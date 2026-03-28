@@ -6,6 +6,10 @@ from sqlalchemy.orm import Session
 from app.models.user import User
 
 
+def get_by_id(db: Session, user_id: int) -> User | None:
+    return db.execute(select(User).where(User.user_id == user_id)).scalars().first()
+
+
 def get_by_username(db: Session, username: str) -> User | None:
     return db.execute(select(User).where(User.username == username)).scalars().first()
 

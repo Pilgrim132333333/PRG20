@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -50,6 +52,161 @@
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
+        #aiChatMessages::-webkit-scrollbar { width: 6px; }
+        #aiChatMessages::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.12);
+            border-radius: 9999px;
+        }
+        @keyframes aiThinkOrb {
+            0%, 100% { opacity: 0.25; transform: rotate(0deg) scale(0.95); }
+            50% { opacity: 0.55; transform: rotate(180deg) scale(1.05); }
+        }
+        @keyframes aiThinkBar {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        @keyframes aiThinkDot {
+            0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
+            40% { transform: translateY(-6px); opacity: 1; }
+        }
+        .ai-thinking-wrap {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .ai-thinking-bubble {
+            max-width: 85%;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(16, 163, 127, 0.4);
+            background: rgba(10, 10, 10, 0.65);
+            padding: 0.75rem 1rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.06),
+                0 12px 40px rgba(0, 0, 0, 0.45),
+                0 0 48px rgba(16, 163, 127, 0.08);
+        }
+        .ai-thinking-bubble::before {
+            content: "";
+            position: absolute;
+            inset: -50%;
+            background: conic-gradient(
+                from 200deg,
+                transparent 0deg,
+                rgba(16, 163, 127, 0.12) 80deg,
+                transparent 140deg,
+                rgba(59, 130, 246, 0.1) 220deg,
+                transparent 300deg
+            );
+            animation: aiThinkOrb 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .ai-thinking-inner {
+            position: relative;
+            z-index: 1;
+        }
+        .ai-thinking-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #6e6e80;
+            margin-bottom: 0.45rem;
+        }
+        .ai-thinking-bar {
+            height: 3px;
+            border-radius: 9999px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(16, 163, 127, 0.2),
+                #10a37f,
+                #19c37d,
+                #3b82f6,
+                #10a37f,
+                rgba(16, 163, 127, 0.2),
+                transparent
+            );
+            background-size: 200% 100%;
+            animation: aiThinkBar 1.6s linear infinite;
+            margin-bottom: 0.55rem;
+        }
+        .ai-thinking-dots {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+        .ai-thinking-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10a37f;
+            animation: aiThinkDot 1.15s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(16, 163, 127, 0.55);
+        }
+        .ai-thinking-dots span:nth-child(2) {
+            animation-delay: 0.14s;
+            background: #19c37d;
+        }
+        .ai-thinking-dots span:nth-child(3) {
+            animation-delay: 0.28s;
+            background: #60a5fa;
+        }
+        /* Assistant chat: rendered Markdown */
+        .ai-md { white-space: normal; word-break: break-word; }
+        .ai-md > :first-child { margin-top: 0 !important; }
+        .ai-md > :last-child { margin-bottom: 0 !important; }
+        .ai-md p { margin: 0.4em 0; line-height: 1.55; }
+        .ai-md ul, .ai-md ol { margin: 0.4em 0; padding-left: 1.25rem; }
+        .ai-md li { margin: 0.2em 0; }
+        .ai-md li > p { margin: 0.15em 0; }
+        .ai-md strong { font-weight: 600; color: #ececf1; }
+        .ai-md em { font-style: italic; color: #d4d4d8; }
+        .ai-md code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.86em;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.12em 0.4em;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ai-md pre {
+            margin: 0.55em 0;
+            padding: 0.75rem;
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        .ai-md pre code {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 0.82em;
+        }
+        .ai-md h1, .ai-md h2, .ai-md h3, .ai-md h4 {
+            font-weight: 600;
+            margin: 0.65em 0 0.35em;
+            line-height: 1.25;
+            color: #ececf1;
+        }
+        .ai-md h1 { font-size: 1.1rem; }
+        .ai-md h2 { font-size: 1.05rem; }
+        .ai-md h3, .ai-md h4 { font-size: 1rem; }
+        .ai-md blockquote {
+            border-left: 3px solid rgba(16, 163, 127, 0.45);
+            margin: 0.5em 0;
+            padding: 0.2em 0 0.2em 0.75em;
+            color: #a1a1aa;
+        }
+        .ai-md a { color: #10a37f; text-decoration: underline; }
+        .ai-md hr { border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 0.75em 0; }
+        .ai-md table { border-collapse: collapse; width: 100%; font-size: 0.88em; margin: 0.5em 0; }
+        .ai-md th, .ai-md td { border: 1px solid rgba(255, 255, 255, 0.12); padding: 0.35em 0.5em; text-align: left; }
+        .ai-md th { background: rgba(255, 255, 255, 0.05); }
+        .ai-chat-scroll {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 48px);
+        }
     </style>
     <style type="text/tailwindcss">
         @layer utilities {
@@ -75,7 +232,7 @@
             .input-gpt:focus, select.input-gpt:focus {
                 @apply outline-none ring-2 ring-[#10a37f]/30 border-[#10a37f]/40;
             }
-            .filter-group {
+             .filter-group {
                 @apply transition-all duration-300 overflow-hidden;
             }
             .filter-group.hidden {
@@ -91,7 +248,7 @@
 </head>
 <body class="gpt-bg min-h-screen flex flex-col text-[#ececf1] antialiased relative">
     <div class="absolute inset-0 shimmer pointer-events-none z-0"></div>
-    <!-- 顶部导航栏 -->
+    <!-- Header -->
     <header class="relative z-20 border-b border-white/10 bg-black/40 backdrop-blur-md">
         <div class="container mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center space-x-2">
@@ -112,9 +269,9 @@
         </div>
     </header>
 
-    <!-- 主内容区 -->
+    <!-- Main layout -->
     <div class="relative z-10 flex flex-1 container mx-auto my-6 px-4 gap-6">
-        <!-- 左侧导航 -->
+        <!-- Sidebar -->
         <aside class="w-64 shrink-0 rounded-xl border border-white/10 bg-[#121212]/80 backdrop-blur-md p-4">
             <nav class="space-y-1">
                 <a href="#" class="nav-item active" data-target="dashboard">
@@ -143,9 +300,9 @@
             </div>
         </aside>
 
-        <!-- 右侧内容区 -->
+        <!-- Main content -->
         <main class="flex-1 min-w-0 relative z-10">
-            <!-- 控制台 -->
+            <!-- Dashboard -->
             <section id="dashboard" class="space-y-6">
                 <div class="flex items-center justify-between">
                     <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">console</h2>
@@ -205,22 +362,22 @@
                     <div class="card">
                         <h3 class="text-lg font-semibold text-[#ececf1] mb-4">Recently completed</h3>
                         <div id="recentCompletedList" class="space-y-4">
-                            <p class="text-sm text-[#8e8ea0]">加载中…</p>
+                            <p class="text-sm text-[#8e8ea0]">Loading…</p>
                         </div>
                     </div>
                     
                     <div class="card">
-                        <h3 class="text-lg font-semibold text-[#ececf1] mb-1">知识点占题库比例</h3>
-                        <p class="text-xs text-[#8e8ea0] mb-4">按每道题「首个知识点」归类，统计在整库题目中的占比</p>
+                        <h3 class="text-lg font-semibold text-[#ececf1] mb-1">Question Bank: knowledge mix</h3>
+                        <p class="text-xs text-[#8e8ea0] mb-4">First knowledge point per <span class="text-[#ececf1]/90">favourited</span> question only — not the full database.</p>
                         <div class="relative w-full max-h-[280px] mx-auto flex justify-center items-center min-h-[200px]">
-                            <canvas id="knowledgePieChart" aria-label="知识点占比扇形图"></canvas>
-                        </div>
-                        <p id="knowledgePieEmpty" class="hidden text-sm text-[#8e8ea0] text-center py-8">暂无题目数据，加载题库后将显示分布。</p>
+                            <canvas id="knowledgePieChart" aria-label="Question Bank knowledge distribution"></canvas>
+                                </div>
+                        <p id="knowledgePieEmpty" class="hidden text-sm text-[#8e8ea0] text-center py-8">No favourites yet. Add questions to Question Bank to see this chart.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Question功能 -->
+            <!-- Question section -->
             <section id="question" class="hidden space-y-6">
                 <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">Exercise Questions</h2>
                 
@@ -230,6 +387,12 @@
                             <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Programming language</label>
                             <select id="languageFilter" class="input-gpt w-full rounded-lg px-3 py-2">
                                 <option value="all">Select languages</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label class="block text-sm font-medium text-[#8e8ea0] mb-1">Question type</label>
+                            <select id="qSourceTypeFilter" class="input-gpt w-full rounded-lg px-3 py-2">
+                                <option value="all">ALL</option>
                             </select>
                         </div>
                        <div id="courseFilterGroup" class="filter-group">
@@ -274,7 +437,7 @@
                 </div>
             </section>
 
-            <!-- Coursework功能 -->
+            <!-- Coursework section -->
             <section id="coursework" class="hidden space-y-6">
                 <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">Coursework</h2>
                 
@@ -318,7 +481,7 @@
                 </div>
             </section>
 
-            <!-- Question Bank功能 -->
+            <!-- Question Bank section -->
             <section id="question-bank" class="hidden space-y-6">
                 <h2 class="text-2xl font-semibold text-[#ececf1] tracking-tight">My Collection</h2>
                 
@@ -328,7 +491,7 @@
                             <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-[#6e6e80]">
                                 <i class="fa fa-search"></i>
                             </span>
-                            <input type="text" id="qbSearch" class="input-gpt w-full pl-10 pr-3 py-2 rounded-lg" placeholder="搜索题目...">
+                            <input type="text" id="qbSearch" class="input-gpt w-full pl-10 pr-3 py-2 rounded-lg" placeholder="Search questions...">
                         </div>
                         <button id="qbExportBtn" type="button" class="bg-[#10a37f] hover:bg-[#0d8f6e] text-white px-4 py-2 rounded-lg transition-all-300">
                             <i class="fa fa-download mr-2"></i>Export
@@ -348,7 +511,7 @@
                             <thead>
                                 <tr>
                                     <th id="qbCheckboxTh" class="px-4 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider hidden">
-                                        <input type="checkbox" id="qbSelectAll" class="rounded border-white/25 bg-[#0a0a0a] text-[#10a37f] focus:ring-[#10a37f]" title="全选">
+                                        <input type="checkbox" id="qbSelectAll" class="rounded border-white/25 bg-[#0a0a0a] text-[#10a37f] focus:ring-[#10a37f]" title="Select all">
                                     </th>
                                     <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Title</th>
                                     <th class="px-6 py-3 bg-white/5 text-left text-xs font-medium text-[#8e8ea0] uppercase tracking-wider">Language</th>
@@ -359,7 +522,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-black/20 divide-y divide-white/10" id="questionBankTableBody">
-                                <!-- 收藏题目列表将通过JavaScript动态动态生成 -->
+                                <!-- Question bank table filled by JavaScript -->
                             </tbody>
                         </table>
                     </div>
@@ -368,7 +531,7 @@
         </main>
     </div>
 
-    <!-- 题目详情模态框 -->
+    <!-- Question detail modal -->
     <div id="questionModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
         <div class="bg-[#141414] border border-white/10 rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto text-[#ececf1]">
             <div class="p-6 border-b border-white/10">
@@ -380,7 +543,7 @@
                 </div>
             </div>
             <div class="p-6" id="modalContent">
-                <!-- 题目详情将通过JavaScript动态生成 -->
+                <!-- Question detail body filled by JavaScript -->
             </div>
             <div class="p-6 border-t border-white/10 flex justify-between items-center flex-wrap gap-3">
                 <button id="viewMaterialsBtn" type="button" class="border border-white/15 bg-white/5 hover:bg-white/10 text-[#ececf1] px-4 py-2 rounded-lg transition-all-300">
@@ -398,7 +561,7 @@
         </div>
     </div>
 
-    <!-- 做题模态框 -->
+    <!-- Solve modal -->
     <div id="solveModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden p-4">
         <div class="bg-[#141414] border border-white/10 rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto text-[#ececf1]">
             <div class="p-6 border-b border-white/10">
@@ -426,21 +589,21 @@
                             </div>
                             <h4 class="font-medium text-[#ececf1] mb-2">Problem Description</h4>
                             <p class="text-[#8e8ea0] whitespace-pre-line" id="solveDescription">
-                                请实现一个可以增加和减少的计数器组件，要求使用React hooks。
+                                Implement a counter that can increment and decrement using React hooks.
                             </p>
                         </div>
                         
                         <div class="mb-4">
-                            <h4 class="font-medium text-[#ececf1] mb-2">测试用例</h4>
+                            <h4 class="font-medium text-[#ececf1] mb-2">Sample tests</h4>
                             <div class="space-y-2" id="testCases">
                                 <div class="p-2 bg-white/5 border border-white/10 rounded text-sm text-[#8e8ea0]">
-                                    <div class="font-medium text-[#ececf1]">输入:</div>
-                                    <div>初始值 0</div>
+                                    <div class="font-medium text-[#ececf1]">Input:</div>
+                                    <div>Initial value 0</div>
                                 </div>
                                 <div class="p-2 bg-white/5 border border-white/10 rounded text-sm text-[#8e8ea0]">
-                                    <div class="font-medium text-[#ececf1]">预期输出:</div>
-                                    <div>点击"+"按钮后显示 1</div>
-                                    <div>点击"-"按钮后显示 0</div>
+                                    <div class="font-medium text-[#ececf1]">Expected output:</div>
+                                    <div>After clicking "+", shows 1</div>
+                                    <div>After clicking "-", shows 0</div>
                                 </div>
                             </div>
                         </div>
@@ -467,7 +630,7 @@
                         </div>
                         
                         <div class="mt-4" id="codeResult">
-                            <!-- 代码运行结果将在这里显示 -->
+                            <!-- Code run output -->
                         </div>
                     </div>
                 </div>
@@ -475,8 +638,66 @@
         </div>
     </div>
 
+    <!-- AI assistant panel -->
+    <div id="aiAssistantDock" class="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[100] flex flex-col items-end gap-0 pointer-events-none">
+        <div
+            id="aiAssistantPanel"
+            class="pointer-events-auto mb-4 hidden w-[min(calc(100vw-2rem),400px)] h-[min(calc(100dvh-5.5rem),540px)] rounded-3xl border border-white/[0.09] bg-[#0e0e0e]/[0.97] backdrop-blur-2xl overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.04)]"
+            role="dialog"
+            aria-label="Study assistant"
+        >
+            <div class="flex items-center justify-between gap-3 px-4 py-3.5 shrink-0 border-b border-white/[0.07] bg-gradient-to-r from-[#101010] via-[#121212] to-[#101010]">
+                <div class="flex items-center gap-3 min-w-0">
+                    <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#1a9d72] from-10% via-[#10a37f] to-[#0a6b50] text-white shadow-[0_8px_28px_rgba(16,163,127,0.35)] ring-1 ring-white/15" aria-hidden="true">
+                        <i class="fa fa-magic text-[15px]"></i>
+                    </span>
+                    <div class="min-w-0">
+                        <div class="text-[15px] font-semibold text-[#ececf1] tracking-tight leading-tight">Study assistant</div>
+                        <div class="text-[11px] text-[#6e6e80] mt-0.5 tracking-wide">Practice · topics · saved questions</div>
+                    </div>
+                </div>
+                <button type="button" id="aiAssistantClose" class="shrink-0 h-9 w-9 rounded-xl text-[#8e8ea0] hover:text-[#ececf1] hover:bg-white/[0.08] transition-all-300 flex items-center justify-center" aria-label="Close">
+                    <i class="fa fa-times text-lg"></i>
+                </button>
+            </div>
+            <div id="aiChatMessages" class="ai-chat-scroll flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-3.5">
+                <div class="flex justify-start">
+                    <div class="ai-intro-bubble max-w-[90%] rounded-2xl px-3.5 py-2.5 text-[13px] leading-relaxed text-[#a1a1aa] border border-white/[0.07] bg-white/[0.03]">
+                        Ask about exercises, concepts, or your saved questions.
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 pt-3 shrink-0 border-t border-white/[0.07] bg-[#0a0a0a]/90">
+                <div class="flex gap-3 items-end">
+                    <textarea
+                        id="aiChatInput"
+                        rows="1"
+                        class="flex-1 resize-none min-h-[46px] max-h-32 py-3 px-4 rounded-2xl border border-white/[0.1] bg-[#141414] text-[#ececf1] text-sm placeholder:text-[#5c5c66] focus:outline-none focus:ring-2 focus:ring-[#10a37f]/35 focus:border-[#10a37f]/40"
+                        placeholder="Message"
+                        autocomplete="off"
+                    ></textarea>
+                    <button type="button" id="aiChatSend" class="shrink-0 h-11 w-11 rounded-full bg-gradient-to-br from-[#19c37d] to-[#10a37f] hover:from-[#10a37f] hover:to-[#0d8f6e] text-white flex items-center justify-center shadow-lg shadow-[#10a37f]/25 transition-all-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#10a37f]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]" aria-label="Send">
+                        <i class="fa fa-paper-plane text-sm pl-0.5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <button
+            type="button"
+            id="aiAssistantFab"
+            class="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-[#19c37d] via-[#10a37f] to-[#0d8f6e] text-white shadow-lg shadow-[#10a37f]/40 ring-2 ring-white/10 hover:scale-105 active:scale-95 transition-all-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] focus-visible:ring-[#10a37f]"
+            aria-label="Open AI assistant"
+            aria-expanded="false"
+            aria-controls="aiAssistantPanel"
+        >
+            <i class="fa fa-comments text-xl" aria-hidden="true"></i>
+        </button>
+    </div>
+
     <script>
         const API_BASE = 'http://127.0.0.1:8000/api';
+        /** In-memory OpenAI-style history for /ai/chat until page refresh */
+        let aiChatTranscript = [];
 
         function getUserId() {
             try {
@@ -498,7 +719,107 @@
                 .replace(/"/g, '&quot;');
         }
 
-        /** Console「Recently completed」：展示当前用户已标记完成的题目（来自 /questions?user_id= 的 is_completed） */
+        function aiAssistantAppendMessage(role, text) {
+            const box = document.getElementById('aiChatMessages');
+            if (!box) return;
+            const isUser = role === 'user';
+            const row = document.createElement('div');
+            row.className = 'flex ' + (isUser ? 'justify-end' : 'justify-start');
+            const bubble = document.createElement('div');
+            const base =
+                'max-w-[90%] rounded-2xl px-3.5 py-2.5 text-[13px] border leading-relaxed break-words shadow-sm ' +
+                (isUser
+                    ? 'bg-gradient-to-br from-[#10a37f]/30 to-[#0d8f6e]/20 text-[#ececf1] border-[#10a37f]/35 whitespace-pre-wrap'
+                    : 'bg-white/[0.045] text-[#e4e4e7] border-white/[0.08]');
+            bubble.className = base;
+            if (isUser) {
+                bubble.textContent = text;
+            } else {
+                const src = text == null ? '' : String(text);
+                try {
+                    if (typeof marked !== 'undefined' && typeof marked.parse === 'function') {
+                        marked.setOptions({ breaks: true, gfm: true });
+                        const html = marked.parse(src);
+                        bubble.classList.add('ai-md');
+                        bubble.innerHTML =
+                            typeof DOMPurify !== 'undefined' && typeof DOMPurify.sanitize === 'function'
+                                ? DOMPurify.sanitize(html, { USE_PROFILES: { html: true } })
+                                : escapeHtml(src).replace(/\n/g, '<br>');
+                    } else {
+                        bubble.classList.add('whitespace-pre-wrap');
+                        bubble.textContent = src;
+                    }
+                } catch (e) {
+                    console.error('ai markdown render', e);
+                    bubble.classList.add('whitespace-pre-wrap');
+                    bubble.textContent = src;
+                }
+            }
+            row.appendChild(bubble);
+            box.appendChild(row);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function aiAssistantSetOpen(open) {
+            const panel = document.getElementById('aiAssistantPanel');
+            const fab = document.getElementById('aiAssistantFab');
+            if (!panel || !fab) return;
+            if (open) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex', 'flex-col');
+            } else {
+                panel.classList.add('hidden');
+                panel.classList.remove('flex', 'flex-col');
+            }
+            fab.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
+        function aiRemoveLastChatRow() {
+            const box = document.getElementById('aiChatMessages');
+            if (!box || !box.lastElementChild) return;
+            box.removeChild(box.lastElementChild);
+        }
+
+        const AI_THINKING_ROW_ID = 'aiAssistantThinkingRow';
+
+        function aiAssistantRemoveThinking() {
+            document.getElementById(AI_THINKING_ROW_ID)?.remove();
+        }
+
+        function aiAssistantShowThinking() {
+            aiAssistantRemoveThinking();
+            const box = document.getElementById('aiChatMessages');
+            if (!box) return;
+            const row = document.createElement('div');
+            row.id = AI_THINKING_ROW_ID;
+            row.className = 'ai-thinking-wrap';
+            row.setAttribute('role', 'status');
+            row.setAttribute('aria-live', 'polite');
+            row.setAttribute('aria-label', 'Assistant is thinking');
+            row.innerHTML = `
+                <div class="ai-thinking-bubble">
+                    <div class="ai-thinking-inner">
+                        <div class="ai-thinking-label">Thinking</div>
+                        <div class="ai-thinking-bar" aria-hidden="true"></div>
+                        <div class="ai-thinking-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                    </div>
+                </div>`;
+            box.appendChild(row);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        /** Optional warm-up; no UI copy (context is rebuilt on each send). */
+        async function loadAiSessionContext() {
+            const uid = getUserId();
+            if (uid == null) return;
+            try {
+                await fetch(API_BASE + '/ai/session-context?user_id=' + encodeURIComponent(uid));
+            } catch (e) {
+                /* silent */
+            }
+        }
+
+        /** Dashboard: recently completed for current user (is_completed from /questions?user_id=) */
         function renderRecentCompleted() {
             const el = document.getElementById('recentCompletedList');
             if (!el) return;
@@ -507,7 +828,7 @@
             const top = completed.slice(0, 8);
             if (top.length === 0) {
                 el.innerHTML =
-                    '<p class="text-sm text-[#8e8ea0]">暂无已完成题目。在 Question 中打开题目并点击「Mark as complete」即可记录。</p>';
+                    '<p class="text-sm text-[#8e8ea0]">No completed items yet. Open a question and use Mark as complete to record progress.</p>';
                 return;
             }
             el.innerHTML = top
@@ -532,7 +853,7 @@
                 .join('');
         }
 
-        /** 扇形图：按每道题「首个知识点」归类，统计占整库题目数比例 */
+        /** Pie chart: first knowledge point per favourited question (Question Bank only) */
         let knowledgePieChartInstance = null;
         const KP_PIE_COLORS = [
             '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899',
@@ -540,13 +861,14 @@
         ];
 
         function getKnowledgePieData() {
+            const favs = (questions || []).filter(q => Number(q.is_favourite) === 1);
             const counts = {};
-            for (const q of questions || []) {
+            for (const q of favs) {
                 const raw = (q.knowledge_point || '').trim();
-                let label = '未分类';
+                let label = 'Uncategorized';
                 if (raw) {
                     const parts = raw.split(/[,;]/).map(s => s.trim()).filter(Boolean);
-                    label = parts[0] || '未分类';
+                    label = parts[0] || 'Uncategorized';
                 }
                 counts[label] = (counts[label] || 0) + 1;
             }
@@ -556,7 +878,7 @@
                 const top = entries.slice(0, MAX_SLICES - 1);
                 const rest = entries.slice(MAX_SLICES - 1);
                 const otherSum = rest.reduce((s, e) => s + e[1], 0);
-                entries = otherSum > 0 ? [...top, ['其他', otherSum]] : top;
+                entries = otherSum > 0 ? [...top, ['Other', otherSum]] : top;
             }
             return {
                 labels: entries.map(e => e[0]),
@@ -574,10 +896,19 @@
                 knowledgePieChartInstance = null;
             }
 
-            const n = (questions || []).length;
-            if (n === 0) {
+            const favs = (questions || []).filter(q => Number(q.is_favourite) === 1);
+            if (favs.length === 0) {
                 canvas.classList.add('hidden');
-                if (emptyEl) emptyEl.classList.remove('hidden');
+                if (emptyEl) {
+                    emptyEl.classList.remove('hidden');
+                    if (!(questions || []).length) {
+                        emptyEl.textContent =
+                            'No question data yet. The chart appears after questions load.';
+                    } else {
+                        emptyEl.textContent =
+                            'No favourites yet. Add questions to Question Bank to see this chart.';
+                    }
+                }
                 return;
             }
             canvas.classList.remove('hidden');
@@ -624,7 +955,7 @@
                                     const v = Number(ctx.raw) || 0;
                                     const pct = ((v / total) * 100).toFixed(1);
                                     const label = ctx.label || '';
-                                    return ` ${label}: ${v} 题（占题库 ${pct}%）`;
+                                    return ` ${label}: ${v} questions (${pct}% of Question Bank)`;
                                 },
                             },
                         },
@@ -641,7 +972,7 @@
             if (elDone) elDone.textContent = String(done);
             if (elTotal) elTotal.textContent = String(total);
 
-            // Coursework：Coursework 页题目中已标记完成的数量 / 课程作业总数
+            // Coursework: completed items vs total coursework rows
             const qById = new Map((questions || []).map(q => [Number(q.question_id), q]));
             let completedCw = 0;
             for (const cw of courseworks || []) {
@@ -655,7 +986,7 @@
             if (elCwDone) elCwDone.textContent = String(completedCw);
             if (elCwTotal) elCwTotal.textContent = String(totalCw);
 
-            // Question Bank：收藏题目数量（与列表 is_favourite 一致）
+            // Question Bank: favourite count (matches is_favourite in list)
             const favCount = (questions || []).filter(q => Number(q.is_favourite) === 1).length;
             const elQb = document.getElementById('dashboardQuestionBankCount');
             if (elQb) elQb.textContent = String(favCount);
@@ -667,7 +998,7 @@
         async function markQuestionCompleteById(questionId) {
             const uid = getUserId();
             if (uid == null || uid === '') {
-                alert('请先登录（需包含 userId，请重新登录一次）');
+                alert('Please sign in (userId required; sign in again if needed).');
                 return false;
             }
             const res = await fetch(`${API_BASE}/questions/${questionId}/complete?user_id=${encodeURIComponent(uid)}`, { method: 'PUT' });
@@ -686,18 +1017,18 @@
         let questionBank = [];
         let qbExportMode = false;
 
-        // DOM加载完成后执行
+        // After DOM ready
         document.addEventListener('DOMContentLoaded', function() {
-            // 获取当前用户信息
-            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { username: '学生', role: 'student' };
+            // Current user from localStorage
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { username: 'Student', role: 'student' };
             document.getElementById('username').textContent = currentUser.username;
             
-            // 设置当前日期
+            // Header date
             const now = new Date();
             const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
-            document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN', options);
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
             
-            // 导航菜单切换
+            // Nav: switch sections
             const navItems = document.querySelectorAll('.nav-item');
             const sections = document.querySelectorAll('main > section');
             
@@ -705,57 +1036,58 @@
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     
-                    // 移除所有导航项的active类
+                    // Clear active nav
                     navItems.forEach(nav => nav.classList.remove('active'));
                     
-                    // 给当前点击的导航项添加active类
+                    // Set active nav
                     this.classList.add('active');
                     
-                    // 隐藏所有内容区域
+                    // Hide all sections
                     sections.forEach(section => section.classList.add('hidden'));
                     
-                    // 显示对应的内容区域
+                    // Show target section
                     const targetId = this.getAttribute('data-target');
                     document.getElementById(targetId).classList.remove('hidden');
                     
-                    // 切换到 Question Bank 时加载收藏题目
+                    // Load favourites when opening Question Bank
                     if (targetId === 'question-bank') {
                         fetchQuestionBank();
                     }
                 });
             });
             
-            // 退出登录
+            // Log out
             document.getElementById('logoutBtn').addEventListener('click', function() {
                 localStorage.removeItem('currentUser');
                 window.location.href = 'login.html';
             });
             
-            // 从 API 获取题目并渲染
+            // Fetch questions
             fetchQuestions();
             
-            // 从 API 获取课程作业并渲染
+            // Fetch courseworks
             fetchCourseworks();
             
-            // Question Bank 初始为空，切换到该页时由 fetchQuestionBank 加载
+            // Question Bank loads on tab switch
             
-            // 语言筛选器事件
+            // Question filters
             document.getElementById('languageFilter').addEventListener('change', filterQuestions);
 
-            // 课程作业语言筛选器事件
+            // Coursework language filter
             document.getElementById('cwLanguageFilter').addEventListener('change', filterCourseworks);
 
-            // 其他筛选条件变化时也触发筛选
+            // Other coursework filters
             document.getElementById('courseFilter').addEventListener('change', filterQuestions);
             document.getElementById('yearFilter').addEventListener('change', filterQuestions);
             document.getElementById('qKnowledgeFilter').addEventListener('change', filterQuestions);
+            document.getElementById('qSourceTypeFilter').addEventListener('change', filterQuestions);
             document.getElementById('cwCourseFilter').addEventListener('change', filterCourseworks);
             document.getElementById('cwKnowledgeFilter').addEventListener('change', filterCourseworks);
             
-            // 搜索题目收藏库
+            // Question bank search
             document.getElementById('qbSearch').addEventListener('input', renderQuestionBank);
             
-            // Export 按钮：进入导出模式
+            // Export: enter selection mode
             document.getElementById('qbExportBtn').addEventListener('click', function() {
                 qbExportMode = true;
                 document.getElementById('qbExportBtn').classList.add('hidden');
@@ -764,7 +1096,7 @@
                 renderQuestionBank();
             });
             
-            // Cancel：退出导出模式
+            // Cancel export selection
             document.getElementById('qbExportCancelBtn').addEventListener('click', function() {
                 qbExportMode = false;
                 document.getElementById('qbExportBtn').classList.remove('hidden');
@@ -794,23 +1126,23 @@
                     URL.revokeObjectURL(url);
                 } catch (err) {
                     console.error(err);
-                    alert('导出 PDF 失败');
+                    alert('Export PDF failed');
                 } finally {
                     updateQbExportState();
                 }
             });
             
-            // 关闭模态框
+            // Close question modal
             document.getElementById('closeModal').addEventListener('click', function() {
                 document.getElementById('questionModal').classList.add('hidden');
             });
             
-            // 关闭做题模态框
+            // Close solve modal
             document.getElementById('closeSolveModal').addEventListener('click', function() {
                 document.getElementById('solveModal').classList.add('hidden');
             });
             
-            // 查看关联材料按钮
+            // View materials
             document.getElementById('viewMaterialsBtn').addEventListener('click', async function() {
                 const questionId = this.getAttribute('data-question-id');
                 if (!questionId) return;
@@ -851,13 +1183,13 @@
                 }
             });
 
-            // 添加到收藏按钮
+            // Add to favourites
             document.getElementById('addToBankBtn').addEventListener('click', async function() {
                 const questionId = this.getAttribute('data-question-id');
                 if (!questionId) return;
                 const uid = getUserId();
                 if (uid == null || uid === '') {
-                    alert('请先登录');
+                    alert('Please sign in');
                     return;
                 }
                 try {
@@ -866,79 +1198,177 @@
                     const q = questions.find(x => x.question_id == questionId);
                     if (q) q.is_favourite = 1;
                     updateDashboardStats();
-                    alert('已添加到收藏！');
+                    alert('Added to favourites.');
                     document.getElementById('questionModal').classList.add('hidden');
                 } catch (err) {
                     console.error(err);
-                    alert('添加收藏失败');
+                    alert('Could not add to favourites');
                 }
             });
             
-            // 标记完成（题目详情模态框）
+            // Mark complete from question modal
             document.getElementById('submitAnswerBtn').addEventListener('click', async function() {
                 const questionId = parseInt(this.getAttribute('data-question-id'), 10);
                 if (!questionId) return;
                 try {
                     await markQuestionCompleteById(questionId);
-                    alert('已标记为完成');
+                    alert('Marked as complete');
                 document.getElementById('questionModal').classList.add('hidden');
                 } catch (err) {
                     console.error(err);
-                    alert('标记完成失败');
+                    alert('Could not mark complete');
                 }
             });
             
-            // 运行代码按钮
+            // Run code (demo)
             document.getElementById('runCodeBtn').addEventListener('click', function() {
                 const code = document.getElementById('codeEditor').value;
                 const resultDiv = document.getElementById('codeResult');
                 
-                // 模拟代码运行
+                // Simulated run
                 resultDiv.innerHTML = `
                     <div class="p-3 rounded-lg border border-[#10a37f]/35 bg-[#0d0d0d]/90 text-[#ececf1]">
                         <div class="flex items-center space-x-2">
                             <i class="fa fa-check-circle text-[#10a37f]"></i>
-                            <span class="font-medium text-[#10a37f]">代码运行成功</span>
+                            <span class="font-medium text-[#10a37f]">Run succeeded</span>
                         </div>
                         <div class="mt-2 text-sm text-[#8e8ea0]">
-                            <p>测试用例 1: 通过</p>
-                            <p>测试用例 2: 通过</p>
+                            <p>Test 1: passed</p>
+                            <p>Test 2: passed</p>
                         </div>
                     </div>
                 `;
             });
             
-            // 做题模态框：标记完成
+            // Solve modal: mark complete
             document.getElementById('submitCodeBtn').addEventListener('click', async function() {
                 const questionId = parseInt(this.getAttribute('data-question-id'), 10);
                 if (!questionId) return;
                 const resultDiv = document.getElementById('codeResult');
                 try {
                     await markQuestionCompleteById(questionId);
-                    resultDiv.innerHTML = `
+                resultDiv.innerHTML = `
                         <div class="p-3 rounded-lg border border-[#10a37f]/35 bg-[#0d0d0d]/90">
-                            <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2">
                                 <i class="fa fa-check-circle text-[#10a37f]"></i>
-                                <span class="font-medium text-[#ececf1]">已标记为完成</span>
-                            </div>
+                                <span class="font-medium text-[#ececf1]">Marked as complete</span>
                         </div>
-                    `;
+                    </div>
+                `;
                     document.getElementById('solveModal').classList.add('hidden');
                 } catch (err) {
                     console.error(err);
-                    resultDiv.innerHTML = '<p class="text-sm text-red-400">标记完成失败</p>';
+                    resultDiv.innerHTML = '<p class="text-sm text-red-400">Could not mark complete</p>';
                 }
             });
             
-            // 代码编辑器字符计数
+            // Code editor char count
             document.getElementById('codeEditor').addEventListener('input', function() {
                 const charCount = this.value.length;
                 document.getElementById('charCount').textContent = charCount;
             });
+
+            // AI: session-context on open; POST /ai/chat (LLM key in backend .env)
+            (function initAiAssistant() {
+                const panel = document.getElementById('aiAssistantPanel');
+                const fab = document.getElementById('aiAssistantFab');
+                const closeBtn = document.getElementById('aiAssistantClose');
+                const input = document.getElementById('aiChatInput');
+                const sendBtn = document.getElementById('aiChatSend');
+                if (!panel || !fab || !closeBtn || !input || !sendBtn) return;
+
+                let aiSending = false;
+
+                fab.addEventListener('click', async function () {
+                    const isHidden = panel.classList.contains('hidden');
+                    aiAssistantSetOpen(isHidden);
+                    if (isHidden) {
+                        setTimeout(function () {
+                            input.focus();
+                        }, 0);
+                        await loadAiSessionContext();
+                    }
+                });
+                closeBtn.addEventListener('click', function () {
+                    aiAssistantSetOpen(false);
+                });
+                document.addEventListener('keydown', function (e) {
+                    if (e.key !== 'Escape') return;
+                    if (panel.classList.contains('hidden')) return;
+                    aiAssistantSetOpen(false);
+                    fab.focus();
+                });
+
+                async function sendAiMessage() {
+                    if (aiSending) return;
+                    const uid = getUserId();
+                    const text = (input.value || '').trim();
+                    if (!text) return;
+                    if (uid == null) {
+                        aiAssistantAppendMessage('assistant', 'Please sign in to use the assistant.');
+                        return;
+                    }
+                    aiAssistantAppendMessage('user', text);
+                    input.value = '';
+                    aiAssistantShowThinking();
+                    const messagesPayload = aiChatTranscript.concat([{ role: 'user', content: text }]);
+                    aiSending = true;
+                    sendBtn.disabled = true;
+                    input.disabled = true;
+                    try {
+                        const res = await fetch(API_BASE + '/ai/chat', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ user_id: uid, messages: messagesPayload }),
+                        });
+                        const data = await res.json().catch(() => ({}));
+                        aiAssistantRemoveThinking();
+                        if (!res.ok) {
+                            aiRemoveLastChatRow();
+                            input.value = text;
+                            const d = data.detail;
+                            let msg =
+                                typeof d === 'string'
+                                    ? d
+                                    : Array.isArray(d)
+                                      ? (d[0] && d[0].msg) || JSON.stringify(d)
+                                      : JSON.stringify(d);
+                            aiAssistantAppendMessage('assistant', 'Request failed: ' + (msg || res.status));
+                            return;
+                        }
+                        const reply = data.reply != null ? String(data.reply) : '';
+                        aiChatTranscript.push({ role: 'user', content: text });
+                        aiChatTranscript.push({ role: 'assistant', content: reply });
+                        aiAssistantAppendMessage('assistant', reply);
+                    } catch (e) {
+                        aiAssistantRemoveThinking();
+                        aiRemoveLastChatRow();
+                        input.value = text;
+                        aiAssistantAppendMessage(
+                            'assistant',
+                            'Network error: ' + (e && e.message ? e.message : String(e))
+                        );
+                    } finally {
+                        aiSending = false;
+                        sendBtn.disabled = false;
+                        input.disabled = false;
+                    }
+                }
+
+                sendBtn.addEventListener('click', function () {
+                    sendAiMessage();
+                });
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendAiMessage();
+                    }
+                });
+            })();
         });
 
-        // 从题目数据中提取并填充 Course、Year、Knowledge Point 筛选选项
-        // knowledge_point 可能为分号/逗号分隔的多值字符串，需拆分为独立选项
+        // Populate question filters from data
+        // knowledge_point may be comma/semicolon-separated
         function populateQuestionFilters() {
             const languages = [...new Set(questions.map(q => q.language).filter(Boolean))].sort();
             const courses = [...new Set(questions.map(q => q.course_name).filter(Boolean))].sort();
@@ -953,18 +1383,25 @@
                 });
             });
             const knowledgePoints = [...kpSet].sort();
+            const sourceTypes = [...new Set(questions.map(q => q.source_type).filter(Boolean))].sort();
+            const hasEmptySourceType = questions.some(q => q.source_type == null || String(q.source_type).trim() === '');
             const langEl = document.getElementById('languageFilter');
+            const typeEl = document.getElementById('qSourceTypeFilter');
             const courseEl = document.getElementById('courseFilter');
             const yearEl = document.getElementById('yearFilter');
             const kpEl = document.getElementById('qKnowledgeFilter');
             langEl.innerHTML = '<option value="all">Select languages</option>' + languages.map(l => `<option value="${l}">${l}</option>`).join('');
+            let typeOpts = '<option value="all">ALL</option>';
+            if (hasEmptySourceType) typeOpts += '<option value="__none__">(Not set)</option>';
+            typeOpts += sourceTypes.map(t => `<option value="${t}">${t}</option>`).join('');
+            typeEl.innerHTML = typeOpts;
             courseEl.innerHTML = '<option value="all">ALL</option>' + courses.map(c => `<option value="${c}">${c}</option>`).join('');
             yearEl.innerHTML = '<option value="all">ALL</option>' + years.map(y => `<option value="${y}">${y}</option>`).join('');
             kpEl.innerHTML = '<option value="all">ALL</option>' + knowledgePoints.map(kp => `<option value="${kp}">${kp}</option>`).join('');
         }
 
-        // 从课程作业数据中提取并填充 Language、Course、Knowledge Point 筛选选项
-        // knowledge_point 可能为分号/逗号分隔的多值字符串，需拆分为独立选项
+        // Populate coursework filters
+        // knowledge_point may be comma/semicolon-separated
         function populateCourseworkFilters() {
             const languages = [...new Set(courseworks.map(cw => cw.language).filter(Boolean))].sort();
             const courses = [...new Set(courseworks.map(cw => (cw.courseName || cw.course_name || cw.course)).filter(Boolean))].sort();
@@ -986,14 +1423,14 @@
             kpEl.innerHTML = '<option value="all">ALL</option>' + knowledgePoints.map(kp => `<option value="${kp}">${kp}</option>`).join('');
         }
 
-        // 从后端 API 获取题目
+        // GET /questions
         async function fetchQuestions() {
             try {
                 const uid = getUserId();
                 const qs = uid != null && uid !== '' ? `?user_id=${encodeURIComponent(uid)}` : '';
                 const res = await fetch(`${API_BASE}/questions${qs}`);
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                questions = await res.json(); //将json数据转化成javascript数组
+                questions = await res.json();
                 populateQuestionFilters();
                 renderQuestions();
                 updateDashboardStats();
@@ -1004,7 +1441,7 @@
             }
         }
 
-        // 从后端 API 获取课程作业
+        // GET /courseworks
         async function fetchCourseworks() {
             try {
                 const res = await fetch(`${API_BASE}/courseworks`);
@@ -1020,15 +1457,21 @@
             }
         }
 
-        // 渲染题目列表
+        // Render question table
         function renderQuestions() {
             const languageFilter = document.getElementById('languageFilter').value;
+            const sourceTypeFilter = document.getElementById('qSourceTypeFilter').value;
             const courseFilter = document.getElementById('courseFilter').value;
             const yearFilter = document.getElementById('yearFilter').value;
             const knowledgeFilter = document.getElementById('qKnowledgeFilter').value;
 
             const filteredQuestions = questions.filter(q => {
                 if (languageFilter && languageFilter !== 'all' && q.language !== languageFilter) return false;
+                if (sourceTypeFilter && sourceTypeFilter !== 'all') {
+                    if (sourceTypeFilter === '__none__') {
+                        if (q.source_type != null && String(q.source_type).trim() !== '') return false;
+                    } else if (q.source_type !== sourceTypeFilter) return false;
+                }
                 if (courseFilter && courseFilter !== 'all' && q.course_name !== courseFilter) return false;
                 if (yearFilter && yearFilter !== 'all' && q.source_year !== yearFilter) return false;
                 if (knowledgeFilter && knowledgeFilter !== 'all') {
@@ -1090,7 +1533,7 @@
             });
         }
 
-        // 渲染课程作业列表
+        // Render coursework table
         function renderCourseworks() {
             const languageFilter = document.getElementById('cwLanguageFilter').value;
             const courseFilter = document.getElementById('cwCourseFilter').value;
@@ -1156,10 +1599,10 @@
                             return String(t).toUpperCase() === 'CW';
                         });
                         if (cwMaterials.length === 0) {
-                            alert('暂无关联的 CW（课程作业）材料可下载');
+                            alert('No linked CW materials to download');
                             return;
                         }
-                        // 同一用户手势内依次触发多个下载，避免只下第一个
+                        // Stagger downloads in same gesture
                         for (let i = 0; i < cwMaterials.length; i++) {
                             const m = cwMaterials[i];
                             const url = `${API_BASE}/materials/${m.material_id}/download`;
@@ -1176,23 +1619,23 @@
                         }
                     } catch (err) {
                         console.error(err);
-                        alert('下载失败');
+                        alert('Download failed');
                     }
                 });
             });
         }
 
-        // 筛选题目
+        // filterQuestions
         function filterQuestions() {
             renderQuestions();
         }
 
-        // 筛选课程作业
+        // filterCourseworks
         function filterCourseworks() {
             renderCourseworks();
         }
 
-        // 从 API 获取收藏题目并渲染
+        // GET favourites and render
         async function fetchQuestionBank() {
             try {
                 const uid = getUserId();
@@ -1200,7 +1643,7 @@
                     questionBank = [];
                     renderQuestionBank();
                     document.getElementById('questionBankTableBody').innerHTML =
-                        '<tr><td colspan="6" class="px-6 py-4 text-center text-amber-600">请先登录后再查看收藏</td></tr>';
+                        '<tr><td colspan="6" class="px-6 py-4 text-center text-amber-600">Please sign in to view favourites</td></tr>';
                     return;
                 }
                 const res = await fetch(`${API_BASE}/questions?favourite=1&user_id=${encodeURIComponent(uid)}`);
@@ -1211,11 +1654,11 @@
                 console.error('Failed to fetch favourites:', err);
                 const errCols = qbExportMode ? 7 : 6;
                 document.getElementById('questionBankTableBody').innerHTML =
-                    `<tr><td colspan="${errCols}" class="px-6 py-4 text-center text-red-500">加载收藏题目失败</td></tr>`;
+                    `<tr><td colspan="${errCols}" class="px-6 py-4 text-center text-red-500">Failed to load favourites</td></tr>`;
             }
         }
 
-        // 渲染题目收藏库列表；按 Title(question_code) 搜索，支持连续子串匹配
+        // Render favourites; search by question_code substring
         function renderQuestionBank() {
             const searchTerm = (document.getElementById('qbSearch').value || '').trim().toLowerCase();
             
@@ -1229,7 +1672,7 @@
             
             const colCount = qbExportMode ? 7 : 6;
             if (filteredQuestions.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="${colCount}" class="px-6 py-4 text-center text-[#6e6e80]">暂无收藏题目</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="${colCount}" class="px-6 py-4 text-center text-[#6e6e80]">No favourites yet</td></tr>`;
                 if (qbExportMode) document.getElementById('qbExportPdfBtn').disabled = true;
                 return;
             }
@@ -1281,7 +1724,7 @@
                     try {
                         const uid = getUserId();
                         if (uid == null || uid === '') {
-                            alert('请先登录');
+                            alert('Please sign in');
                             return;
                         }
                         const res = await fetch(`${API_BASE}/questions/${qid}/favourite?user_id=${encodeURIComponent(uid)}`, { method: 'DELETE' });
@@ -1293,7 +1736,7 @@
                         renderQuestionBank();
                     } catch (err) {
                         console.error(err);
-                        alert('取消收藏失败');
+                        alert('Could not remove favourite');
                     }
                 });
             });
@@ -1325,7 +1768,7 @@
             }
         }
 
-        // 显示题目详情；fromFavourites=true 时（从 Question Bank 进入）隐藏“添加到收藏”按钮
+        // showQuestionDetails; hide add when from favourites
         function showQuestionDetails(questionId, fromFavourites) {
             const question = questions.find(q => q.question_id === questionId) || questionBank.find(q => q.question_id === questionId);
             if (!question) return;
@@ -1379,7 +1822,7 @@
             document.getElementById('questionModal').classList.remove('hidden');
         }
 
-        // 显示做题模态框
+        // showSolveModal
         function showSolveModal(question) {
             document.getElementById('solveModalTitle').textContent = question.title || question.question_code || 'Solve';
             document.getElementById('solveLanguage').textContent = question.language || '-';
@@ -1389,12 +1832,12 @@
             
             document.getElementById('submitCodeBtn').setAttribute('data-question-id', question.question_id || question.id);
             
-            // 清空代码编辑器和结果
+            // Reset editor and result
             document.getElementById('codeEditor').value = '';
             document.getElementById('charCount').textContent = '0';
             document.getElementById('codeResult').innerHTML = '';
             
-            // 显示做题模态框
+            // Open solve modal
             document.getElementById('solveModal').classList.remove('hidden');
         }
     </script>
