@@ -1,4 +1,4 @@
-"""User_Question_State CRUD"""
+"""CRUD operations for the User_Question_State table."""
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 

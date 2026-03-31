@@ -1,4 +1,4 @@
-# FastAPI + SQL 后端
+# FastAPI + SQL backend dependencies
 fastapi
 uvicorn[standard]
 sqlalchemy
@@ -8,7 +8,7 @@ pydantic-settings
 python-multipart
 reportlab
 pymysql
-cryptography  # MySQL 8 caching_sha2_password 时 pymysql 需要
+cryptography  # required by pymysql for MySQL 8 caching_sha2_password auth
 passlib[bcrypt]
 email-validator
 httpx

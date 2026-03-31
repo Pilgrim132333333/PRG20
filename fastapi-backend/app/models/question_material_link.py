@@ -1,4 +1,4 @@
-"""题目-物料关联表 Model - 对应 pga_platform.Question_Material_Link"""
+"""ORM model for pga_platform.Question_Material_Link (many-to-many join table)."""
 from sqlalchemy import Column, Integer, ForeignKey, PrimaryKeyConstraint
 
 from .base import Base

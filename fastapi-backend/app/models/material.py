@@ -1,4 +1,4 @@
-"""物料表 Model - 对应 pga_platform.Materials"""
+"""ORM model for the Materials table (pga_platform.Materials)."""
 from sqlalchemy import Column, Integer, String, Enum
 from sqlalchemy.orm import relationship
 

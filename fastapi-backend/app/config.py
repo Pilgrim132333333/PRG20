@@ -1,4 +1,4 @@
-# 配置：DATABASE_URL、JWT、CORS 等
+# Settings: DATABASE_URL, JWT, CORS, AI, etc.
 from pathlib import Path
 from urllib.parse import quote_plus
 
@@ -16,7 +16,7 @@ _ENV_FILES = tuple(
 
 
 class Settings(BaseSettings):
-    """支持 DB_*（本机 pga_platform）或 DATABASE_*（远程）"""
+    """Supports DB_* (local pga_platform) or DATABASE_* (remote) credential groups."""
     model_config = ConfigDict(
         env_file=_ENV_FILES if _ENV_FILES else (".env",),
         env_file_encoding="utf-8",
@@ -25,7 +25,7 @@ class Settings(BaseSettings):
 
     DATABASE_HOST: str = "localhost"
     DATABASE_PORT: int = 3306
-    DB_PORT: int | None = None  # 与 DB_HOST 同用时可覆盖端口
+    DB_PORT: int | None = None  # Overrides port when used together with DB_HOST
     DATABASE_USER: str = "root"
     DATABASE_PASSWORD: str = ""
     DATABASE_NAME: str = "pga_platform"
@@ -35,7 +35,7 @@ class Settings(BaseSettings):
     DB_PASSWORD: str | None = None
     DB_NAME: str | None = None
 
-    # 材料文件根目录，例如 /path/to/Workspace/backend/static
+    # Root directory for served material files, e.g. /path/to/Workspace/backend/static
     STATIC_FILES_ROOT: str | None = None
 
     # AI assistant: OpenAI-compatible POST {AI_API_BASE}/chat/completions
@@ -70,18 +70,18 @@ class Settings(BaseSettings):
         return self.DB_PORT if self.DB_PORT is not None else self.DATABASE_PORT
 
     def _encoded_credentials(self) -> tuple[str, str]:
-        """用户名/密码中的 @ : / ? # ! 等需 URL 编码，否则 pymysql 解析错误"""
+        """URL-encode username and password to handle special characters (@, :, /, etc.)."""
         return quote_plus(self._user(), safe=""), quote_plus(self._password(), safe="")
 
     @property
     def DATABASE_URL(self) -> str:
-        """异步连接（aiomysql）"""
+        """Async connection string (aiomysql)."""
         u, p = self._encoded_credentials()
         return f"mysql+aiomysql://{u}:{p}@{self._host()}:{self._port()}/{self._db_name()}?charset=utf8mb4"
 
     @property
     def SYNC_DATABASE_URL(self) -> str:
-        """同步连接（pymysql）"""
+        """Synchronous connection string (pymysql)."""
         u, p = self._encoded_credentials()
         return f"mysql+pymysql://{u}:{p}@{self._host()}:{self._port()}/{self._db_name()}?charset=utf8mb4"
 

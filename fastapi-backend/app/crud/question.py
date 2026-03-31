@@ -1,4 +1,4 @@
-"""Questions 表 CRUD"""
+"""CRUD operations for the Questions table."""
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -12,7 +12,7 @@ def get_question_by_id_sync(db: Session, question_id: int) -> Question | None:
 
 
 def get_questions_by_ids(db: Session, question_ids: list[int]) -> list:
-    """按 ID 列表获取题目，保持传入顺序"""
+    """Fetch questions by a list of IDs, preserving the input order."""
     if not question_ids:
         return []
     result = db.execute(
@@ -30,7 +30,7 @@ def get_questions_all(
     user_id: int | None = None,
     favourite: int | None = None,
 ):
-    """获取所有题目；favourite=1 时需 user_id，按 User_Question_State.is_favourite 筛选"""
+    """Return all questions; when favourite=1, requires user_id to filter by User_Question_State.is_favourite."""
     stmt = select(Question)
     if user_id is not None and favourite == 1:
         stmt = (
@@ -39,7 +39,7 @@ def get_questions_all(
             .where(UserQuestionState.is_favourite == 1)
         )
     elif favourite == 1:
-        # 无 user_id 时无法按收藏筛选，返回空
+        # Cannot filter by favourite without a user_id — return empty list
         return []
     stmt = stmt.order_by(Question.question_id).offset(skip).limit(limit)
     result = db.execute(stmt)
@@ -79,7 +79,7 @@ async def delete_question_by_code(db, question_code: str) -> bool:
     return True
 
 def select_all_coursework(db, skip: int = 0, limit: int = 100) -> list:
-    """从 Questions 表中选取 source_type='CW' 的题目作为 coursework"""
+    """Return all Questions rows where source_type='CW' (coursework items)."""
     result = db.execute(
         select(Question)
         .where(Question.source_type == "CW")

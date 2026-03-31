@@ -1,4 +1,4 @@
-"""Questions API 路由"""
+"""Questions API routes."""
 from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import Response
 from pydantic import BaseModel

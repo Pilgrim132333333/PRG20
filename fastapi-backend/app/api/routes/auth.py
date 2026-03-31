@@ -1,4 +1,4 @@
-"""注册 / 登录 API"""
+"""Registration and login API endpoints."""
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy.exc import IntegrityError
@@ -35,7 +35,7 @@ def _verify_password(plain: str, hashed: str) -> bool:
 
 @router.post("/register")
 def register(body: RegisterBody, db: Session = Depends(get_db)):
-    """注册：写入 Users 表"""
+    """Register a new user and insert a row into the Users table."""
     if user_crud.get_by_username(db, body.username.strip()):
         raise HTTPException(status_code=400, detail="Username already exists")
     if user_crud.get_by_email(db, body.email.strip().lower()):
@@ -62,7 +62,7 @@ def register(body: RegisterBody, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def login(body: LoginBody, db: Session = Depends(get_db)):
-    """登录：校验用户名与密码"""
+    """Log in: verify username and password."""
     user: User | None = user_crud.get_by_username(db, body.username.strip())
     if not user or not _verify_password(body.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid username or password")

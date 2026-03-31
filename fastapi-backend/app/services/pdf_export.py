@@ -8,7 +8,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 
 def _register_fonts():
-    """尝试注册支持中文的字体（若系统存在），.ttf 格式"""
+    """Try to register a CJK-capable font if one is available on the system (.ttf format)."""
     for path, name in [
         ("/System/Library/Fonts/Supplemental/Arial Unicode.ttf", "ArialUnicode"),
         ("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", "WenQuanYi"),
@@ -25,7 +25,7 @@ def _register_fonts():
 
 def build_questions_pdf(questions: list) -> bytes:
     """
-    将题目列表合并为一个 PDF。
+    Merge a list of questions into a single PDF.
     questions: [{"question_code", "question_text", "answer_text", "knowledge_point", ...}, ...]
     """
     buf = io.BytesIO()

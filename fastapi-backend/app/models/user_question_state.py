@@ -1,4 +1,4 @@
-"""用户-题目状态表 - 对应 pga_platform.User_Question_State"""
+"""ORM model for the User_Question_State table (pga_platform.User_Question_State)."""
 from sqlalchemy import Column, ForeignKey, Integer
 
 from .base import Base

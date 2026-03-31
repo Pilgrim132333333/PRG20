@@ -1,4 +1,4 @@
-"""用户表 Model - 对应 pga_platform.Users"""
+"""ORM model for the Users table (pga_platform.Users)."""
 from sqlalchemy import Column, DateTime, Integer, String, func
 
 from .base import Base

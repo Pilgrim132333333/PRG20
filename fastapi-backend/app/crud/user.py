@@ -1,4 +1,4 @@
-"""Users 表 CRUD"""
+"""CRUD operations for the Users table."""
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session

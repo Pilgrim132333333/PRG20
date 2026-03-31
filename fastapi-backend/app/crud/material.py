@@ -1,4 +1,4 @@
-"""Materials 表 CRUD"""
+"""CRUD operations for the Materials table."""
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession

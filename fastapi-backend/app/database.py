@@ -1,4 +1,4 @@
-# 数据库连接、Session、init_db
+# Database connection, Session factory, and table initialisation
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.config import settings
@@ -6,7 +6,7 @@ from typing import Generator
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
-# 同步引擎（create_engine 需用 pymysql，不能用 aiomysql）
+# Synchronous engine — create_engine requires pymysql (not aiomysql)
 engine = create_engine(
     settings.SYNC_DATABASE_URL,
     echo=True,
@@ -15,9 +15,9 @@ engine = create_engine(
 )
 
 sessionmaker = sessionmaker(
-    autocommit = False,
-    autoflush= False,
-    bind = engine
+    autocommit=False,
+    autoflush=False,
+    bind=engine
 )
 
 Base = declarative_base()
@@ -31,4 +31,3 @@ def get_db() -> Generator:
 
 def create_tables():
     Base.metadata.create_all(bind=engine)
-

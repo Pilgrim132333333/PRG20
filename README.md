@@ -1,81 +1,81 @@
-# AI Programming Question Bank（Group 20 · Project 15）
+# AI Programming Question Bank (Group 20 · Project 15)
 
-面向编程与算法课程的教学辅助平台：题库浏览、材料下载、作业与课程信息、以及基于大模型的学习助手（OpenAI 兼容接口）。前端为静态 HTML（Tailwind CDN），后端为 FastAPI + MySQL。
+A teaching-support platform for the Programming and Algorithms course: browse questions, download materials, view coursework and course info, and interact with an AI study assistant (OpenAI-compatible API). The front end is static HTML (Tailwind CDN); the back end is FastAPI + MySQL.
 
-## 小组成员
+## Team Members
 
-- Bingzhuo Wang  
-- Ziheng Meng  
-- Yunuo Shao  
-- Zigeng Guo  
-- Wenqi Huang  
-- Junjie Chen  
+- Bingzhuo Wang
+- Ziheng Meng
+- Yunuo Shao
+- Zigeng Guo
+- Wenqi Huang
+- Junjie Chen
 
-## 技术栈
+## Tech Stack
 
-| 层级 | 说明 |
-|------|------|
-| 前端 | `vue-frontend/`：多页 HTML（登录、注册、学生端等），通过 `fetch` 调用 REST API |
-| 后端 | `fastapi-backend/`：FastAPI、SQLAlchemy（同步 Session + MySQL）、bcrypt 密码 |
-| 数据库 | MySQL 8（建议 `utf8mb4`），表结构见 `backend/init_schema.sql` |
-| AI | 兼容 OpenAI Chat Completions（默认 DeepSeek，可在 `.env` 中改为 OpenAI 等） |
+| Layer    | Details |
+|----------|---------|
+| Frontend | `vue-frontend/`: multi-page HTML (login, sign-up, student portal, etc.), calls the REST API via `fetch` |
+| Backend  | `fastapi-backend/`: FastAPI, SQLAlchemy (synchronous Session + MySQL), bcrypt password hashing |
+| Database | MySQL 8 (recommended: `utf8mb4`); schema defined in `backend/init_schema.sql` |
+| AI       | OpenAI Chat Completions compatible (DeepSeek by default; switch to OpenAI etc. via `.env`) |
 
-## 仓库结构
+## Repository Structure
 
 ```
 Workspace/
-├── .env                    # 本地环境变量（勿提交密钥；见下方说明）
-├── fastapi-backend/        # FastAPI 应用
+├── .env                    # Local environment variables (do NOT commit secrets; see below)
+├── fastapi-backend/        # FastAPI application
 │   ├── app/
-│   │   ├── main.py         # 路由挂载：questions / courseworks / materials / auth / ai
-│   │   ├── config.py       # DB_*、AI_* 等配置
+│   │   ├── main.py         # Router registration: questions / courseworks / materials / auth / ai
+│   │   ├── config.py       # DB_* and AI_* configuration
 │   │   └── ...
 │   └── requirements.txt
-├── backend/                # 数据库脚本与种子数据
-│   ├── init_schema.sql     # 建库建表（新环境）
-│   ├── clear_all_data.sql  # 仅清空数据、保留表结构
-│   ├── seed_data.py        # 从 CSV 导入示例数据
-│   ├── database_templates/ # materials.csv、questions.csv、links.csv 等
-│   └── static/             # 材料文件目录（与库中 file_path 对应）
-└── vue-frontend/           # 静态页面（需本地 HTTP 服务打开，避免 file:// 跨域问题）
+├── backend/                # Database scripts and seed data
+│   ├── init_schema.sql     # Create database and tables (fresh environment)
+│   ├── clear_all_data.sql  # Truncate all data while keeping table structure
+│   ├── seed_data.py        # Import sample data from CSV files
+│   ├── database_templates/ # materials.csv, questions.csv, links.csv, etc.
+│   └── static/             # Material files (paths must match file_path in the DB)
+└── vue-frontend/           # Static pages (serve via local HTTP server to avoid file:// CORS issues)
 ```
 
-## 环境要求
+## Requirements
 
-- Python 3.10+（推荐 3.12）
+- Python 3.10+ (3.12 recommended)
 - MySQL 8
-- 可选：`python-dotenv`（`seed_data.py` 读取项目根目录 `.env`）
+- Optional: `python-dotenv` (`seed_data.py` reads `.env` from the project root)
 
-## 配置说明
+## Configuration
 
-在**仓库根目录**创建或编辑 `.env`（`fastapi-backend/app/config.py` 会读取 `Workspace/.env` 或 `fastapi-backend/.env`）。
+Create or edit `.env` in the **repository root** (`fastapi-backend/app/config.py` reads `Workspace/.env` or `fastapi-backend/.env`).
 
-**数据库（二选一，优先 `DB_*`）：**
+**Database (choose one set; `DB_*` takes priority):**
 
 ```env
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
-DB_PASSWORD=你的密码
+DB_PASSWORD=your_password
 DB_NAME=pga_platform
 ```
 
-也可使用 `DATABASE_HOST`、`DATABASE_USER` 等一组变量（与 FastAPI 配置一致）。
+Alternatively use `DATABASE_HOST`, `DATABASE_USER`, etc. (same semantics as FastAPI config).
 
-**AI 助手（可选）：**
+**AI assistant (optional):**
 
 ```env
-AI_API_KEY=你的密钥
+AI_API_KEY=your_key
 AI_API_BASE=https://api.deepseek.com
 AI_MODEL=deepseek-chat
 ```
 
-不要将真实密钥提交到 Git。若密码含特殊字符，可用双引号包裹；后端会对账号密码做 URL 编码。
+Never commit real secrets to Git. If your password contains special characters, wrap it in double quotes; the backend URL-encodes credentials automatically.
 
-## 数据库初始化
+## Database Initialisation
 
-1. 在 MySQL 中执行 `backend/init_schema.sql`（会创建库 `pga_platform`；若库已存在可只执行建表部分）。
-2. （可选）导入示例数据：
+1. Run `backend/init_schema.sql` in MySQL (creates the `pga_platform` database; if the database already exists, run only the `CREATE TABLE` statements).
+2. (Optional) Import sample data:
 
    ```bash
    cd "/path/to/Workspace"
@@ -83,13 +83,13 @@ AI_MODEL=deepseek-chat
    python backend/seed_data.py
    ```
 
-3. 若仅需**清空数据、保留表结构**：
+3. To **truncate all data while keeping table structure**:
 
    ```bash
    mysql -u USER -p DATABASE_NAME < backend/clear_all_data.sql
    ```
 
-## 启动后端
+## Starting the Backend
 
 ```bash
 cd fastapi-backend
@@ -99,13 +99,43 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-默认 API 根路径：`http://127.0.0.1:8000`，业务接口前缀为 `/api`（例如 `/api/auth/login`、`/api/questions`）。
+Default API root: `http://127.0.0.1:8000`; all business endpoints are under the `/api` prefix (e.g. `/api/auth/login`, `/api/questions`).
 
-## 启动前端
+## Starting the Frontend
 
-前端页面通过 `API_BASE = 'http://127.0.0.1:8000/api'` 访问后端；请用**本地 HTTP 服务**打开页面，不要直接用 `file://`。
+The front end uses `API_BASE = 'http://127.0.0.1:8000/api'`; open pages through a **local HTTP server** instead of `file://` to avoid CORS issues.
 
 ```bash
 cd vue-frontend
 python -m http.server 5173
 ```
+
+Browser entry points:
+
+- `http://127.0.0.1:5173/login.html` — Login
+- `http://127.0.0.1:5173/signup.html` — Sign up
+- `http://127.0.0.1:5173/student.html` — Student portal (requires login)
+
+If the backend runs on a different host or port, update `API_BASE` in each HTML file accordingly.
+
+## API Overview
+
+| Prefix           | Description |
+|------------------|-------------|
+| `/api/auth`      | Register and login |
+| `/api/questions` | Question list, favourite, complete, export PDF, etc. |
+| `/api/courseworks` | Coursework entries |
+| `/api/materials` | Material metadata and file download |
+| `/api/ai`        | Session context and chat (requires `AI_API_KEY`) |
+
+Interactive docs (Swagger UI): start the backend and open `http://127.0.0.1:8000/docs`.
+
+## Troubleshooting
+
+- **MySQL connection failure**: check `DB_*` in `.env`, ensure MySQL is running, and verify user permissions and the database name. MySQL 8 users should install `cryptography` to support `caching_sha2_password`.
+- **Frontend CORS errors**: use `http.server` or serve from the same origin; avoid opening pages via `file://`.
+- **Material file 404**: ensure files under `backend/static/` match the `Materials.file_path` values in the database, and set `STATIC_FILES_ROOT` in config if needed.
+
+## Licence and Course Notice
+
+This project is a group coursework submission (Project 15). Usage and citation requirements are governed by the course regulations.

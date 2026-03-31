@@ -1,4 +1,4 @@
-"""题库表 Model - 对应 pga_platform.Questions"""
+"""ORM model for the Questions table (pga_platform.Questions)."""
 from sqlalchemy import Column, Integer, String, Text, Enum
 from sqlalchemy.orm import relationship
 

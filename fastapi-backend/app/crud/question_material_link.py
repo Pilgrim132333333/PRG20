@@ -1,4 +1,4 @@
-"""Question_Material_Link 表 CRUD"""
+"""CRUD operations for the Question_Material_Link table."""
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -8,7 +8,7 @@ from app.models.material import Material
 
 
 def get_materials_by_question_id(db: Session, question_id: int):
-    """获取与题目关联的 Materials（同步）"""
+    """Return all Materials linked to a given question (synchronous)."""
     stmt = (
         select(Material)
         .join(QuestionMaterialLink, Material.material_id == QuestionMaterialLink.material_id)
