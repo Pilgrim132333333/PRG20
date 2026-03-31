@@ -16,7 +16,7 @@ class Question(Base):
         Enum("Sample Paper", "CW", "Lab Worksheet", "Tutorial"),
         nullable=True,
     )
-    knowledge_point = Column(String(100), nullable=True)
+    knowledge_point = Column(String(512), nullable=True)
     question_text = Column(Text, nullable=False)
     answer_text = Column(Text, nullable=True)
     image_path = Column(String(255), nullable=True)

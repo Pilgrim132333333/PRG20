@@ -9,7 +9,6 @@ try:
 except ImportError:
     load_dotenv = None
 
-# 本脚本在 backend/；项目根目录为上一级（与 fastapi-backend 共用 Workspace/.env）
 BACKEND_DIR = Path(__file__).resolve().parent
 ROOT_DIR = BACKEND_DIR.parent
 
@@ -59,40 +58,9 @@ def get_full_path(material_type, filename):
     return paths.get(material_type, f"/static/others/{filename}")
 
 
-def ensure_user_tables(cursor) -> None:
-    """
-    若库是旧版只建了 Materials/Questions/Link，会缺少 Users、User_Question_State。
-    与 backend/init_schema.sql 中定义一致。
-    """
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS Users (
-            user_id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(50) UNIQUE NOT NULL,
-            email VARCHAR(100) UNIQUE NOT NULL,
-            password_hash VARCHAR(255) NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-        """
-    )
-    cursor.execute(
-        """
-        CREATE TABLE IF NOT EXISTS User_Question_State (
-            user_id INT NOT NULL,
-            question_id INT NOT NULL,
-            is_favourite TINYINT(1) DEFAULT 0,
-            is_completed TINYINT(1) DEFAULT 0,
-            PRIMARY KEY (user_id, question_id),
-            CONSTRAINT fk_seed_uqs_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-            CONSTRAINT fk_seed_uqs_q FOREIGN KEY (question_id) REFERENCES Questions(question_id) ON DELETE CASCADE
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-        """
-    )
-
-
 def run_seed():
     db = get_db_config()
-    print(f"📡 连接 MySQL: {db['user']}@{db['host']}:{db['port']}/{db['database']}")
+    print(f"📡 MySQL: {db['user']}@{db['host']}:{db['port']}/{db['database']}")
     connection = pymysql.connect(**db)
     try:
         with connection.cursor() as cursor:
@@ -119,10 +87,9 @@ def run_seed():
                 for row in reader:
                     img_path = row["image_path"] if row.get("image_path", "").strip() else None
                     lang = row.get("language", "C").strip()
-
                     sql = """
-                        INSERT IGNORE INTO Questions 
-                        (question_code, source_year, source_type, knowledge_point, question_text, answer_text, image_path, language) 
+                        INSERT IGNORE INTO Questions
+                        (question_code, source_year, source_type, knowledge_point, question_text, answer_text, image_path, language)
                         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                     """
                     cursor.execute(
@@ -151,9 +118,6 @@ def run_seed():
                         )
                     """
                     cursor.execute(sql, (row["question_code"].strip(), row["material_code"].strip()))
-
-            print("⏳ 检查/创建 Users、User_Question_State 表（依赖 Questions 已存在）...")
-            ensure_user_tables(cursor)
 
             print("⏳ 正在导入用户表 (Users)...")
             try:
@@ -203,7 +167,6 @@ def run_seed():
     except Exception as e:
         print(f"❌ 出错了: {e}")
         connection.rollback()
-        raise
     finally:
         connection.close()
 
